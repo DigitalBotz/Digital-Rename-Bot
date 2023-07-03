@@ -72,7 +72,7 @@ broadcast - Send Message To All Users (Admin Only)
 
 ## ❣️Thanks To
 
-<a href="[https://t.me/RknDeveloper]">
+<a href="(https://t.me/RknDeveloper)">
    <p> Rkndeveloper TG</p>
   </a>
 <a href="[https://youtube.com/@RknDeveloper]">
