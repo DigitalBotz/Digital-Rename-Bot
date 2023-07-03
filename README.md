@@ -9,7 +9,7 @@
 ![github card](https://github-readme-stats.vercel.app/api/pin/?username=TEAM-PYRO-BOTZ&repo=PYRO-RENAME-BOT&theme=dark)
 
 
-### Sᴀᴍᴩʟᴇ Bᴏᴛ (Official Pyro Rename Bot)
+### Sᴀᴍᴩʟᴇ Bᴏᴛ (Official RKN Rename Bot)
 
 <p align="center">
 🤖 <a href="https://t.me/Pyro_Rename_Bot"><img title="Telegram" src="https://img.shields.io/static/v1?label=PYRO+RENAME&message=BOT&color=blue-green"></a> 🤖
