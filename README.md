@@ -18,13 +18,13 @@
 
 ## Deploy To Koyeb
 
-[![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/deploy?type=git&repository=github.com/TEAM-PYRO-BOTZ/PYRO-RENAME-BOT&env[BOT_TOKEN]&env[API_ID]&env[API_HASH]&env[WEBHOOK]=True&env[ADMIN]&env[DB_URL]&env[DB_NAME]=pyro-botz&env[FORCE_SUB]&env[START_PIC]&env[LOG_CHANNEL]=You%20Dont%20Need%20LogChannel%20To%20Remove%20This%20Variable&run_command=python%20bot.py&branch=main&name=pyro-rename) 
+[![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/deploy?type=git&repository=github.com/RknDeveloper/Rkn-rename-bot-V3&env[BOT_TOKEN]&env[API_ID]&env[API_HASH]&env[WEBHOOK]=True&env[ADMIN]&env[DB_URL]&env[DB_NAME]=pyro-botz&env[FORCE_SUB]&env[START_PIC]&env[LOG_CHANNEL]=You%20Dont%20Need%20LogChannel%20To%20Remove%20This%20Variable&run_command=python%20bot.py&branch=main&name=rkn-rename) 
 
 ## Deploy To Render
 
 ◉ Watch Tutorial For Render Deploy <a href="https://graph.org/file/3c0171b4d2d72a2018a18.jpg"><img src="https://img.shields.io/badge/Watch%20Tutorial%20On%20YouTube-red.svg?logo=Youtube"></a>                     
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/TEAM-PYRO-BOTZ/PYRO-RENAME-BOT)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/RknDeveloper/Rkn-rename-bot-V3)
 
 ## Deploy To Railway
 
@@ -32,8 +32,7 @@
 
 ## Deploy To Heroku
 
-<a href="https://heroku.com/deploy?template=https://github.com/TEAM-PYRO-BOTZ/PYRO-RENAME-BOT"><img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy"></a>
-
+<a href="https://heroku.com/deploy?template=https://github.com/RknDeveloper/Rkn-rename-bot-V3"><img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy"></a>
 
 
 ## Configs 
@@ -73,17 +72,11 @@ broadcast - Send Message To All Users (Admin Only)
 
 ## ❣️Thanks To
 
-<a href="https://t.me/lntechnical">
-   <p> lntechnical TG</p>
+<a href="[https://t.me/RknDeveloper]">
+   <p> Rkndeveloper TG</p>
   </a>
-<a href="https://youtube.com/c/LNtechnical">
-   <p> lntechnical YT </p>
-  </a>
-
-## 🤩 INSPIRATION
-
-<a href="https://youtube.com/c/MoTech_YT">
-   <p>❣️ MoTech 🔥</p>
+<a href="[https://youtube.com/@RknDeveloper]">
+   <p> Rkndeveloper YT </p>
   </a>
 
 
