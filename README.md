@@ -5,6 +5,10 @@
 
 <p align="center"> 🅡🅔🅟🅞 🅢🅣🅐🅣🅢 </p>
 
+<p align="center">
+  <img src="https://telegra.ph/file/0766f02af89d3a0cea466.jpg" alt="RKN AUTO FILTER BOT">
+</p>
+
 
 ### Sᴀᴍᴩʟᴇ Bᴏᴛ (Official RKN Rename Bot)
 
