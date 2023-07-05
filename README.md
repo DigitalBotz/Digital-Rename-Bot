@@ -6,7 +6,7 @@
 <p align="center"> 🅡🅔🅟🅞 🅢🅣🅐🅣🅢 </p>
 
 <p align="center">
-  <img src="https://telegra.ph/file/0766f02af89d3a0cea466.jpg" alt="RKN RENAME BOT V2">
+  <img src="https://telegra.ph/file/98842f9fe8978a8688b9c.jpg" alt="RKN RENAME BOT V2">
 </p>
 
 
