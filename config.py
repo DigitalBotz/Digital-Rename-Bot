@@ -89,8 +89,8 @@ Exᴀᴍᴩʟᴇ:- /set_caption 📕 Fɪʟᴇ Nᴀᴍᴇ: {filename}
 • ❣️ <a href=https://github.com/RknDeveloper>OWNER</a>
 • ❣️ <a href=https://t.me/RknDeveloper>Rᴋɴ Dᴇᴠᴇʟᴏᴘᴇʀ</a> """
 
-    Rkn Developer Waiting 🔥 = """<b>\n
-╭━━━━❰Rkn Developer Waiting 🔥❱━➣
+    Rkn Developer Waiting  = """<b>\n
+╭━━━━❰Rkn Developer Waiting Progress Bar❱━➣
 ┣⪼ 🗃️ Sɪᴢᴇ: {1} | {2}
 ┣⪼ ⏳️ Dᴏɴᴇ : {0}%
 ┣⪼ 🚀 Sᴩᴇᴇᴅ: {3}/s
