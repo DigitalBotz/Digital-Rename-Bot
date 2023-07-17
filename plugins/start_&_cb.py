@@ -36,7 +36,8 @@ async def start(client, message):
     button = InlineKeyboardMarkup([[
         InlineKeyboardButton("➕️ 𝙰𝙳𝙳 𝙼𝙴 𝚃𝙾 𝚈𝙾𝚄𝚁 𝙶𝚁𝙾𝚄𝙿 ➕️", url=f"http://t.me/RKN_MOVIE_SEARCH_BOT?startgroup=true")
         ],[
-        InlineKeyboardButton("👨‍💻 Dᴇᴠꜱ 👨‍💻", callback_data='dev')
+        InlineKeyboardButton("👨‍💻 Dᴇᴠꜱ 👨‍💻", callback_data='dev'),
+        InlineKeyboardButton('🎬 Uᴩᴅᴀᴛ🎬', url='https://t.me/RknDeveloper')
         ],[
         InlineKeyboardButton('📯 Uᴩᴅᴀᴛᴇꜱ', url='https://t.me/RknDeveloper'),
         InlineKeyboardButton('💁‍♂️ Sᴜᴩᴩᴏʀᴛ', url='https://t.me/RknDeveloperSupport')
