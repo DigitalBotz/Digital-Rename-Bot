@@ -39,11 +39,11 @@ async def start(client, message):
         InlineKeyboardButton("👨‍💻 Dᴇᴠꜱ 👨‍💻", callback_data='dev'),
         InlineKeyboardButton('🎬 𝙼𝙾𝚅𝙸𝙴 𝚂𝙴𝙰𝚁𝙲𝙷 𝙶𝚁𝙾𝚄𝙿 🎬', url='https://t.me/CG_OF_MOVIES_GROUP')
         ],[
-        InlineKeyboardButton('📯 Uᴩᴅᴀᴛᴇꜱ 📯', url='https://t.me/RknDeveloper'),
-        InlineKeyboardButton('💁‍♂️ Sᴜᴩᴩᴏʀᴛ ', url='https://t.me/RknDeveloperSupport')
+        InlineKeyboardButton('📯 Uᴩᴅᴀ𝚃ᴇꜱ 📯', url='https://t.me/RknDeveloper'),
+        InlineKeyboardButton('💁‍♂️ Sᴜᴩᴩᴏʀ𝚃 👯‍♂', url='https://t.me/RknDeveloperSupport')
         ],[
-        InlineKeyboardButton('🎛️ Aʙᴏᴜᴛ', callback_data='about'),
-        InlineKeyboardButton('🛠️ Hᴇʟᴩ', callback_data='help')
+        InlineKeyboardButton('🎛️ Aʙᴏυᴛ 🎛️', callback_data='about'),
+        InlineKeyboardButton('🛠️ Hᴇʟᴩ 🩸', callback_data='help')
         ],[
         InlineKeyboardButton('🎬 𝙹𝙾𝙸𝙽 𝙼𝙾𝚅𝙸𝙴 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 🎬', url='https://t.me/CG_OF_MOVIES')
     ]])
@@ -66,11 +66,11 @@ async def cb_handler(client, query: CallbackQuery):
                 InlineKeyboardButton("👨‍💻 Dᴇᴠꜱ 👨‍💻", callback_data='dev'),
                 InlineKeyboardButton('🎬 𝙼𝙾𝚅𝙸𝙴 𝚂𝙴𝙰𝚁𝙲𝙷 𝙶𝚁𝙾𝚄𝙿 🎬', url='https://t.me/CG_OF_MOVIES_GROUP')
                 ],[
-                InlineKeyboardButton('📯 Uᴩᴅᴀᴛᴇꜱ 📯', url='https://t.me/RknDeveloper'),
-                InlineKeyboardButton('💁‍♂️ Sᴜᴩᴩᴏʀᴛ', url='https://t.me/RknDeveloperSupport')
+                InlineKeyboardButton('📯 Uᴩᴅᴀ𝚃ᴇꜱ 📯', url='https://t.me/RknDeveloper'),
+                InlineKeyboardButton('💁‍♂️ Sᴜᴩᴩᴏʀ𝚃 👯‍♂', url='https://t.me/RknDeveloperSupport')
                 ],[
-                InlineKeyboardButton('🎛️ Aʙᴏᴜᴛ', callback_data='about'),
-                InlineKeyboardButton('🛠️ Hᴇʟᴩ', callback_data='help')
+                InlineKeyboardButton('🎛️ Aʙᴏυᴛ 🎛️', callback_data='about'),
+                InlineKeyboardButton('🛠️ Hᴇʟᴩ 🩸', callback_data='help')
                 ],[
                 InlineKeyboardButton('🎬 𝙹𝙾𝙸𝙽 𝙼𝙾𝚅𝙸𝙴 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 🎬', url='https://t.me/CG_OF_MOVIES')
             ]])
@@ -87,6 +87,8 @@ async def cb_handler(client, query: CallbackQuery):
                 ],[
                 InlineKeyboardButton("🔒 Cʟᴏꜱᴇ", callback_data = "close"),
                 InlineKeyboardButton("◀️ Bᴀᴄᴋ", callback_data = "start")
+                ],[
+                InlineKeyboardButton('🎬 𝙹𝙾𝙸𝙽 𝙼𝙾𝚅𝙸𝙴 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 🎬', url='https://t.me/CG_OF_MOVIES')
             ]])            
         )
     elif data == "about":
@@ -101,6 +103,8 @@ async def cb_handler(client, query: CallbackQuery):
                 ],[
                 InlineKeyboardButton("🔒 Cʟᴏꜱᴇ", callback_data = "close"),
                 InlineKeyboardButton("◀️ Bᴀᴄᴋ", callback_data = "start")
+                ],[
+                InlineKeyboardButton('🎬 𝙹𝙾𝙸𝙽 𝙼𝙾𝚅𝙸𝙴 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 🎬', url='https://t.me/CG_OF_MOVIES')
             ]])            
         )
     elif data == "dev":
@@ -115,6 +119,8 @@ async def cb_handler(client, query: CallbackQuery):
                 ],[
                 InlineKeyboardButton("🔒 Cʟᴏꜱᴇ", callback_data = "close"),
                 InlineKeyboardButton("◀️ Bᴀᴄᴋ", callback_data = "start")
+                ],[
+                InlineKeyboardButton('🎬 𝙹𝙾𝙸𝙽 𝙼𝙾𝚅𝙸𝙴 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 🎬', url='https://t.me/CG_OF_MOVIES')
             ]])          
         )
     elif data == "close":
