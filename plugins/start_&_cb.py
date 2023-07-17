@@ -39,11 +39,13 @@ async def start(client, message):
         InlineKeyboardButton("👨‍💻 Dᴇᴠꜱ 👨‍💻", callback_data='dev'),
         InlineKeyboardButton('🎬 𝙼𝙾𝚅𝙸𝙴 𝚂𝙴𝙰𝚁𝙲𝙷 𝙶𝚁𝙾𝚄𝙿 🎬', url='https://t.me/CG_OF_MOVIES_GROUP')
         ],[
-        InlineKeyboardButton('📯 Uᴩᴅᴀᴛᴇꜱ', url='https://t.me/RknDeveloper'),
-        InlineKeyboardButton('💁‍♂️ Sᴜᴩᴩᴏʀᴛ', url='https://t.me/RknDeveloperSupport')
+        InlineKeyboardButton('📯 Uᴩᴅᴀᴛᴇꜱ 📯', url='https://t.me/RknDeveloper'),
+        InlineKeyboardButton('💁‍♂️ Sᴜᴩᴩᴏʀᴛ ', url='https://t.me/RknDeveloperSupport')
         ],[
         InlineKeyboardButton('🎛️ Aʙᴏᴜᴛ', callback_data='about'),
         InlineKeyboardButton('🛠️ Hᴇʟᴩ', callback_data='help')
+        ],[
+        InlineKeyboardButton('🎬 𝙹𝙾𝙸𝙽 𝙼𝙾𝚅𝙸𝙴 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 🎬', url='https://t.me/CG_OF_MOVIES')
     ]])
     if Config.START_PIC:
         await message.reply_photo(Config.START_PIC, caption=Txt.START_TXT.format(user.mention), reply_markup=button)       
@@ -64,13 +66,13 @@ async def cb_handler(client, query: CallbackQuery):
                 InlineKeyboardButton("👨‍💻 Dᴇᴠꜱ 👨‍💻", callback_data='dev'),
                 InlineKeyboardButton('🎬 𝙼𝙾𝚅𝙸𝙴 𝚂𝙴𝙰𝚁𝙲𝙷 𝙶𝚁𝙾𝚄𝙿 🎬', url='https://t.me/CG_OF_MOVIES_GROUP')
                 ],[
-                InlineKeyboardButton('📯 Uᴩᴅᴀᴛᴇꜱ', url='https://t.me/RknDeveloper'),
+                InlineKeyboardButton('📯 Uᴩᴅᴀᴛᴇꜱ 📯', url='https://t.me/RknDeveloper'),
                 InlineKeyboardButton('💁‍♂️ Sᴜᴩᴩᴏʀᴛ', url='https://t.me/RknDeveloperSupport')
                 ],[
                 InlineKeyboardButton('🎛️ Aʙᴏᴜᴛ', callback_data='about'),
                 InlineKeyboardButton('🛠️ Hᴇʟᴩ', callback_data='help')
                 ],[
-                InlineKeyboardButton('🎬 𝙹𝙾𝙸𝙽 𝙼𝙾𝚅𝙸𝙴 𝙲𝙷𝙰𝙽🎬', url='https://t.me/CG_OF_MOVIES_GROUP')
+                InlineKeyboardButton('🎬 𝙹𝙾𝙸𝙽 𝙼𝙾𝚅𝙸𝙴 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 🎬', url='https://t.me/CG_OF_MOVIES')
             ]])
         )
     elif data == "help":
