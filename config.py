@@ -31,7 +31,7 @@ class Config(object):
     BOT_TOKEN = os.environ.get("BOT_TOKEN", "") 
    
     # database config
-    DB_NAME = os.environ.get("DB_NAME","rkndeveloper")     
+    DB_NAME = os.environ.get("DB_NAME","Rkn-Developer")     
     DB_URL  = os.environ.get("DB_URL","")
  
     # other configs
@@ -90,7 +90,7 @@ Exᴀᴍᴩʟᴇ:- /set_caption 📕 Fɪʟᴇ Nᴀᴍᴇ: {filename}
 • ❣️ <a href=https://t.me/RknDeveloper>Rᴋɴ Dᴇᴠᴇʟᴏᴘᴇʀ</a> """
 
     PROGRESS_BAR = """<b>\n
-╭━━━━❰Rkn Developer Waiting Progress Bar❱━➣
+╭━━━━❰RKN PROCESSING...❱━➣
 ┣⪼ 🗃️ Sɪᴢᴇ: {1} | {2}
 ┣⪼ ⏳️ Dᴏɴᴇ : {0}%
 ┣⪼ 🚀 Sᴩᴇᴇᴅ: {3}/s
