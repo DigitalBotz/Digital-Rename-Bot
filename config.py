@@ -49,11 +49,9 @@ class Config(object):
 class Txt(object):
     # part of text configuration
     START_TXT = """<b>Hᴀɪ {} 👋,
-Tʜɪs Is Aɴ Aᴅᴠᴀɴᴄᴇᴅ Aɴᴅ Yᴇᴛ Pᴏᴡᴇʀꜰᴜʟ Rᴇɴᴀᴍᴇ Bᴏᴛ
-Usɪɴɢ Tʜɪs Bᴏᴛ Yᴏᴜ Cᴀɴ Rᴇɴᴀᴍᴇ & Cʜᴀɴɢᴇ Tʜᴜᴍʙɴᴀɪʟ Oꜰ Yᴏᴜʀ Fɪʟᴇ
-Yᴏᴜ Cᴀɴ Aʟsᴏ Cᴏɴᴠᴇʀᴛ Vɪᴅᴇᴏ Tᴏ Fɪʟᴇ & Fɪʟᴇ Tᴏ Vɪᴅᴇᴏ
-Tʜɪs Bᴏᴛ Aʟꜱᴏ Sᴜᴘᴘᴏʀᴛs Cᴜsᴛᴏᴍ Tʜᴜᴍʙɴᴀɪʟ Aɴᴅ Cᴜsᴛᴏᴍ Cᴀᴘᴛɪᴏɴ
-Tʜɪs Bᴏᴛ Wᴀs Cʀᴇᴀᴛᴇᴅ Bʏ : @RknDeveloper 💞</b>"""
+𝙸'ᴍ 𝙰 𝚂𝙸𝙼𝙿𝙻𝙴 𝙵𝙸𝙻𝙴 𝚁𝙴𝙽𝙰𝙼𝙴 𝙱𝙾𝚃 𝚆𝙸𝚃𝙷 𝙿𝙴𝚁𝙼𝙰𝙽𝙴𝙽𝚃 𝚃𝙷𝚄𝙼𝙱𝙽𝙰𝙸𝙻 & 𝙲𝚄𝚂𝚃𝙾𝙼 𝚂𝚄𝙿𝙿𝙾𝚁𝚃!🤪
+
+𝚃ʜɪs 𝙱ᴏᴛ 𝚆ᴀs 𝙲ʀᴇᴀᴛᴇᴅ 𝙱ʏ : @RknDeveloper 💞</b>"""
 
     ABOUT_TXT = """<b>╭───────────⍟
 ├🤖 ᴍy ɴᴀᴍᴇ : {}
