@@ -34,8 +34,7 @@ async def start(client, message):
     user = message.from_user
     await db.add_user(client, message)                
     button = InlineKeyboardMarkup([[
-        InlineKeyboardButton("Dᴇᴠꜱ", callback_data='dev')
-        ],[
+        
         InlineKeyboardButton('Uᴩᴅᴀ𝚃ᴇꜱ', url='https://t.me/RknDeveloper'),
         InlineKeyboardButton('Sᴜᴩᴩᴏʀ𝚃', url='https://t.me/RknDeveloperSupport')
         ],[
@@ -56,8 +55,7 @@ async def cb_handler(client, query: CallbackQuery):
             text=Txt.START_TXT.format(query.from_user.mention),
             disable_web_page_preview=True,
             reply_markup = InlineKeyboardMarkup([[
-                InlineKeyboardButton("Dᴇᴠꜱ", callback_data='dev')
-                ],[
+                
                 InlineKeyboardButton('Uᴩᴅᴀ𝚃ᴇꜱ', url='https://t.me/RknDeveloper'),
                 InlineKeyboardButton('Sᴜᴩᴩᴏʀ𝚃', url='https://t.me/RknDeveloperSupport')
                 ],[
@@ -71,8 +69,8 @@ async def cb_handler(client, query: CallbackQuery):
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup([[
                 #⚠️ don't change source code & source link ⚠️ #
-                InlineKeyboardButton("💞 𝚂ᴏᴜʀᴄᴇ 𝙲ᴏᴅᴇ 💞", url="https://github.com/RknDeveloper/Rkn-rename-bot-V3")
-                ],[
+                InlineKeyboardButton("°.Oᴡɴᴇʀ.°", url="https://t.me/RknDeveloperr")
+              ],[
                
                 InlineKeyboardButton("Cʟᴏꜱᴇ", callback_data = "close"),
                 InlineKeyboardButton("Bᴀᴄᴋ", callback_data = "start")
