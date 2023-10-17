@@ -48,7 +48,7 @@ class Config(object):
 
 
 
-class Txt(object):
+class rkn(object):
     # part of text configuration
     START_TXT = """<b>Ｈ𝙰𝙸, {}👋
 
