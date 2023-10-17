@@ -38,7 +38,7 @@ class Config(object):
  
     # other configs
     BOT_UPTIME  = time.time()
-    RKN_PIC   = os.environ.get("START_PIC", "https://telegra.ph/file/48ca749ffa182cb1db24c.jpg")
+    RKN_PIC   = os.environ.get("RKN_PIC", "https://graph.org/file/a2fe94c8c19f5a2885b4c.jpg")
     ADMIN       = [int(admin) if id_pattern.search(admin) else admin for admin in os.environ.get('ADMIN', '').split()]
     FORCE_SUB   = os.environ.get("FORCE_SUB", "-1001819787652") 
     LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", None))
