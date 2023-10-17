@@ -95,7 +95,7 @@ async def cb_handler(client, query: CallbackQuery):
                 InlineKeyboardButton('🎬 𝙹𝙾𝙸𝙽 𝙼𝙾𝚅𝙸𝙴 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 🎬', url='https://t.me/CG_OF_MOVIES')
             ]])            
         )
-    elif data == "source_code"":
+    elif data == "source_code":
         await query.message.edit_text(
             text=Txt.DEV_TXT,
             disable_web_page_preview=True,
