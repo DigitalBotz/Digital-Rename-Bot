@@ -34,16 +34,14 @@ async def start(client, message):
     user = message.from_user
     await db.add_user(client, message)                
     button = InlineKeyboardMarkup([[
-        InlineKeyboardButton("👨‍💻 Dᴇᴠꜱ 👨‍💻", callback_data='dev')
+        InlineKeyboardButton("Dᴇᴠꜱ", callback_data='dev')
         ],[
-        InlineKeyboardButton('📯 Uᴩᴅᴀ𝚃ᴇꜱ 📯', url='https://t.me/RknDeveloper'),
-        InlineKeyboardButton('💁‍♂️ Sᴜᴩᴩᴏʀ𝚃 👯‍♂', url='https://t.me/RknDeveloperSupport')
+        InlineKeyboardButton('Uᴩᴅᴀ𝚃ᴇꜱ', url='https://t.me/RknDeveloper'),
+        InlineKeyboardButton('Sᴜᴩᴩᴏʀ𝚃', url='https://t.me/RknDeveloperSupport')
         ],[
-        InlineKeyboardButton('🎛️ Aʙᴏυᴛ 🎛️', callback_data='about'),
-        InlineKeyboardButton('🛠️ Hᴇʟᴩ 🩸', callback_data='help')
-        ],[
-        InlineKeyboardButton('🎬 𝙼𝙾𝚅𝙸𝙴 𝚂𝙴𝙰𝚁𝙲𝙷 𝙶𝚁𝙾𝚄𝙿 🎬', url='https://t.me/CG_OF_MOVIES_GROUP')
-    ]])
+        InlineKeyboardButton('Aʙᴏυᴛ', callback_data='about'),
+        InlineKeyboardButton('Hᴇʟᴩ', callback_data='help')
+         ]])
     if Config.RKN_PIC:
         await message.reply_photo(Config.RKN_PIC, caption=Txt.START_TXT.format(user.mention), reply_markup=button)       
     else:
@@ -58,16 +56,14 @@ async def cb_handler(client, query: CallbackQuery):
             text=Txt.START_TXT.format(query.from_user.mention),
             disable_web_page_preview=True,
             reply_markup = InlineKeyboardMarkup([[
-                InlineKeyboardButton("👨‍💻 Dᴇᴠꜱ 👨‍💻", callback_data='dev')
+                InlineKeyboardButton("Dᴇᴠꜱ", callback_data='dev')
                 ],[
-                InlineKeyboardButton('📯 Uᴩᴅᴀ𝚃ᴇꜱ 📯', url='https://t.me/RknDeveloper'),
-                InlineKeyboardButton('💁‍♂️ Sᴜᴩᴩᴏʀ𝚃 👯‍♂', url='https://t.me/RknDeveloperSupport')
+                InlineKeyboardButton('Uᴩᴅᴀ𝚃ᴇꜱ', url='https://t.me/RknDeveloper'),
+                InlineKeyboardButton('Sᴜᴩᴩᴏʀ𝚃', url='https://t.me/RknDeveloperSupport')
                 ],[
-                InlineKeyboardButton('🎛️ Aʙᴏυᴛ 🎛️', callback_data='about'),
-                InlineKeyboardButton('🛠️ Hᴇʟᴩ 🩸', callback_data='help')
-                ],[
-                InlineKeyboardButton('🎬 𝙼𝙾𝚅𝙸𝙴 𝚂𝙴𝙰𝚁𝙲𝙷 𝙶𝚁𝙾𝚄𝙿 🎬', url='https://t.me/CG_OF_MOVIES_GROUP')
-            ]])
+                InlineKeyboardButton('Aʙᴏυᴛ', callback_data='about'),
+                InlineKeyboardButton('Hᴇʟᴩ', callback_data='help')
+                   ]])
         )
     elif data == "help":
         await query.message.edit_text(
@@ -77,16 +73,10 @@ async def cb_handler(client, query: CallbackQuery):
                 #⚠️ don't change source code & source link ⚠️ #
                 InlineKeyboardButton("💞 𝚂ᴏᴜʀᴄᴇ 𝙲ᴏᴅᴇ 💞", url="https://github.com/RknDeveloper/Rkn-rename-bot-V3")
                 ],[
-                InlineKeyboardButton("❤️‍🔥 𝙰𝙳𝙼𝙸𝙽 ❤️‍🔥", url='https://t.me/RknDeveloperr'),
-                InlineKeyboardButton('💁‍♂️ Sᴜᴩᴩᴏʀ𝚃 👯‍♂', url='https://t.me/RknDeveloperSupport')
-                ],[
-                InlineKeyboardButton("🔒 Cʟᴏꜱᴇ", callback_data = "close"),
-                InlineKeyboardButton("◀️ Bᴀᴄᴋ", callback_data = "start")
-                ],[
-                InlineKeyboardButton('🎬 𝙹𝙾𝙸𝙽 𝙼𝙾𝚅𝙸𝙴 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 🎬', url='https://t.me/CG_OF_MOVIES')
-                ],[
-                InlineKeyboardButton('🎬 𝙼𝙾𝚅𝙸𝙴 𝚂𝙴𝙰𝚁𝙲𝙷 𝙶𝚁𝙾𝚄𝙿 🎬', url='https://t.me/CG_OF_MOVIES_GROUP')
-            ]])            
+               
+                InlineKeyboardButton("Cʟᴏꜱᴇ", callback_data = "close"),
+                InlineKeyboardButton("Bᴀᴄᴋ", callback_data = "start")
+                  ]])            
         )
     elif data == "about":
         await query.message.edit_text(
@@ -94,7 +84,7 @@ async def cb_handler(client, query: CallbackQuery):
             disable_web_page_preview = True,
             reply_markup=InlineKeyboardMarkup([[
                 #⚠️ don't change source code & source link ⚠️ #
-                InlineKeyboardButton("💞 𝚂ᴏᴜʀᴄᴇ 𝙲ᴏᴅᴇ 💞", url="https://github.com/RknDeveloper/Rkn-rename-bot-V3")
+                InlineKeyboardButton("💞 𝚂ᴏᴜʀᴄᴇ 𝙲ᴏᴅᴇ 💞", callback_data = "source_code")
                 ],[
                 InlineKeyboardButton("👨‍🦱 ᴀᴅᴍɪɴ 👨‍🦱", url="https://t.me/RknDeveloperr"),
                 InlineKeyboardButton('📯 Uᴩᴅᴀ𝚃ᴇꜱ 📯', url='https://t.me/RknDeveloper')
@@ -105,22 +95,17 @@ async def cb_handler(client, query: CallbackQuery):
                 InlineKeyboardButton('🎬 𝙹𝙾𝙸𝙽 𝙼𝙾𝚅𝙸𝙴 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 🎬', url='https://t.me/CG_OF_MOVIES')
             ]])            
         )
-    elif data == "dev":
+    elif data == "source_code"":
         await query.message.edit_text(
             text=Txt.DEV_TXT,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup([[
                 #⚠️ don't change source code & source link ⚠️ #
                 InlineKeyboardButton("💞 Sᴏᴜʀᴄᴇ Cᴏᴅᴇ 💞", url="https://github.com/RknDeveloper/Rkn-rename-bot-V3")
-                ],[
-                InlineKeyboardButton("🏹 𝙰𝙳𝙼𝙸𝙽 🏹", url="https://t.me/RknDeveloperr"),
-                InlineKeyboardButton('📯 Uᴩᴅᴀ𝚃ᴇꜱ 📯', url='https://t.me/RknDeveloper')
-                ],[
+            ],[
                 InlineKeyboardButton("🔒 Cʟᴏꜱᴇ", callback_data = "close"),
                 InlineKeyboardButton("◀️ Bᴀᴄᴋ", callback_data = "start")
-                ],[
-                InlineKeyboardButton('🎬 𝙹𝙾𝙸𝙽 𝙼𝙾𝚅𝙸𝙴 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 🎬', url='https://t.me/CG_OF_MOVIES')
-            ]])          
+                 ]])          
         )
     elif data == "close":
         try:
