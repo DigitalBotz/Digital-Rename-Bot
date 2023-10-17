@@ -4,6 +4,6 @@ motor==3.1.2
 dnspython==2.3.0
 hachoir==3.2.0
 Pillow==10.0.1 
-aiohttp==3.8.4
+aiohttp
 pytz==2023.3
  
