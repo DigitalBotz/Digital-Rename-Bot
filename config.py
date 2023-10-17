@@ -93,7 +93,7 @@ Exᴀᴍᴩʟᴇ:- /set_caption 📕 Fɪʟᴇ Nᴀᴍᴇ: {filename}
 • ❣️ <a href=https://github.com/RknDeveloper>OWNER</a>
 • ❣️ <a href=https://t.me/RknDeveloper>Rᴋɴ Dᴇᴠᴇʟᴏᴘᴇʀ</a> """
 
-    PROGRESS_BAR = """<b>\n
+    RKN_PROGRESS = """<b>\n
 ╭━━━━❰RKN PROCESSING...❱━➣
 ┣⪼ 🗃️ Sɪᴢᴇ: {1} | {2}
 ┣⪼ ⏳️ Dᴏɴᴇ : {0}%
