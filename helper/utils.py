@@ -1,7 +1,7 @@
 import math, time
 from datetime import datetime
 from pytz import timezone
-from config import Config, Txt 
+from config import Config, rkn 
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 
@@ -22,7 +22,7 @@ async def progress_for_pyrogram(current, total, ud_type, message, start):
             ''.join(["►" for i in range(math.floor(percentage / 5))]),
             ''.join(["▻" for i in range(20 - math.floor(percentage / 5))])
         )            
-        tmp = progress + Txt.PROGRESS_BAR.format( 
+        tmp = progress + rkn.PROGRESS_BAR.format( 
             round(percentage, 2),
             humanbytes(current),
             humanbytes(total),
