@@ -1,3 +1,5 @@
+# (©) @RknDeveloper ❣️
+
 """
 Apache License 2.0
 Copyright (c) 2022 @RknDeveloper
@@ -16,8 +18,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Telegram Link : https://t.me/RknDeveloper 
-Repo Link : https://github.com/RknDeveloper/Rkn-rename-bot-V2
-License Link : https://github.com/RknDeveloper/Rkn-rename-bot-V2/blob/main/LICENSE
+Repo Link : https://github.com/RknDeveloper/Rkn-Powerful-Rename-Bot
+License Link : https://github.com/RknDeveloper/Rkn-Powerful-Rename-Bot/blob/main/LICENSE
 """
 
 import re, os, time
@@ -36,7 +38,7 @@ class Config(object):
  
     # other configs
     BOT_UPTIME  = time.time()
-    START_PIC   = os.environ.get("START_PIC", "https://telegra.ph/file/48ca749ffa182cb1db24c.jpg")
+    RKN_PIC   = os.environ.get("START_PIC", "https://telegra.ph/file/48ca749ffa182cb1db24c.jpg")
     ADMIN       = [int(admin) if id_pattern.search(admin) else admin for admin in os.environ.get('ADMIN', '').split()]
     FORCE_SUB   = os.environ.get("FORCE_SUB", "-1001819787652") 
     LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", None))
