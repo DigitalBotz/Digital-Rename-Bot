@@ -26,7 +26,7 @@ import random
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ForceReply, CallbackQuery
 from helper.database import db
-from config import Config, Txt  
+from config import Config, rkn  
   
 
 @Client.on_message(filters.private & filters.command("start"))
@@ -42,9 +42,9 @@ async def start(client, message):
         InlineKeyboardButton('Hᴇʟᴩ', callback_data='help')
          ]])
     if Config.RKN_PIC:
-        await message.reply_photo(Config.RKN_PIC, caption=Txt.START_TXT.format(user.mention), reply_markup=button)       
+        await message.reply_photo(Config.RKN_PIC, caption=rkn.START_TXT.format(user.mention), reply_markup=button)       
     else:
-        await message.reply_text(text=Txt.START_TXT.format(user.mention), reply_markup=button, disable_web_page_preview=True)
+        await message.reply_text(text=rkn.START_TXT.format(user.mention), reply_markup=button, disable_web_page_preview=True)
    
 
 @Client.on_callback_query()
@@ -52,7 +52,7 @@ async def cb_handler(client, query: CallbackQuery):
     data = query.data 
     if data == "start":
         await query.message.edit_text(
-            text=Txt.START_TXT.format(query.from_user.mention),
+            text=rkn.START_TXT.format(query.from_user.mention),
             disable_web_page_preview=True,
             reply_markup = InlineKeyboardMarkup([[
                 
@@ -65,7 +65,7 @@ async def cb_handler(client, query: CallbackQuery):
         )
     elif data == "help":
         await query.message.edit_text(
-            text=Txt.HELP_TXT,
+            text=rkn.HELP_TXT,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup([[
                 #⚠️ don't change source code & source link ⚠️ #
@@ -78,7 +78,7 @@ async def cb_handler(client, query: CallbackQuery):
         )
     elif data == "about":
         await query.message.edit_text(
-            text=Txt.ABOUT_TXT.format(client.mention),
+            text=rkn.ABOUT_TXT.format(client.mention),
             disable_web_page_preview = True,
             reply_markup=InlineKeyboardMarkup([[
                 #⚠️ don't change source code & source link ⚠️ #
@@ -95,7 +95,7 @@ async def cb_handler(client, query: CallbackQuery):
         )
     elif data == "source_code":
         await query.message.edit_text(
-            text=Txt.DEV_TXT,
+            text=rkn.DEV_TXT,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup([[
                 #⚠️ don't change source code & source link ⚠️ #
