@@ -73,9 +73,8 @@ broadcast - Send Message To All Users (Admin Only)
 
 ## ❣️Thanks To
 
-Thanks To Pyro Team For His Awesome <a href="https://youtube.com/@RknDeveloper">
-   <p> Rᴋɴ Dᴇᴠʀʟᴏᴘᴇʀ YT </p>
-  </a>
+- Thanks To Mahesh For His Awesome [Media-Search-bot](https://github.com/TEAM-PYRO-BOTZ)
+
 <a href="https://youtube.com/@RknDeveloper">
    <p> Rᴋɴ Dᴇᴠʀʟᴏᴘᴇʀ YT </p>
   </a>
