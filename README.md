@@ -32,8 +32,9 @@
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/RknDeveloper/Rkn-rename-bot-V3)
 
 ## Deploy To Railway
-
+<details><summary>📌 Deploy To Railway </summary>
 <a href="https://graph.org/file/fabd75cd5043d2cfdc13d.jpg"><img src="https://railway.app/button.svg" alt="Deploy"></a>
+</details>
 
 ## Deploy To Heroku
 <details><summary>📌 Deploy to Heroku </summary>
