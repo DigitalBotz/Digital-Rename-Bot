@@ -3,7 +3,7 @@
     "description": "Telegram File Renamer Bot ",
     "logo": "https://graph.org/file/91ab4b346dddd0652958c.jpg",
     "keywords": ["Renamer Bot", "Mongo DB"],    
-    "repository": "https://github.com/TEAM-PYRO-BOTZ/PYRO-RENAME-BOT",
+    "repository": "https://github.com/RknDeveloper/Rkn-Powerful-Rename-Bot",
     "env": {
         "API_ID": {
             "description": "Your APP ID From my.telegram.org ",
@@ -39,10 +39,10 @@
         },
         "DB_NAME":{ 
             "description":"Your Mongo DB Database Name ",
-            "value": "pyro-botz",
+            "value": "Rkn-Developer",
             "required": false
         },
-        "START_PIC": {
+        "RKN_PIC": {
             "description": "Your Bot start cmd Pic from @MT_TelegraPH_Bot",
             "value": "",
             "required": false
