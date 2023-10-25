@@ -25,11 +25,11 @@
 
 
 <details><summary>📌 Deploy to Koyeb </summary>
-[![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/deploy?type=git&repository=github.com/RknDeveloper/Rkn-rename-bot-V3&env[BOT_TOKEN]&env[API_ID]&env[API_HASH]&env[WEBHOOK]=True&env[ADMIN]&env[DB_URL]&env[DB_NAME]=pyro-botz&env[FORCE_SUB]&env[START_PIC]&env[LOG_CHANNEL]=You%20Dont%20Need%20LogChannel%20To%20Remove%20This%20Variable&run_command=python%20bot.py&branch=main&name=rkn-rename) 
+[![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/deploy?type=git&repository=github.com/RknDeveloper/Rkn-Powerful-Rename-Bot&env[BOT_TOKEN]&env[API_ID]&env[API_HASH]&env[WEBHOOK]=True&env[ADMIN]&env[DB_URL]&env[DB_NAME]=pyro-botz&env[FORCE_SUB]&env[START_PIC]&env[LOG_CHANNEL]=You%20Dont%20Need%20LogChannel%20To%20Remove%20This%20Variable&run_command=python%20bot.py&branch=main&name=rkn-rename) 
 </details>
 
 <details><summary>📌 Deploy to Render </summary>
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/RknDeveloper/Rkn-rename-bot-V3)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/RknDeveloper/Rkn-Powerful-Rename-Bot)
 </details>
 
 <details><summary>📌 Deploy To Railway </summary>
@@ -38,7 +38,7 @@
 
 <details><summary>📌 Deploy to Heroku </summary>
 
-<a href="https://heroku.com/deploy?template=https://github.com/RknDeveloper/Rkn-rename-bot-V3"><img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy"></a>
+<a href="https://heroku.com/deploy?template=https://github.com/RknDeveloper/Rkn-Powerful-Rename-Bot"><img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy"></a>
 </details>
 
 ## Configs 
