@@ -74,10 +74,8 @@ broadcast - Send Message To All Users (Admin Only)
 ## ❣️Thanks To
 
 - Thanks To TEAM-PYRO-BOTZ For His Awesome [PYRO-RENAME-BOT](https://github.com/TEAM-PYRO-BOTZ/PYRO-RENAME-BOT.git)
+- Thanks To [RknDeveloper](https://github.com/RknDeveloper) who have edited and modified this repo as now it is. (It's me 😂)
 
-<a href="https://youtube.com/@RknDeveloper">
-   <p> Rᴋɴ Dᴇᴠʀʟᴏᴘᴇʀ YT </p>
-  </a>
 
 
 
