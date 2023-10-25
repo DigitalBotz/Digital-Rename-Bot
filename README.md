@@ -73,7 +73,7 @@ broadcast - Send Message To All Users (Admin Only)
 
 ## ❣️Thanks To
 
-- Thanks To Mahesh For His Awesome [Media-Search-bot](https://github.com/TEAM-PYRO-BOTZ)
+- Thanks To TEAM-PYRO-BOTZ For His Awesome [PYRO-RENAME-BOT](https://github.com/TEAM-PYRO-BOTZ/PYRO-RENAME-BOT.git)
 
 <a href="https://youtube.com/@RknDeveloper">
    <p> Rᴋɴ Dᴇᴠʀʟᴏᴘᴇʀ YT </p>
