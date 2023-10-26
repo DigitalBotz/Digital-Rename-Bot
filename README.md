@@ -3,7 +3,7 @@
 # 𝐑𝐊𝐍 𝐑𝐄𝐍𝐀𝐌𝐄 𝐁𝐎𝐓
 
 <p align="center">
-  <img src="https://telegra.ph/file/98842f9fe8978a8688b9c.jpg" alt="RKN RENAME BOT V2">
+  <img src="https://graph.org/file/9dc402f2ba612e3f6dfbf.jpg" alt="RKN RENAME BOT V2">
 </p>
 
 <p align="center">
