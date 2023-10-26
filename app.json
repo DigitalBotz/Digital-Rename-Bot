@@ -43,8 +43,8 @@
             "required": false
         },
         "RKN_PIC": {
-            "description": "Your Bot start cmd Pic from @MT_TelegraPH_Bot",
-            "value": "",
+            "description": "Your Bot start cmd Pic from @RKN_Telegraphbot",
+            "value": "https://graph.org/file/9dc402f2ba612e3f6dfbf.jpg",
             "required": false
         }
     },
