@@ -1,27 +1,5 @@
 # (©) @RknDeveloper ❣️
 
-"""
-Apache License 2.0
-Copyright (c) 2022 @RknDeveloper
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-Telegram Link : https://t.me/RknDeveloper 
-Repo Link : https://github.com/RknDeveloper/Rkn-Powerful-Rename-Bot
-License Link : https://github.com/RknDeveloper/Rkn-Powerful-Rename-Bot/blob/main/LICENSE
-"""
-
 import re, os, time
 
 id_pattern = re.compile(r'^.\d+$') 
@@ -38,7 +16,7 @@ class Config(object):
  
     # other configs
     BOT_UPTIME  = time.time()
-    RKN_PIC   = os.environ.get("RKN_PIC", "https://graph.org/file/a2fe94c8c19f5a2885b4c.jpg")
+    RKN_PIC   = os.environ.get("RKN_PIC", "https://graph.org/file/9dc402f2ba612e3f6dfbf.jpg")
     ADMIN       = [int(admin) if id_pattern.search(admin) else admin for admin in os.environ.get('ADMIN', '').split()]
     FORCE_SUB   = os.environ.get("FORCE_SUB", "-1001819787652") 
     LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", None))
