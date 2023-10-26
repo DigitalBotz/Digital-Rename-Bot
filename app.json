@@ -1,7 +1,7 @@
 {
     "name": "Renamer Bot",
     "description": "Telegram File Renamer Bot ",
-    "logo": "https://graph.org/file/61eec30a619ec8a3e76e8.jpg",
+    "logo": "https://graph.org/file/9dc402f2ba612e3f6dfbf.jpg",
     "keywords": ["Renamer Bot", "Mongo DB"],    
     "repository": "https://github.com/RknDeveloper/Rkn-Powerful-Rename-Bot",
     "env": {
