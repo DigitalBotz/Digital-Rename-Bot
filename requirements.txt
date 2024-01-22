@@ -3,7 +3,7 @@ TgCrypto==1.2.5
 motor==3.1.2
 dnspython==2.3.0
 hachoir==3.2.0
-Pillow==10.0.1 
+Pillow==10.2.0 
 aiohttp
 pytz==2023.3
  
