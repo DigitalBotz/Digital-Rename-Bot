@@ -2,13 +2,10 @@ from pyrogram import Client, filters
 from pyrogram.enums import MessageMediaType
 from pyrogram.errors import FloodWait
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ForceReply
-
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
-
 from helper.utils import progress_for_pyrogram, convert, humanbytes
 from helper.database import db
-
 from asyncio import sleep
 from PIL import Image
 import os, time
@@ -19,7 +16,7 @@ async def rename_start(client, message):
     file = getattr(message, message.media.value)
     filename = file.file_name  
     if file.file_size > 2000 * 1024 * 1024:
-         return await message.reply_text("Sᴏʀʀy Bʀᴏ Tʜɪꜱ Bᴏᴛ Iꜱ Dᴏᴇꜱɴ'ᴛ Sᴜᴩᴩᴏʀᴛ Uᴩʟᴏᴀᴅɪɴɢ Fɪʟᴇꜱ Bɪɢɢᴇʀ Tʜᴀɴ 2Gʙ")
+         return await message.reply_text("Sᴏʀʀy Bʀᴏ Tʜɪꜱ Bᴏᴛ Iꜱ Dᴏᴇꜱɴ'ᴛ Sᴜᴩᴩᴏʀᴛ Uᴩʟᴏᴀᴅɪɴɢ Fɪʟᴇꜱ Bɪɢɢᴇʀ Tʜᴀɴ 2Gʙ+")
 
     try:
         await message.reply_text(
@@ -63,7 +60,7 @@ async def refunc(client, message):
         elif file.media == MessageMediaType.AUDIO:
             button.append([InlineKeyboardButton("🎵 Aᴜᴅɪᴏ", callback_data = "upload_audio")])
         await message.reply(
-            text=f"**Sᴇʟᴇᴄᴛ Tʜᴇ Oᴜᴛᴩᴜᴛ Fɪʟᴇ Tyᴩᴇ**\n**• Fɪʟᴇ Nᴀᴍᴇ :-**```{new_name}```",
+            text=f"**Sᴇʟᴇᴄᴛ Tʜᴇ Oᴜᴛᴩᴜᴛ Fɪʟᴇ Tyᴩᴇ**\n**• Fɪʟᴇ Nᴀᴍᴇ :-**`{new_name}`",
             reply_to_message_id=file.id,
             reply_markup=InlineKeyboardMarkup(button)
         )
@@ -77,9 +74,9 @@ async def doc(bot, update):
     file_path = f"downloads/{new_filename}"
     file = update.message.reply_to_message
 
-    ms = await update.message.edit("Tʀyɪɴɢ Tᴏ Dᴏᴡɴʟᴏᴀᴅɪɴɢ....")    
+    ms = await update.message.edit("`ᴛʀʏ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ....`")    
     try:
-     	path = await bot.download_media(message=file, file_name=file_path, progress=progress_for_pyrogram,progress_args=("Dᴏᴡɴʟᴏᴀᴅ Sᴛᴀʀᴛᴇᴅ....", ms, time.time()))                    
+     	path = await bot.download_media(message=file, file_name=file_path, progress=progress_for_pyrogram, progress_args=("ᴅᴏᴡɴʟᴏᴀᴅ sᴛᴀʀᴛᴇᴅ....", ms, time.time()))                    
     except Exception as e:
      	return await ms.edit(e)
      	     
@@ -114,7 +111,7 @@ async def doc(bot, update):
          img.resize((320, 320))
          img.save(ph_path, "JPEG")
 
-    await ms.edit("Tʀyɪɴɢ Tᴏ Uᴩʟᴏᴀᴅɪɴɢ....")
+    await ms.edit("`ᴛʀʏɪɴɢ ᴛᴏ ᴜᴩʟᴏᴀᴅɪɴɢ....`")
     type = update.data.split("_")[1]
     try:
         if type == "document":
@@ -124,7 +121,7 @@ async def doc(bot, update):
                 thumb=ph_path, 
                 caption=caption, 
                 progress=progress_for_pyrogram,
-                progress_args=("Rkn Server Uᴩʟᴏᴀᴅɪɴɢ Sᴛᴀʀᴛᴇᴅ....", ms, time.time()))
+                progress_args=("ᴜᴩʟᴏᴀᴅ sᴛᴀʀᴛᴇᴅ....", ms, time.time()))
         elif type == "video": 
             await bot.send_video(
 		update.message.chat.id,
@@ -133,7 +130,7 @@ async def doc(bot, update):
 		thumb=ph_path,
 		duration=duration,
 	        progress=progress_for_pyrogram,
-		progress_args=("Rkn Server Uᴩʟᴏᴀᴅɪɴɢ Sᴛᴀʀᴛᴇᴅ....", ms, time.time()))
+		progress_args=("ᴜᴩʟᴏᴀᴅ sᴛᴀʀᴛᴇᴅ....", ms, time.time()))
         elif type == "audio": 
             await bot.send_audio(
 		update.message.chat.id,
@@ -142,7 +139,7 @@ async def doc(bot, update):
 		thumb=ph_path,
 		duration=duration,
 	        progress=progress_for_pyrogram,
-	        progress_args=("Rkn Server Uᴩʟᴏᴀᴅɪɴɢ Sᴛᴀʀᴛᴇᴅ....", ms, time.time()))
+	        progress_args=("ᴜᴩʟᴏᴀᴅ sᴛᴀʀᴛᴇᴅ....", ms, time.time()))
     except Exception as e:          
         os.remove(file_path)
         if ph_path:
@@ -153,7 +150,5 @@ async def doc(bot, update):
     os.remove(file_path) 
     if ph_path: os.remove(ph_path) 
 
-
-
-
-
+#@RknDeveloper
+#✅ Team-RknDeveloper
