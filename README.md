@@ -20,7 +20,7 @@
 ### Sᴀᴍᴩʟᴇ Bᴏᴛ (Official RKN Rename Bot)
 
 <p align="center">
-🤖 <a href="http://t.me/RKN_DEVELOPER_RENAME_BOT"><img title="Telegram" src="https://img.shields.io/static/v1?label=RKN+RENAME&message=BOT&color=blue-green"></a> 🤖
+🤖 <a href="http://t.me/Rkn_RenameBot"><img title="Telegram" src="https://img.shields.io/static/v1?label=RKN+RENAME&message=BOT&color=blue-green"></a> 🤖
 </p>
 
 ## Deploy Me 🥀
@@ -48,23 +48,14 @@
 ## Configs 
 
 * `BOT_TOKEN`  - Get Bot Token From @BotFather
-
 * `API_ID` - From my.telegram.org 
-
 * `API_HASH` - From my.telegram.org
-
 * `WEBHOOK` - If Your Server Is Need Web Service! Value = `True` Else Value = `False`
-
 * `ADMIN` - AUTH Or Bot Controllers Id's Multiple Id Use Space To Split 
-
 * `DB_URL`  - Mongo Database URL From https://cloud.mongodb.com
-
 * `DB_NAME`  - Your Database Name From Mongodb. 
-
 * `FORCE_SUB` - Your Force Sub Channel Username Without @
-
 * `LOG_CHANNEL` - Bot Logs Sending Channel. If You Don't Need This To Remove This Variable In Your Server
-
 * `RKN_PIC` - Start Message Photo. You Don't Need This! Just Skip
 
 ## Botfather Commands
@@ -75,7 +66,8 @@ del_thumb - Delete Thumbnail
 set_caption - Set A Custom Caption
 see_caption - See Your Custom Caption
 del_caption - Delete Custom Caption
-restart - To Rrstart The Bot (Admin Only)
+restart - To Rrstart The Bot With Send Message all db users (Admin Only)
+logs - bot logs (Admin Only)
 status - Check Bot Status (Admin Only)
 broadcast - Send Message To All Users (Admin Only)
 ```
