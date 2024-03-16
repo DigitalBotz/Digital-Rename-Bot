@@ -1,9 +1,9 @@
 pyrogram==2.0.93
 TgCrypto==1.2.5 
-motor==3.1.2
-dnspython==2.3.0
-hachoir==3.2.0
-Pillow==10.2.0
+motor
+dnspython
+hachoir
+Pillow
 aiohttp
-pytz==2023.3
+pytz
  
