@@ -1,24 +1,22 @@
 # (©) @RknDeveloper ❣️
-
 import re, os, time
-
 id_pattern = re.compile(r'^.\d+$') 
 
 class Config(object):
     # pyro client config
-    API_ID    = os.environ.get("API_ID", "")
-    API_HASH  = os.environ.get("API_HASH", "")
+    API_ID = os.environ.get("API_ID", "")
+    API_HASH = os.environ.get("API_HASH", "")
     BOT_TOKEN = os.environ.get("BOT_TOKEN", "") 
    
     # database config
     DB_NAME = os.environ.get("DB_NAME","Rkn-Developer")     
-    DB_URL  = os.environ.get("DB_URL","")
+    DB_URL = os.environ.get("DB_URL","")
  
     # other configs
-    BOT_UPTIME  = time.time()
-    RKN_PIC   = os.environ.get("RKN_PIC", "https://graph.org/file/9dc402f2ba612e3f6dfbf.jpg")
-    ADMIN       = [int(admin) if id_pattern.search(admin) else admin for admin in os.environ.get('ADMIN', '').split()]
-    FORCE_SUB   = os.environ.get("FORCE_SUB", "-1001819787652") 
+    BOT_UPTIME = time.time()
+    RKN_PIC = os.environ.get("RKN_PIC", "https://graph.org/file/9dc402f2ba612e3f6dfbf.jpg")
+    ADMIN = [int(admin) if id_pattern.search(admin) else admin for admin in os.environ.get('ADMIN', '').split()]
+    FORCE_SUB = os.environ.get("FORCE_SUB", "-1001819787652") 
     LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", None))
 
     # wes response configuration     
@@ -44,7 +42,7 @@ Tʜɪs Bᴏᴛ Wᴀs Cʀᴇᴀᴛᴇᴅ Bʏ : @RknDeveloper 💞</b>"""
 ├📕 Lɪʙʀᴀʀy : <a href=https://github.com/pyrogram>Pyʀᴏɢʀᴀᴍ</a>
 ├✏️ Lᴀɴɢᴜᴀɢᴇ: <a href=https://www.python.org>Pyᴛʜᴏɴ 3</a>
 ├💾 Dᴀᴛᴀ Bᴀꜱᴇ: <a href=https://cloud.mongodb.com>Mᴏɴɢᴏ DB</a>
-├📊 Bᴜɪʟᴅ Vᴇʀꜱɪᴏɴ: <a href=https://github.com/RknDeveloper/Rkn-rename-bot-V3>Rᴋɴ Rᴇɴᴀᴍᴇʀ V3.0.0</a></b>     
+├📊 ᴠᴇʀsɪᴏɴ: <a href=https://github.com/RknDeveloper/Rkn-rename-bot-V3>𝟸.𝟶.𝟶</a></b>     
 ╰───────────────⍟ """
 
     HELP_TXT = """
