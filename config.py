@@ -9,7 +9,7 @@ class Config(object):
     BOT_TOKEN = os.environ.get("BOT_TOKEN", "") 
    
     # database config
-    DB_NAME = os.environ.get("DB_NAME","Rkn-Developer")     
+    DB_NAME = os.environ.get("DB_NAME","Rkn_RenameBot")     
     DB_URL = os.environ.get("DB_URL","")
  
     # other configs
