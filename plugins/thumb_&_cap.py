@@ -46,7 +46,7 @@ async def removethumb(client, message):
     if thumb:
         await db.set_thumbnail(message.from_user.id, file_id=None)
         await rkn.edit("❌️ __**Tʜᴜᴍʙɴᴀɪʟ Dᴇʟᴇᴛᴇᴅ**__")
-	return
+        return
     await rkn.edit("😔 __**Yᴏᴜ Dᴏɴ'ᴛ Hᴀᴠᴇ Aɴy Tʜᴜᴍʙɴᴀɪʟ**__")
 
 
