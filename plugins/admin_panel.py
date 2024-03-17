@@ -33,7 +33,6 @@ async def log_file(b, m):
 async def restart_bot(b, m):
     rkn = await b.send_message(text="**🔄 𝙿𝚁𝙾𝙲𝙴𝚂𝚂𝙴𝚂 𝚂𝚃𝙾𝙿𝙴𝙳. 𝙱𝙾𝚃 𝙸𝚂 𝚁𝙴𝚂𝚃𝙰𝚁𝚃𝙸𝙽𝙶...**", chat_id=message.chat.id)       
     start_time = time.time()
-    os.execl(sys.executable, sys.executable, *sys.argv)
     all_users = await db.get_all_users()
     async for user in all_users:
         rkn = await send_msg(user['_id'], f"ʜᴇʏ, {(await b.get_users(user['_id'])).mention}\n\n**✅️ 𝙱𝙾𝚃 𝙸𝚂 𝚁𝙴𝚂𝚃𝙰𝚁𝚃𝙴𝙳. 𝙽𝙾𝚆 𝚈𝙾𝚄 𝙲𝙰𝙽 𝚄𝚂𝙴 𝙼𝙴**")
@@ -45,7 +44,7 @@ async def restart_bot(b, m):
            await db.delete_user(user['_id'])
     completed_restart = datetime.timedelta(seconds=int(time.time() - start_time))
     await rkn.edit("ᴄᴏᴍᴘʟᴇᴛᴇᴅ ʀᴇsᴛᴀʀᴛ: {completed_restart}\n**✅️ 𝙱𝙾𝚃 𝙸𝚂 𝚁𝙴𝚂𝚃𝙰𝚁𝚃𝙴𝙳. 𝙽𝙾𝚆 𝚈𝙾𝚄 𝙲𝙰𝙽 𝚄𝚂𝙴 𝙼𝙴**")
-    
+    os.execl(sys.executable, sys.executable, *sys.argv)
 
 @Client.on_message(filters.command("broadcast") & filters.user(Config.ADMIN) & filters.reply)
 async def broadcast_handler(bot: Client, m: Message):
