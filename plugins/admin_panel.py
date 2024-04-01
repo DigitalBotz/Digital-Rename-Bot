@@ -40,7 +40,7 @@ async def restart_bot(b, m):
     all_users = await db.get_all_users()
     async for user in all_users:
         try:
-            rkn = await send_msg(user['_id'], f"ʜᴇʏ, {(await b.get_users(user['_id'])).mention}\n\n**✅️ 𝙱𝙾𝚃 𝙸𝚂 𝚁𝙴𝚂𝚃𝙰𝚁𝚃𝙴𝙳. 𝙽𝙾𝚆 𝚈𝙾𝚄 𝙲𝙰𝙽 𝚄𝚂𝙴 𝙼𝙴**")
+            rkn = await send_msg(user['_id'], f"**✅️ 𝙱𝙾𝚃 𝙸𝚂 𝚁𝙴𝚂𝚃𝙰𝚁𝚃𝙴𝙳. 𝙽𝙾𝚆 𝚈𝙾𝚄 𝙲𝙰𝙽 𝚄𝚂𝙴 𝙼𝙴**")
             if rkn == 200:
                 success += 1
             else:
