@@ -1,4 +1,8 @@
-#(©) @RknDeveloper
+# (c) @RknDeveloperr
+# Rkn Developer 
+# Don't Remove Credit 😔
+# Telegram Channel @RknDeveloper & @Rkn_Bots
+# Developer @RknDeveloperr
 
 from config import Config
 from helper.database import db
@@ -31,7 +35,7 @@ async def log_file(b, m):
 #Restart to cancell all process 
 @Client.on_message(filters.private & filters.command("restart") & filters.user(Config.ADMIN))
 async def restart_bot(b, m):
-    rkn = await b.send_message(text="**🔄 𝙿𝚁𝙾𝙲𝙴𝚂𝚂𝙴𝚂 𝚂𝚃𝙾𝙿𝙴𝙳. 𝙱𝙾𝚃 𝙸𝚂 𝚁𝙴𝚂𝚃𝙰𝚁𝚃𝙸𝙽𝙶...**", chat_id=m.chat.id)
+    rkn = await b.send_message(text="**🔄 ᴘʀᴏᴄᴇssᴇs sᴛᴏᴘᴘᴇᴅ. ʙᴏᴛ ɪs ʀᴇsᴛᴀʀᴛɪɴɢ.....**", chat_id=m.chat.id)
     failed = 0
     success = 0
     deactivated = 0
@@ -41,18 +45,18 @@ async def restart_bot(b, m):
     all_users = await db.get_all_users()
     async for user in all_users:
         try:
-            restart_msg = f"ʜᴇʏ, {(await b.get_users(user['_id'])).mention}\n\n**✅️ 𝙱𝙾𝚃 𝙸𝚂 𝚁𝙴𝚂𝚃𝙰𝚁𝚃𝙴𝙳. 𝙽𝙾𝚆 𝚈𝙾𝚄 𝙲𝙰𝙽 𝚄𝚂𝙴 𝙼𝙴**"
+            restart_msg = f"ʜᴇʏ, {(await b.get_users(user['_id'])).mention}\n\n**🔄 ᴘʀᴏᴄᴇssᴇs sᴛᴏᴘᴘᴇᴅ. ʙᴏᴛ ɪs ʀᴇsᴛᴀʀᴛɪɴɢ.....\n\n✅️ ʙᴏᴛ ɪs ʀᴇsᴛᴀʀᴛᴇᴅ. ɴᴏᴡ ʏᴏᴜ ᴄᴀɴ ᴜsᴇ ᴍᴇ.**"
             await b.send_message(user['_id'], restart_msg)
             success += 1
         except InputUserDeactivated:
             deactivated +=1
-         #   await db.delete_user(user['_id'])
+            await db.delete_user(user['_id'])
         except UserIsBlocked:
             blocked +=1
-         #   await db.delete_user(user['_id'])
+            await db.delete_user(user['_id'])
         except Exception as e:
             failed += 1
-           # await db.delete_user(user['_id'])
+            await db.delete_user(user['_id'])
             print(e)
             pass
         try:
@@ -108,3 +112,8 @@ async def send_msg(user_id, message):
         logger.error(f"{user_id} : {e}")
         return 500
  
+
+# Rkn Developer 
+# Don't Remove Credit 😔
+# Telegram Channel @RknDeveloper & @Rkn_Bots
+# Developer @RknDeveloperr
