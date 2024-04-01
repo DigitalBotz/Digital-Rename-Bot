@@ -1,4 +1,9 @@
-# (©) @RknDeveloper ❣️
+# (c) @RknDeveloperr
+# Rkn Developer 
+# Don't Remove Credit 😔
+# Telegram Channel @RknDeveloper & @Rkn_Bots
+# Developer @RknDeveloperr
+
 import re, os, time
 id_pattern = re.compile(r'^.\d+$') 
 
@@ -13,16 +18,14 @@ class Config(object):
     DB_URL = os.environ.get("DB_URL","")
  
     # other configs
-    BOT_UPTIME = time.time()
     RKN_PIC = os.environ.get("RKN_PIC", "https://graph.org/file/9dc402f2ba612e3f6dfbf.jpg")
     ADMIN = [int(admin) if id_pattern.search(admin) else admin for admin in os.environ.get('ADMIN', '').split()]
     FORCE_SUB = os.environ.get("FORCE_SUB", "-1001819787652") 
     LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", None))
 
     # wes response configuration     
-    WEBHOOK = bool(os.environ.get("WEBHOOK", True))
-
-
+    PORT = int(os.environ.get("PORT", "8080"))
+    BOT_UPTIME = time.time()
 
 class rkn(object):
     # part of text configuration
@@ -71,10 +74,13 @@ Exᴀᴍᴩʟᴇ:- /set_caption 📕 Fɪʟᴇ Nᴀᴍᴇ: {filename}
 
     RKN_PROGRESS = """<b>\n
 ╭━━━━❰RKN PROCESSING...❱━➣
-┣⪼ 🗃️ Sɪᴢᴇ: {1} | {2}
-┣⪼ ⏳️ Dᴏɴᴇ : {0}%
-┣⪼ 🚀 Sᴩᴇᴇᴅ: {3}/s
-┣⪼ ⏰️ Eᴛᴀ: {4}
+┣⪼ 🗃️ ꜱɪᴢᴇ: {1} | {2}
+┣⪼ ⏳️ ᴅᴏɴᴇ : {0}%
+┣⪼ 🚀 ꜱᴩᴇᴇᴅ: {3}/s
+┣⪼ ⏰️ ᴇᴛᴀ: {4}
 ╰━━━━━━━━━━━━━━━➣ </b>"""
 
-
+# Rkn Developer 
+# Don't Remove Credit 😔
+# Telegram Channel @RknDeveloper & @Rkn_Bots
+# Developer @RknDeveloperr
