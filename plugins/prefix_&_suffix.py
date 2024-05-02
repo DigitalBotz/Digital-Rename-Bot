@@ -68,4 +68,4 @@ async def see_suffix(client, message):
 # Don't Remove Credit 😔
 # Telegram Channel @RknDeveloper & @Rkn_Bots
 # Developer @RknDeveloperr
-# Special Thanks To Snowball & @ReshamOwner
+# Special Thanks To @ReshamOwner
