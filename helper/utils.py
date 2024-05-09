@@ -1,9 +1,15 @@
-import math, time
+# (c) @RknDeveloperr
+# Rkn Developer 
+# Don't Remove Credit 😔
+# Telegram Channel @RknDeveloper & @Rkn_Bots
+# Developer @RknDeveloperr
+# Special Thanks To (https://github.com/JayMahakal98) & @ReshamOwner
+
+import math, time, re
 from datetime import datetime
 from pytz import timezone
 from config import Config, rkn 
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-
 
 async def progress_for_pyrogram(current, total, ud_type, message, start):
     now = time.time()
@@ -95,6 +101,12 @@ def add_prefix_suffix(input_string, prefix='', suffix=''):
             return f"{prefix}{filename}{extension}"
         else:
             return f"{prefix}{filename} {suffix}{extension}"
-
     else:
         return input_string
+
+# (c) @RknDeveloperr
+# Rkn Developer 
+# Don't Remove Credit 😔
+# Telegram Channel @RknDeveloper & @Rkn_Bots
+# Developer @RknDeveloperr
+# Special Thanks To @ReshamOwner
