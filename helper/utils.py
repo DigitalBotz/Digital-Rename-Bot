@@ -79,6 +79,22 @@ async def send_log(b, u):
             f"**--Nᴇᴡ Uꜱᴇʀ Sᴛᴀʀᴛᴇᴅ Tʜᴇ Bᴏᴛ--**\n\nUꜱᴇʀ: {u.mention}\nIᴅ: `{u.id}`\nUɴ: @{u.username}\n\nDᴀᴛᴇ: {date}\nTɪᴍᴇ: {time}\n\nBy: {b.mention}"
         )
         
+def add_prefix_suffix(input_string, prefix='', suffix=''):
+    pattern = r'(?P<filename>.*?)(\.\w+)?$'
+    match = re.search(pattern, input_string)
+    if match:
+        filename = match.group('filename')
+        extension = match.group(2) or ''
+        if prefix == None:
+            if suffix == None:
+                return f"{filename}{extension}"
+            return f"{filename} {suffix}{extension}"
+        elif suffix == None:
+            if prefix == None:
+               return f"{filename}{extension}"
+            return f"{prefix}{filename}{extension}"
+        else:
+            return f"{prefix}{filename} {suffix}{extension}"
 
-
-
+    else:
+        return input_string
