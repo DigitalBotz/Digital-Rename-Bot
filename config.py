@@ -12,7 +12,10 @@ class Config(object):
     API_ID = os.environ.get("API_ID", "")
     API_HASH = os.environ.get("API_HASH", "")
     BOT_TOKEN = os.environ.get("BOT_TOKEN", "") 
-   
+
+    # premium account string session required 😢 
+    STRING_SESSION = os.environ.get("STRING_SESSION", "")
+    
     # database config
     DB_NAME = os.environ.get("DB_NAME","Rkn_RenameBot")     
     DB_URL = os.environ.get("DB_URL","")
@@ -72,6 +75,16 @@ Exᴀᴍᴩʟᴇ:- /set_caption 📕 Fɪʟᴇ Nᴀᴍᴇ: {filename}
 • ❣️ <a href=https://github.com/RknDeveloper>OWNER</a>
 • ❣️ <a href=https://t.me/RknDeveloper>Rᴋɴ Dᴇᴠᴇʟᴏᴘᴇʀ</a> """
 
+    SEND_METADATA = """
+❪ SET CUSTOM METADATA ❫
+
+☞ Fᴏʀ Exᴀᴍᴘʟᴇ:-
+
+◦ <code> -map 0 -c:s copy -c:a copy -c:v copy -metadata title="Powered By:- @Rkn_Bots" -metadata author="@RknDeveloper" -metadata:s:s title="Subtitled By :- @Rkn_Bots" -metadata:s:a title="By :- @Rkn_Bots" -metadata:s:v title="By:- @RknDeveloper" </code>
+
+📥 Fᴏʀ Hᴇʟᴘ Cᴏɴᴛ. @RknDeveloper
+"""
+    
     RKN_PROGRESS = """<b>\n
 ╭━━━━❰RKN PROCESSING...❱━➣
 ┣⪼ 🗃️ ꜱɪᴢᴇ: {1} | {2}
