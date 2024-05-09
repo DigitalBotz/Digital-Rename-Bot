@@ -16,8 +16,11 @@ from helper.database import db
 from asyncio import sleep
 from PIL import Image
 import os, time, asyncio
+from config import Config
 
-
+UPLOAD_TEXT = """ᴜᴩʟᴏᴀᴅ sᴛᴀʀᴛᴇᴅ...."""
+app = Client("4gb_FileRenameBot", api_id=Config.API_ID, api_hash=Config.API_HASH, session_string=Config.STRING_SESSION)
+   
 @Client.on_message(filters.private & (filters.document | filters.audio | filters.video))
 async def rename_start(client, message):
     file = getattr(message, message.media.value)
@@ -154,43 +157,116 @@ async def doc(bot, update):
 
     await ms.edit("`ᴛʀʏɪɴɢ ᴛᴏ ᴜᴩʟᴏᴀᴅɪɴɢ....`")
     type = update.data.split("_")[1]
-    try:
-        if type == "document":
-            await bot.send_document(
-                update.message.chat.id,
-                document=file_path,
-                thumb=ph_path, 
-                caption=caption, 
-                progress=progress_for_pyrogram,
-                progress_args=("ᴜᴩʟᴏᴀᴅ sᴛᴀʀᴛᴇᴅ....", ms, time.time()))
-        elif type == "video": 
-            await bot.send_video(
-		update.message.chat.id,
-	        video=file_path,
-	        caption=caption,
-		thumb=ph_path,
-		duration=duration,
-	        progress=progress_for_pyrogram,
-		progress_args=("ᴜᴩʟᴏᴀᴅ sᴛᴀʀᴛᴇᴅ....", ms, time.time()))
-        elif type == "audio": 
-            await bot.send_audio(
-		update.message.chat.id,
-		audio=file_path,
-		caption=caption,
-		thumb=ph_path,
-		duration=duration,
-	        progress=progress_for_pyrogram,
-	        progress_args=("ᴜᴩʟᴏᴀᴅ sᴛᴀʀᴛᴇᴅ....", ms, time.time()))
-    except Exception as e:          
-        os.remove(file_path)
-        if ph_path:
-            os.remove(ph_path)
-        return await ms.edit(f" Eʀʀᴏʀ {e}")
- 
-    await ms.delete() 
-    os.remove(file_path) 
-    if ph_path: os.remove(ph_path) 
+    if media.file_size > 2000 * 1024 * 1024:
+        try:
+            if type == "document":
+                filw = await app.send_document(
+                    Config.LOG_CHANNEL,
+                    document=metadata_path if _bool_metadata else file_path,
+                    thumb=ph_path,
+                    caption=caption,
+                    progress=progress_for_pyrogram,
+                    progress_args=(UPLOAD_TEXT, ms, time.time()))
 
+                from_chat = filw.chat.id
+                mg_id = filw.id
+                time.sleep(2)
+                await bot.copy_message(update.from_user.id, from_chat, mg_id)
+                await ms.delete()
+                await bot.delete_messages(from_chat, mg_id)
+            elif type == "video":
+                filw = await app.send_video(
+                    update.message.chat.id,
+                    video=metadata_path if _bool_metadata else file_path,
+                    caption=caption,
+                    thumb=ph_path,
+                    width=width,
+                    height=height,
+                    duration=duration,
+                    progress=progress_for_pyrogram,
+                    progress_args=(UPLOAD_TEXT, ms, time.time()))
+
+                from_chat = filw.chat.id
+                mg_id = filw.id
+                time.sleep(2)
+                await bot.copy_message(update.from_user.id, from_chat, mg_id)
+                await ms.delete()
+                await bot.delete_messages(from_chat, mg_id)
+            elif type == "audio":
+                filw = await app.send_audio(
+                    update.message.chat.id,
+                    audio=metadata_path if _bool_metadata else file_path,
+                    caption=caption,
+                    thumb=ph_path,
+                    duration=duration,
+                    progress=progress_for_pyrogram,
+                    progress_args=(UPLOAD_TEXT, ms, time.time()))
+
+                from_chat = filw.chat.id
+                mg_id = filw.id
+                time.sleep(2)
+                await bot.copy_message(update.from_user.id, from_chat, mg_id)
+                await ms.delete()
+                await bot.delete_messages(from_chat, mg_id)
+        except Exception as e:
+            if file_path:
+                os.remove(file_path)
+            if ph_path:
+                os.remove(ph_path)
+            if metadata_path:
+                os.remove(metadata_path)
+            if path:
+                os.remove(path)
+            return await ms.edit(f" Eʀʀᴏʀ {e}")
+    else:
+        try:
+            if type == "document":
+                await bot.send_document(
+                    update.message.chat.id,
+                    document=metadata_path if _bool_metadata else file_path,
+                    thumb=ph_path,
+                    caption=caption,
+                    progress=progress_for_pyrogram,
+                    progress_args=(UPLOAD_TEXT, ms, time.time()))
+            elif type == "video":
+                await bot.send_video(
+                    update.message.chat.id,
+                    video=metadata_path if _bool_metadata else file_path,
+                    caption=caption,
+                    thumb=ph_path,
+                    width=width,
+                    height=height,
+                    duration=duration,
+                    progress=progress_for_pyrogram,
+                    progress_args=(UPLOAD_TEXT, ms, time.time()))
+            elif type == "audio":
+                await bot.send_audio(
+                    update.message.chat.id,
+                    audio=metadata_path if _bool_metadata else file_path,
+                    caption=caption,
+                    thumb=ph_path,
+                    duration=duration,
+                    progress=progress_for_pyrogram,
+                    progress_args=(UPLOAD_TEXT, ms, time.time()))
+        except Exception as e:
+            if file_path:
+                os.remove(file_path)
+            if ph_path:
+                os.remove(ph_path)
+            if metadata_path:
+                os.remove(metadata_path)
+            if path:
+                os.remove(path)
+            return await ms.edit(f" Eʀʀᴏʀ {e}")
+
+    await ms.delete()
+    if ph_path:
+        os.remove(ph_path)
+    if file_path:
+        os.remove(file_path)
+    if metadata_path:
+        os.remove(metadata_path)
+    
 #@RknDeveloper
 #✅ Team-RknDeveloper
 # Rkn Developer 
