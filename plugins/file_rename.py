@@ -1,14 +1,21 @@
+# (c) @RknDeveloperr
+# Rkn Developer 
+# Don't Remove Credit 😔
+# Telegram Channel @RknDeveloper & @Rkn_Bots
+# Developer @RknDeveloperr
+# Special Thanks To @ReshamOwner
+
 from pyrogram import Client, filters
 from pyrogram.enums import MessageMediaType
 from pyrogram.errors import FloodWait
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ForceReply
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
-from helper.utils import progress_for_pyrogram, convert, humanbytes
+from helper.utils import progress_for_pyrogram, convert, humanbytes, add_prefix_suffix
 from helper.database import db
 from asyncio import sleep
 from PIL import Image
-import os, time
+import os, time, asyncio
 
 
 @Client.on_message(filters.private & (filters.document | filters.audio | filters.video))
@@ -68,9 +75,22 @@ async def refunc(client, message):
 
 
 @Client.on_callback_query(filters.regex("upload"))
-async def doc(bot, update):    
+async def doc(bot, update):
+    # Creating Directory for Metadata
+    if not os.path.isdir("Metadata"):
+        os.mkdir("Metadata")
+
+    user_id = int(update.message.chat.id) 
     new_name = update.message.text
-    new_filename = new_name.split(":-")[1]
+    new_filename_ = new_name.split(":-")[1]
+    try:
+        # adding prefix and suffix
+        prefix = await db.get_prefix(user_id)
+        suffix = await db.get_suffix(user_id)
+        new_filename = add_prefix_suffix(new_filename_, prefix, suffix)
+    except Exception as e:
+        return await update.message.edit(f"⚠️ Something went wrong can't able to set Prefix or Suffix ☹️ \n\n❄️ Contact My Creator -> @RknDeveloperr\nError: {e}")
+	    
     file_path = f"downloads/{new_filename}"
     file = update.message.reply_to_message
 
@@ -80,18 +100,39 @@ async def doc(bot, update):
     except Exception as e:
      	return await ms.edit(e)
      	     
+    _bool_metadata = await db.get_metadata_mode(user_id)
+    if (_bool_metadata):
+        metadata_path = f"Metadata/{new_filename}"
+        metadata = await db.get_metadata_code(user_id)
+        if metadata:
+            await ms.edit("I Fᴏᴜɴᴅ Yᴏᴜʀ Mᴇᴛᴀᴅᴀᴛᴀ\n\n__**Pʟᴇᴀsᴇ Wᴀɪᴛ...**__\n**Aᴅᴅɪɴɢ Mᴇᴛᴀᴅᴀᴛᴀ Tᴏ Fɪʟᴇ....**")
+            cmd = f"""ffmpeg -i {path} {metadata} {metadata_path}"""
+            process = await asyncio.create_subprocess_shell(cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE)
+            stdout, stderr = await process.communicate()
+            er = stderr.decode()
+            try:
+                if er:
+                    return await ms.edit(str(er) + "\n\n**Error**")
+            except BaseException:
+                pass
+        await ms.edit("**Metadata added to the file successfully ✅**\n\n**Tʀyɪɴɢ Tᴏ Uᴩʟᴏᴀᴅɪɴɢ....**")
+    else:
+        await ms.edit("`ᴛʀʏɪɴɢ ᴛᴏ ᴜᴩʟᴏᴀᴅɪɴɢ....`")
+	    
     duration = 0
     try:
-        metadata = extractMetadata(createParser(file_path))
+        parser = createParser(file_path)
+        metadata = extractMetadata(parser)
         if metadata.has("duration"):
-           duration = metadata.get('duration').seconds
+            duration = metadata.get('duration').seconds
+        parser.close()
     except:
         pass
+	    
     ph_path = None
-    user_id = int(update.message.chat.id) 
     media = getattr(file, file.media.value)
-    c_caption = await db.get_caption(update.message.chat.id)
-    c_thumb = await db.get_thumbnail(update.message.chat.id)
+    c_caption = await db.get_caption(user_id)
+    c_thumb = await db.get_thumbnail(user_id)
 
     if c_caption:
          try:
@@ -152,3 +193,8 @@ async def doc(bot, update):
 
 #@RknDeveloper
 #✅ Team-RknDeveloper
+# Rkn Developer 
+# Don't Remove Credit 😔
+# Telegram Channel @RknDeveloper & @Rkn_Bots
+# Developer @RknDeveloperr
+# Special Thanks To @ReshamOwner
