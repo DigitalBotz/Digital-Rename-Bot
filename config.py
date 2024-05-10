@@ -3,6 +3,7 @@
 # Don't Remove Credit 😔
 # Telegram Channel @RknDeveloper & @Rkn_Bots
 # Developer @RknDeveloperr
+# Update Channel @Digital_Botz & @DigitalBotz_Support
 
 import re, os, time
 id_pattern = re.compile(r'^.\d+$') 
@@ -69,11 +70,14 @@ Exᴀᴍᴩʟᴇ:- /set_caption 📕 Fɪʟᴇ Nᴀᴍᴇ: {filename}
 ℹ️ 𝗔𝗻𝘆 𝗢𝘁𝗵𝗲𝗿 𝗛𝗲𝗹𝗽 𝗖𝗼𝗻𝘁𝗮𝗰𝘁 :- <a href=https://t.me/RknDeveloperSupport>𝑺𝑼𝑷𝑷𝑶𝑹𝑻 𝑮𝑹𝑶𝑼𝑷</a>
 """
 
+    #⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
 #⚠️ Dᴏɴ'ᴛ Rᴇᴍᴏᴠᴇ Oᴜʀ Cʀᴇᴅɪᴛꜱ @RknDeveloper🙏🥲
+    # ᴡʜᴏᴇᴠᴇʀ ɪs ᴅᴇᴘʟᴏʏɪɴɢ ᴛʜɪs ʀᴇᴘᴏ ɪs ᴡᴀʀɴᴇᴅ ⚠️ ᴅᴏ ɴᴏᴛ ʀᴇᴍᴏᴠᴇ ᴄʀᴇᴅɪᴛs ɢɪᴠᴇɴ ɪɴ ᴛʜɪs ʀᴇᴘᴏ #ғɪʀsᴛ ᴀɴᴅ ʟᴀsᴛ ᴡᴀʀɴɪɴɢ ⚠️
     DEV_TXT = """<b><u>Sᴩᴇᴄɪᴀʟ Tʜᴀɴᴋꜱ & Dᴇᴠᴇʟᴏᴩᴇʀꜱ</b></u>
 » 𝗦𝗢𝗨𝗥𝗖𝗘 𝗖𝗢𝗗𝗘 : <a href=https://github.com/RknDeveloper/Rkn-rename-bot-V3>𝐑𝐊𝐍 𝐑𝐄𝐍𝐀𝐌𝐄 𝐁𝐎𝐓</a>
 • ❣️ <a href=https://github.com/RknDeveloper>OWNER</a>
 • ❣️ <a href=https://t.me/RknDeveloper>Rᴋɴ Dᴇᴠᴇʟᴏᴘᴇʀ</a> """
+    # ⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
 
     SEND_METADATA = """
 ❪ SET CUSTOM METADATA ❫
@@ -97,3 +101,4 @@ Exᴀᴍᴩʟᴇ:- /set_caption 📕 Fɪʟᴇ Nᴀᴍᴇ: {filename}
 # Don't Remove Credit 😔
 # Telegram Channel @RknDeveloper & @Rkn_Bots
 # Developer @RknDeveloperr
+# Update Channel @Digital_Botz & @DigitalBotz_Support
