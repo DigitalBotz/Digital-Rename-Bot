@@ -4,7 +4,7 @@
 # 
 
 <p align="center">
-  <img src="https://telegra.ph/file/3e5263f829e3ce2c52fb5.jpg" alt="RKN RENAME BOT V2">
+  <img src="https://telegra.ph/file/b746aadfe59959eb76f59.jpg" alt="RKN RENAME BOT V2">
 </p>
 
 <p align="center">
