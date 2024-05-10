@@ -1,6 +1,6 @@
 """
 Apache License 2.0
-Copyright (c) 2022 @RknDeveloper
+Copyright (c) 2022 @Digital_Botz
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -17,9 +17,9 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-Telegram Link : https://t.me/RknDeveloper 
-Repo Link : https://github.com/RknDeveloper/Rkn-rename-bot-V3
-License Link : https://github.com/RknDeveloper/Rkn-rename-bot-V3/blob/main/LICENSE
+Telegram Link : https://t.me/Digital_Botz 
+Repo Link : https://github.com/DigitalBotz/Digital-Rename-Bot
+License Link : https://github.com/RknDeveloper/Digital-Rename-Bot/blob/main/LICENSE
 """
 
 import random
@@ -28,23 +28,24 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ForceRepl
 from helper.database import db
 from config import Config, rkn  
   
+start_button = InlineKeyboardMarkup([[        
+        InlineKeyboardButton('Uᴩᴅᴀ𝚃ᴇꜱ', url='https://t.me/Digital_Botz'),
+        InlineKeyboardButton('Sᴜᴩᴩᴏʀ𝚃', url='https://t.me/DigitalBotz_Support')
+        ],[
+        InlineKeyboardButton('Aʙᴏυᴛ', callback_data='about'),
+        InlineKeyboardButton('Hᴇʟᴩ', callback_data='help')
+        ],[
+        InlineKeyboardButton('💸 ᴜᴘɢʀᴀᴅᴇ ᴛᴏ ᴘʀᴇᴍɪᴜᴍ 💸', callback_data='upgrade')
+         ]])
 
 @Client.on_message(filters.private & filters.command("start"))
 async def start(client, message):
     user = message.from_user
-    await db.add_user(client, message)                
-    button = InlineKeyboardMarkup([[
-        
-        InlineKeyboardButton('Uᴩᴅᴀ𝚃ᴇꜱ', url='https://t.me/RknDeveloper'),
-        InlineKeyboardButton('Sᴜᴩᴩᴏʀ𝚃', url='https://t.me/RknDeveloperSupport')
-        ],[
-        InlineKeyboardButton('Aʙᴏυᴛ', callback_data='about'),
-        InlineKeyboardButton('Hᴇʟᴩ', callback_data='help')
-         ]])
+    await db.add_user(client, message) 
     if Config.RKN_PIC:
-        await message.reply_photo(Config.RKN_PIC, caption=rkn.START_TXT.format(user.mention), reply_markup=button)       
+        await message.reply_photo(Config.RKN_PIC, caption=rkn.START_TXT.format(user.mention), reply_markup=start_button)       
     else:
-        await message.reply_text(text=rkn.START_TXT.format(user.mention), reply_markup=button, disable_web_page_preview=True)
+        await message.reply_text(text=rkn.START_TXT.format(user.mention), reply_markup=start_button, disable_web_page_preview=True)
    
 
 @Client.on_callback_query()
@@ -54,14 +55,7 @@ async def cb_handler(client, query: CallbackQuery):
         await query.message.edit_text(
             text=rkn.START_TXT.format(query.from_user.mention),
             disable_web_page_preview=True,
-            reply_markup = InlineKeyboardMarkup([[
-                
-                InlineKeyboardButton('Uᴩᴅᴀ𝚃ᴇꜱ', url='https://t.me/RknDeveloper'),
-                InlineKeyboardButton('Sᴜᴩᴩᴏʀ𝚃', url='https://t.me/RknDeveloperSupport')
-                ],[
-                InlineKeyboardButton('Aʙᴏυᴛ', callback_data='about'),
-                InlineKeyboardButton('Hᴇʟᴩ', callback_data='help')
-                   ]])
+            reply_markup = start_button
         )
     elif data == "help":
         await query.message.edit_text(
@@ -83,16 +77,19 @@ async def cb_handler(client, query: CallbackQuery):
             reply_markup=InlineKeyboardMarkup([[
                 #⚠️ don't change source code & source link ⚠️ #
                 InlineKeyboardButton("💞 𝚂ᴏᴜʀᴄᴇ 𝙲ᴏᴅᴇ 💞", callback_data = "source_code")
-                ],[
-                InlineKeyboardButton("👨‍🦱 ᴀᴅᴍɪɴ 👨‍🦱", url="https://t.me/RknDeveloperr"),
-                InlineKeyboardButton('📯 Uᴩᴅᴀ𝚃ᴇꜱ 📯', url='https://t.me/RknDeveloper')
-                ],[
+            ],[
                 InlineKeyboardButton("🔒 Cʟᴏꜱᴇ", callback_data = "close"),
                 InlineKeyboardButton("◀️ Bᴀᴄᴋ", callback_data = "start")
                 ],[
                 InlineKeyboardButton('🎬 𝙹𝙾𝙸𝙽 𝙼𝙾𝚅𝙸𝙴 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 🎬', url='https://t.me/CG_OF_MOVIES')
             ]])            
         )
+    elif data == "upgrade":
+        await query.message.edit_text(
+            text=rkn.UPGRADE,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup([[
+             InlineKeyboardButton("◀️ Bᴀᴄᴋ", callback_data = "start")]])) 
     elif data == "source_code":
         await query.message.edit_text(
             text=rkn.DEV_TXT,
@@ -113,7 +110,4 @@ async def cb_handler(client, query: CallbackQuery):
         except:
             await query.message.delete()
             await query.message.continue_propagation()
-
-
-
 
