@@ -4,6 +4,7 @@
 # Telegram Channel @RknDeveloper & @Rkn_Bots
 # Developer @RknDeveloperr
 # Special Thanks To (https://github.com/JayMahakal98) & @ReshamOwner
+# Update Channel @Digital_Botz & @DigitalBotz_Support
 
 import math, time, re
 from datetime import datetime
@@ -84,6 +85,34 @@ async def send_log(b, u):
             Config.LOG_CHANNEL,
             f"**--Nᴇᴡ Uꜱᴇʀ Sᴛᴀʀᴛᴇᴅ Tʜᴇ Bᴏᴛ--**\n\nUꜱᴇʀ: {u.mention}\nIᴅ: `{u.id}`\nUɴ: @{u.username}\n\nDᴀᴛᴇ: {date}\nTɪᴍᴇ: {time}\n\nBy: {b.mention}"
         )
+
+async def get_seconds(time_string):
+    def extract_value_and_unit(ts):
+        value = ""
+        unit = ""
+        index = 0
+        while index < len(ts) and ts[index].isdigit():
+            value += ts[index]
+            index += 1
+        unit = ts[index:].lstrip()
+        if value:
+            value = int(value)
+        return value, unit
+    value, unit = extract_value_and_unit(time_string)
+    if unit == 's':
+        return value
+    elif unit == 'min':
+        return value * 60
+    elif unit == 'hour':
+        return value * 3600
+    elif unit == 'day':
+        return value * 86400
+    elif unit == 'month':
+        return value * 86400 * 30
+    elif unit == 'year':
+        return value * 86400 * 365
+    else:
+        return 0
         
 def add_prefix_suffix(input_string, prefix='', suffix=''):
     pattern = r'(?P<filename>.*?)(\.\w+)?$'
@@ -110,3 +139,4 @@ def add_prefix_suffix(input_string, prefix='', suffix=''):
 # Telegram Channel @RknDeveloper & @Rkn_Bots
 # Developer @RknDeveloperr
 # Special Thanks To @ReshamOwner
+# Update Channel @Digital_Botz & @DigitalBotz_Support
