@@ -4,21 +4,22 @@
 # Telegram Channel @RknDeveloper & @Rkn_Bots
 # Developer @RknDeveloperr
 
-import aiohttp, pytz, datetime, logging, logging.config
+import aiohttp, asyncio, warnings, pytz, datetime, logging, logging.config
 from pyrogram import Client, __version__
 from pyrogram.raw.all import layer
 from config import Config
 from plugins.web_support import web_server
+from plugins.file_rename import app
 
 # Get logging configurations
 logging.config.fileConfig("logging.conf")
 logging.getLogger().setLevel(logging.INFO)
 logging.getLogger("cinemagoer").setLevel(logging.ERROR)
 
-class Rkn_FileRenameBot(Client):
+class Digital_FileRenameBot(Client):
     def __init__(self):
         super().__init__(
-            name="Rkn_FileRenameBot",
+            name="Digital_FileRenameBot",
             api_id=Config.API_ID,
             api_hash=Config.API_HASH,
             bot_token=Config.BOT_TOKEN,
@@ -53,9 +54,29 @@ class Rkn_FileRenameBot(Client):
         await super().stop()
         print("Bot Stopped 🙄")
 
-Rkn_FileRenameBot().run()
+bot_instance = Digital_FileRenameBot()
 
+def main():
+    async def start_services():
+        if Config.STRING_SESSION:
+            await asyncio.gather(
+                app.start(),        # Start the Pyrogram Client
+                bot_instance.start()  # Start the bot instance
+            )
+        else:
+            await asyncio.gather(
+                bot_instance.start())
+            
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(start_services())
+    loop.run_forever()
+
+if __name__ == "__main__":
+    warnings.filterwarnings("ignore", message="There is no current event loop")
+    main()
+    
 # Rkn Developer 
 # Don't Remove Credit 😔
 # Telegram Channel @RknDeveloper & @Rkn_Bots
 # Developer @RknDeveloperr
+# Update Channel @Digital_Botz & @DigitalBotz_Support
