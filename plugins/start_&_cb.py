@@ -55,48 +55,99 @@ async def cb_handler(client, query: CallbackQuery):
         await query.message.edit_text(
             text=rkn.START_TXT.format(query.from_user.mention),
             disable_web_page_preview=True,
-            reply_markup = start_button
-        )
+            reply_markup = start_button)
+        
     elif data == "help":
         await query.message.edit_text(
             text=rkn.HELP_TXT,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup([[
                 #⚠️ don't change source code & source link ⚠️ #
-                InlineKeyboardButton("°.Oᴡɴᴇʀ.°", url="https://t.me/RknDeveloperr")
-              ],[
-               
-                InlineKeyboardButton("Cʟᴏꜱᴇ", callback_data = "close"),
+                InlineKeyboardButton("ᴛʜᴜᴍʙɴᴀɪʟ", callback_data = "thumbnail"),
+                InlineKeyboardButton("ᴄᴀᴘᴛɪᴏɴ", callback_data = "caption")
+                ],[          
+                InlineKeyboardButton("ᴄᴜsᴛᴏᴍ ғɪʟᴇ ɴᴀᴍᴇ", callback_data = "custom_file_name")    
+                ],[          
+                InlineKeyboardButton("ᴀʙᴏᴜᴛ", callback_data = "about"),
+                InlineKeyboardButton("ᴍᴇᴛᴀᴅᴀᴛᴀ", callback_data = "digital_meta_data")
+                                     ],[
                 InlineKeyboardButton("Bᴀᴄᴋ", callback_data = "start")
-                  ]])            
-        )
+                  ]]))         
+        
     elif data == "about":
         await query.message.edit_text(
             text=rkn.ABOUT_TXT.format(client.mention),
             disable_web_page_preview = True,
             reply_markup=InlineKeyboardMarkup([[
                 #⚠️ don't change source code & source link ⚠️ #
-                InlineKeyboardButton("💞 𝚂ᴏᴜʀᴄᴇ 𝙲ᴏᴅᴇ 💞", callback_data = "source_code")
-            ],[
-                InlineKeyboardButton("🔒 Cʟᴏꜱᴇ", callback_data = "close"),
-                InlineKeyboardButton("◀️ Bᴀᴄᴋ", callback_data = "start")
+                InlineKeyboardButton("𝚂ᴏᴜʀᴄᴇ",
+     callback_data = "source_code"), #Whoever is deploying this repo is given a warning ⚠️ not to remove this repo link #first & last warning ⚠️
+                InlineKeyboardButton("ʙᴏᴛ sᴛᴀᴛᴜs", callback_data = "bot_status")
                 ],[
-                InlineKeyboardButton('🎬 𝙹𝙾𝙸𝙽 𝙼𝙾𝚅𝙸𝙴 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 🎬', url='https://t.me/CG_OF_MOVIES')
-            ]])            
-        )
+                InlineKeyboardButton("ʟɪᴠᴇ sᴛᴀᴛᴜs", callback_data = "live_status"),
+                InlineKeyboardButton("ᴜᴘɢʀᴀᴅᴇ", callback_data = "upgrade")
+                ],[   
+                InlineKeyboardButton("Bᴀᴄᴋ", callback_data = "start")
+            
+           ]]))    
+        
     elif data == "upgrade":
         await query.message.edit_text(
             text=rkn.UPGRADE,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup([[
              InlineKeyboardButton("◀️ Bᴀᴄᴋ", callback_data = "start")]])) 
+      
+    elif data == "thumbnail":
+        await query.message.edit_text(
+            text=rkn.THUMBNAIL,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup([[
+             InlineKeyboardButton(" Bᴀᴄᴋ", callback_data = "help")]])) 
+      
+    elif data == "caption":
+        await query.message.edit_text(
+            text=rkn.CAPTION,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup([[
+             InlineKeyboardButton(" Bᴀᴄᴋ", callback_data = "help")]])) 
+      
+    elif data == "custom_file_name":
+        await query.message.edit_text(
+            text=rkn.CUSTOM_FILE_NAME,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup([[
+             InlineKeyboardButton(" Bᴀᴄᴋ", callback_data = "help")]])) 
+      
+    elif data == "digital_meta_data":
+        await query.message.edit_text(
+            text=rkn.DIGITAL_METADTA,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup([[
+             InlineKeyboardButton(" Bᴀᴄᴋ", callback_data = "help")]])) 
+      
+    elif data == "bot_status":
+        await query.message.edit_text(
+            text=rkn.BOT_STATUS,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup([[
+             InlineKeyboardButton(" Bᴀᴄᴋ", callback_data = "about")]])) 
+      
+    elif data == "live_status":
+        await query.message.edit_text(
+            text=rkn.LIVE_STATUS,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup([[
+             InlineKeyboardButton(" Bᴀᴄᴋ", callback_data = "about")]])) 
+      
     elif data == "source_code":
         await query.message.edit_text(
             text=rkn.DEV_TXT,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup([[
                 #⚠️ don't change source code & source link ⚠️ #
-                InlineKeyboardButton("💞 Sᴏᴜʀᴄᴇ Cᴏᴅᴇ 💞", url="https://github.com/RknDeveloper/Rkn-rename-bot-V3")
+           #Whoever is deploying this repo is given a warning ⚠️ not to remove this repo link #first & last warning ⚠️   
+                InlineKeyboardButton("💞 Sᴏᴜʀᴄᴇ Cᴏᴅᴇ 💞", url="https://github.com/DigitalBotz/Digital-Rename-Bot")
             ],[
                 InlineKeyboardButton("🔒 Cʟᴏꜱᴇ", callback_data = "close"),
                 InlineKeyboardButton("◀️ Bᴀᴄᴋ", callback_data = "start")
@@ -111,3 +162,9 @@ async def cb_handler(client, query: CallbackQuery):
             await query.message.delete()
             await query.message.continue_propagation()
 
+# (c) @RknDeveloperr
+# Rkn Developer 
+# Don't Remove Credit 😔
+# Telegram Channel @RknDeveloper & @Rkn_Bots
+# Developer @RknDeveloperr
+# Update Channel @Digital_Botz & @DigitalBotz_Support
