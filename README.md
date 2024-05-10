@@ -1,3 +1,10 @@
+
+## The repo is in processing for upcoming feature editing.
+## give the some time.
+## error solve soon....
+## waiting.........
+## Join _ @RknDeveloper
+
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 ![Typing SVG](https://readme-typing-svg.herokuapp.com/?lines=𝗪𝗘𝗟𝗖𝗢𝗠+𝗧𝗢+𝐑𝐊𝐍+𝐑𝐄𝐍𝐀𝐌𝐄+𝐁𝐎𝐓!;𝗖𝗥𝗘𝗔𝗧𝗘𝗗+𝗕𝗬+𝚁𝙺𝙽+𝙳𝙴𝚅𝙴𝙻𝙾𝙿𝙴𝚁!;𝗔+𝗦𝗜𝗠𝗣𝗟𝗘+𝗧𝗚+𝐑𝐄𝐍𝐀𝐌𝐄+𝗕𝗢𝗧!)</p>
