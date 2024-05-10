@@ -4,7 +4,7 @@
 # 
 
 <p align="center">
-  <img src="https://graph.org/file/9dc402f2ba612e3f6dfbf.jpg" alt="RKN RENAME BOT V2">
+  <img src="https://telegra.ph/file/3e5263f829e3ce2c52fb5.jpg" alt="RKN RENAME BOT V2">
 </p>
 
 <p align="center">
@@ -17,7 +17,7 @@
 </p>
 
 
-### Sᴀᴍᴩʟᴇ Bᴏᴛ (Official RKN Rename Bot)
+### Sᴀᴍᴩʟᴇ Bᴏᴛ (Official Digital Rename Bot)
 
 <p align="center">
 🤖 <a href="http://t.me/Rkn_RenameBot"><img title="Telegram" src="https://img.shields.io/static/v1?label=RKN+RENAME&message=BOT&color=blue-green"></a> 🤖
