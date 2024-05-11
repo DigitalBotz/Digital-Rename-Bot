@@ -26,13 +26,8 @@
 
 ### Sᴀᴍᴩʟᴇ Bᴏᴛ (Official Digital Rename Bot)
 
-<p align="center">
-🤖 <a href="http://t.me/Rkn_RenameBot"><img title="Telegram" src="https://img.shields.io/static/v1?label=RKN+RENAME&message=BOT&color=blue-green"></a> 🤖
-</p>
-<p
-[Rkn_RenameBot](http://t.me/Rkn_RenameBot)
-[Digital_Rename_Bot](http://t.me/Digital_Rename_Bot)
-</p>
+* [Rkn_RenameBot](http://t.me/Rkn_RenameBot)
+* [Digital_Rename_Bot](http://t.me/Digital_Rename_Bot)
 
 
 ## Deploy Me 🥀
