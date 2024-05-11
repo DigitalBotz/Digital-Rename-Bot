@@ -4,7 +4,9 @@
 # Telegram Channel @RknDeveloper & @Rkn_Bots
 # Developer @RknDeveloperr
 
-import aiohttp, asyncio, warnings, pytz, datetime, logging, logging.config
+import aiohttp, asyncio, warnings, pytz, datetime, logging, 
+logging.config, glob, sys, importlib
+from pathlib import Path
 from pyrogram import Client, __version__
 from pyrogram.raw.all import layer
 from config import Config
@@ -37,6 +39,20 @@ class Digital_FileRenameBot(Client):
         await app.setup()
         bind_address = "0.0.0.0"
         await aiohttp.web.TCPSite(app, bind_address, Config.PORT).start()
+        path = "plugins/*.py"
+        files = glob.glob(path)
+        for name in files:
+            with open(name) as a:
+                patt = Path(a.name)
+                plugin_name = patt.stem.replace(".py", "")
+                plugins_path = Path(f"plugins/{plugin_name}.py")
+                import_path = "plugins.{}".format(plugin_name)
+                spec = importlib.util.spec_from_file_location(import_path, plugins_path)
+                load = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(load)
+                sys.modules["plugins" + plugin_name] = load
+                print("Digital Botz Imported " + plugin_name)
+                
         print(f"{me.first_name} Iꜱ Sᴛᴀʀᴛᴇᴅ.....✨️")
         for id in Config.ADMIN:
             try: await self.send_message(id, f"**__{me.first_name}  Iꜱ Sᴛᴀʀᴛᴇᴅ.....✨️__**")                                
