@@ -22,12 +22,23 @@ Repo Link : https://github.com/DigitalBotz/Digital-Rename-Bot
 License Link : https://github.com/RknDeveloper/Digital-Rename-Bot/blob/main/LICENSE
 """
 
-import random
+import random, asyncio, datetime, pytz
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ForceReply, CallbackQuery
 from helper.database import db
 from config import Config, rkn  
-  
+
+upgrade_button = InlineKeyboardMarkup([[        
+        InlineKeyboardButton('Aʙᴏυᴛ', callback_data='about'),
+        InlineKeyboardButton('Hᴇʟᴩ', callback_data='help')
+        ],[
+        InlineKeyboardButton('Aʙᴏυᴛ', callback_data='about'),
+        InlineKeyboardButton('Hᴇʟᴩ', callback_data='help')
+        ],[
+        InlineKeyboardButton('Aʙᴏυᴛ', callback_data='about'),
+        InlineKeyboardButton('Hᴇʟᴩ', callback_data='help')
+]])
+
 start_button = InlineKeyboardMarkup([[        
         InlineKeyboardButton('Uᴩᴅᴀ𝚃ᴇꜱ', url='https://t.me/Digital_Botz'),
         InlineKeyboardButton('Sᴜᴩᴩᴏʀ𝚃', url='https://t.me/DigitalBotz_Support')
@@ -46,8 +57,39 @@ async def start(client, message):
         await message.reply_photo(Config.RKN_PIC, caption=rkn.START_TXT.format(user.mention), reply_markup=start_button)       
     else:
         await message.reply_text(text=rkn.START_TXT.format(user.mention), reply_markup=start_button, disable_web_page_preview=True)
-   
 
+@Client.on_message(filters.private & filters.command("myplan"))
+async def myplan(client, message):
+    user_id  = message.from_user.id
+    if await db.has_premium_access(user_id):         
+        expiry = await db.check_remaining_time(user_id)
+        expiry_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata"))
+        expiry_str_in_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata")).strftime("%d-%m-%Y\n⏱️ ᴇxᴘɪʀʏ ᴛɪᴍᴇ : %I:%M:%S %p")            
+        # Calculate time difference
+        current_time = datetime.datetime.now(pytz.timezone("Asia/Kolkata"))
+        time_left = expiry_ist - current_time
+            
+        # Calculate days, hours, and minutes
+        days = time_left.days
+        hours, remainder = divmod(time_left.seconds, 3600)
+        minutes, seconds = divmod(remainder, 60)
+            
+        # Format time left as a string
+        time_left_str = f"{days} ᴅᴀʏꜱ, {hours} ʜᴏᴜʀꜱ, {minutes} ᴍɪɴᴜᴛᴇꜱ"
+        await message.reply_text(f"⚜️ ʏᴏᴜʀ ᴘʟᴀɴs ᴅᴇᴛᴀɪʟs ᴀʀᴇ :\n\n👤 ᴜꜱᴇʀ : {user}\n⚡ ᴜꜱᴇʀ ɪᴅ : <code>{user_id}</code>\n⏰ ᴛɪᴍᴇ ʟᴇꜰᴛ : {time_left_str}\n⌛️ ᴇxᴘɪʀʏ ᴅᴀᴛᴇ : {expiry_str_in_ist}")
+    else:
+        m=await message.reply_sticker("CAACAgIAAxkBAAIBTGVjQbHuhOiboQsDm35brLGyLQ28AAJ-GgACglXYSXgCrotQHjibHgQ")
+        await message.reply_text(f"ʜᴇʏ {user},\n\nʏᴏᴜ ᴅᴏ ɴᴏᴛ ʜᴀᴠᴇ ᴀɴʏ ᴀᴄᴛɪᴠᴇ ᴘʀᴇᴍɪᴜᴍ ᴘʟᴀɴs, ɪꜰ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ᴛᴀᴋᴇ ᴘʀᴇᴍɪᴜᴍ ᴛʜᴇɴ ᴄʟɪᴄᴋ ᴏɴ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴ 👇",
+        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("💸 ᴄʜᴇᴄᴋᴏᴜᴛ ᴘʀᴇᴍɪᴜᴍ ᴘʟᴀɴꜱ 💸", callback_data='upgrade')]]))			 
+        await asyncio.sleep(2)
+        await m.delete()
+
+@Client.on_message(filters.private & filters.command("plans"))
+async def plans(client, message):
+    user = message.from_user
+    await message.reply_text(text=rkn.UPGRADE.format(user.mention), reply_markup=upgrade_button, disable_web_page_preview=True)
+   
+  
 @Client.on_callback_query()
 async def cb_handler(client, query: CallbackQuery):
     data = query.data 
