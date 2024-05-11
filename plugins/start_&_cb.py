@@ -61,8 +61,9 @@ async def start(client, message):
 @Client.on_message(filters.private & filters.command("myplan"))
 async def myplan(client, message):
     user_id  = message.from_user.id
+    user = message.from_user.mention
     if await db.has_premium_access(user_id):         
-        expiry = await db.check_remaining_time(user_id)
+        expiry = await db.checking_remaining_time(user_id)
         expiry_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata"))
         expiry_str_in_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata")).strftime("%d-%m-%Y\n⏱️ ᴇxᴘɪʀʏ ᴛɪᴍᴇ : %I:%M:%S %p")            
         # Calculate time difference
