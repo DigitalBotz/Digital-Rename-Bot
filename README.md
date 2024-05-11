@@ -29,6 +29,11 @@
 <p align="center">
 🤖 <a href="http://t.me/Rkn_RenameBot"><img title="Telegram" src="https://img.shields.io/static/v1?label=RKN+RENAME&message=BOT&color=blue-green"></a> 🤖
 </p>
+<p
+[Rkn_RenameBot](http://t.me/Rkn_RenameBot)
+[Digital_Rename_Bot](http://t.me/Digital_Rename_Bot)
+</p>
+
 
 ## Deploy Me 🥀
 
@@ -57,13 +62,11 @@
 * `BOT_TOKEN`  - Get Bot Token From @BotFather [Required ⚠️]
 * `API_ID` - From my.telegram.org [Required ⚠️]
 * `API_HASH` - From my.telegram.org [Required ⚠️]
-* `WEBHOOK` - If Your Server Is Need Web Service! Value = `True` Else Value = `False`
 * `ADMIN` - AUTH Or Bot Controllers Id's Multiple Id Use Space To Split 
 * `DB_URL`  - Mongo Database URL From https://cloud.mongodb.com [Required ⚠️]
 * `DB_NAME`  - Your Database Name From Mongodb. [Required ⚠️]
 * `FORCE_SUB` - Your Force Sub Channel Username Without @ [Required ⚠️]
 * `LOG_CHANNEL` - Bot Logs Sending Channel. If You Don't Need This To Remove This Variable In Your Server [Required ⚠️]
-* `RKN_PIC` - Start Message Photo. You Don't Need This! Just Skip
 * `STRING_SESSION` - Your Premium Account SESSION STRING
 
 ## Botfather Commands
@@ -93,7 +96,7 @@ broadcast - Sᴇɴᴅ Mᴇssᴀɢᴇ Tᴏ Aʟʟ Usᴇʀs (Aᴅᴍɪɴ Oɴʟʏ)
 ## ᴡᴀʀɴɪɴɢ ⚠️
 ```
 # ᴡʜᴏᴇᴠᴇʀ ɪs ᴅᴇᴘʟᴏʏɪɴɢ ᴛʜɪs ʀᴇᴘᴏ ɪs ᴡᴀʀɴᴇᴅ ⚠️ ᴅᴏ ɴᴏᴛ ʀᴇᴍᴏᴠᴇ ᴄʀᴇᴅɪᴛs ɢɪᴠᴇɴ ɪɴ ᴛʜɪs ʀᴇᴘᴏ #ғɪʀsᴛ ᴀɴᴅ ʟᴀsᴛ ᴡᴀʀɴɪɴɢ ⚠️
-``
+```
 
 ## ❣️Thanks To
 
