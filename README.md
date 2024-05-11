@@ -90,6 +90,11 @@ status - Cʜᴇᴄᴋ Bᴏᴛ Sᴛᴀᴛᴜs (Aᴅᴍɪɴ Oɴʟʏ)
 broadcast - Sᴇɴᴅ Mᴇssᴀɢᴇ Tᴏ Aʟʟ Usᴇʀs (Aᴅᴍɪɴ Oɴʟʏ)
 ```
 
+## ᴡᴀʀɴɪɴɢ ⚠️
+```
+# ᴡʜᴏᴇᴠᴇʀ ɪs ᴅᴇᴘʟᴏʏɪɴɢ ᴛʜɪs ʀᴇᴘᴏ ɪs ᴡᴀʀɴᴇᴅ ⚠️ ᴅᴏ ɴᴏᴛ ʀᴇᴍᴏᴠᴇ ᴄʀᴇᴅɪᴛs ɢɪᴠᴇɴ ɪɴ ᴛʜɪs ʀᴇᴘᴏ #ғɪʀsᴛ ᴀɴᴅ ʟᴀsᴛ ᴡᴀʀɴɪɴɢ ⚠️
+``
+
 ## ❣️Thanks To
 
 - Thanks To TEAM-PYRO-BOTZ For His Awesome [PYRO-RENAME-BOT](https://github.com/TEAM-PYRO-BOTZ/PYRO-RENAME-BOT.git)
