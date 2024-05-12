@@ -26,17 +26,13 @@ import random, asyncio, datetime, pytz, time, psutil, shutil
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ForceReply, CallbackQuery
 from helper.database import db
-from config import Config, rkn  
+from config import Config, rkn
+from helper.utils import humanbytes
 
 upgrade_button = InlineKeyboardMarkup([[        
-        InlineKeyboardButton('Aʙᴏυᴛ', callback_data='about'),
-        InlineKeyboardButton('Hᴇʟᴩ', callback_data='help')
-        ],[
-        InlineKeyboardButton('Aʙᴏυᴛ', callback_data='about'),
-        InlineKeyboardButton('Hᴇʟᴩ', callback_data='help')
-        ],[
-        InlineKeyboardButton('Aʙᴏυᴛ', callback_data='about'),
-        InlineKeyboardButton('Hᴇʟᴩ', callback_data='help')
+        InlineKeyboardButton('buy premium ✓', user_id=int(6705898491)),
+         ],[
+        InlineKeyboardButton("Bᴀᴄᴋ", callback_data = "start")
 ]])
 
 start_button = InlineKeyboardMarkup([[        
