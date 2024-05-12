@@ -7,7 +7,7 @@
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
-![Typing SVG](https://readme-typing-svg.herokuapp.com/?lines=𝗪𝗘𝗟𝗖𝗢𝗠+𝗧𝗢+𝐑𝐊𝐍+𝐑𝐄𝐍𝐀𝐌𝐄+𝐁𝐎𝐓!;𝗖𝗥𝗘𝗔𝗧𝗘𝗗+𝗕𝗬+𝚁𝙺𝙽+𝙳𝙴𝚅𝙴𝙻𝙾𝙿𝙴𝚁!;𝗔+𝗦𝗜𝗠𝗣𝗟𝗘+𝗧𝗚+𝐑𝐄𝐍𝐀𝐌𝐄+𝗕𝗢𝗧!)</p>
+![Typing SVG](https://readme-typing-svg.herokuapp.com/?lines=𝗪𝗘𝗟𝗖𝗢𝗠+𝗧𝗢+𝗗𝗜𝗚𝗜𝗧𝗔𝗟+𝗥𝗘𝗡𝗔𝗠𝗘+𝗕𝗢𝗧!;𝗖𝗥𝗘𝗔𝗧𝗘𝗗+𝗕𝗬+𝗗𝗜𝗚𝗜𝗧𝗔𝗟+𝗕𝗢𝗧𝗭!;𝗜+𝗔𝗠+𝗣𝗢𝗪𝗘𝗥𝗙𝗨𝗟+𝗧𝗚+𝗥𝗘𝗡𝗔𝗠𝗘+𝗕𝗢𝗧!)</p>
 # 
 
 <p align="center">
@@ -52,17 +52,17 @@
 <a href="https://heroku.com/deploy?template=https://github.com/RknDeveloper/Rkn-Powerful-Rename-Bot"><img src="https://img.shields.io/badge/Deploy%20To%20Heroku-black?style=for-the-badge&logo=heroku" width="220" height="38.45"></p></a>
 </details>
 
-## Configs 
+## ʀᴇǫᴜɪʀᴇᴅ ᴄᴏɴғɪɢs
 
-* `BOT_TOKEN`  - Get Bot Token From @BotFather [Required ⚠️]
-* `API_ID` - From my.telegram.org [Required ⚠️]
-* `API_HASH` - From my.telegram.org [Required ⚠️]
+* `BOT_TOKEN`  - Get Bot Token From @BotFather
+* `API_ID` - From my.telegram.org
+* `API_HASH` - From my.telegram.org
 * `ADMIN` - AUTH Or Bot Controllers Id's Multiple Id Use Space To Split 
-* `DB_URL`  - Mongo Database URL From https://cloud.mongodb.com [Required ⚠️]
-* `DB_NAME`  - Your Database Name From Mongodb. [Required ⚠️]
-* `FORCE_SUB` - Your Force Sub Channel Username Without @ [Required ⚠️]
-* `LOG_CHANNEL` - Bot Logs Sending Channel. If You Don't Need This To Remove This Variable In Your Server [Required ⚠️]
-* `STRING_SESSION` - Your Premium Account SESSION STRING
+* `DB_URL`  - Mongo Database URL From https://cloud.mongodb.com
+* `DB_NAME`  - Your Database Name From Mongodb.
+* `FORCE_SUB` - Your Force Sub Channel Username Without @
+* `LOG_CHANNEL` - Bot Logs Sending Channel. If You Don't Need This To Remove This Variable In Your Server
+* `STRING_SESSION` - Your Tg Premium Account SESSION STRING Required.
 
 ## Botfather Commands
 ```
@@ -88,10 +88,10 @@ status - Cʜᴇᴄᴋ Bᴏᴛ Sᴛᴀᴛᴜs (Aᴅᴍɪɴ Oɴʟʏ)
 broadcast - Sᴇɴᴅ Mᴇssᴀɢᴇ Tᴏ Aʟʟ Usᴇʀs (Aᴅᴍɪɴ Oɴʟʏ)
 ```
 
-## ᴡᴀʀɴɪɴɢ ⚠️
-```
-# ᴡʜᴏᴇᴠᴇʀ ɪs ᴅᴇᴘʟᴏʏɪɴɢ ᴛʜɪs ʀᴇᴘᴏ ɪs ᴡᴀʀɴᴇᴅ ⚠️ ᴅᴏ ɴᴏᴛ ʀᴇᴍᴏᴠᴇ ᴄʀᴇᴅɪᴛs ɢɪᴠᴇɴ ɪɴ ᴛʜɪs ʀᴇᴘᴏ #ғɪʀsᴛ ᴀɴᴅ ʟᴀsᴛ ᴡᴀʀɴɪɴɢ ⚠️
-```
+## ᴡᴀʀɴɪɴɢ ᴅᴇᴠᴇʟᴏᴘᴇʀ ⚠️
+
+- ᴡʜᴏᴇᴠᴇʀ ɪs ᴅᴇᴘʟᴏʏɪɴɢ ᴛʜɪs ʀᴇᴘᴏ ɪs ᴡᴀʀɴᴇᴅ ⚠️ ᴅᴏ ɴᴏᴛ ʀᴇᴍᴏᴠᴇ ᴄʀᴇᴅɪᴛs ɢɪᴠᴇɴ ɪɴ ᴛʜɪs ʀᴇᴘᴏ #ғɪʀsᴛ ᴀɴᴅ ʟᴀsᴛ ᴡᴀʀɴɪɴɢ ⚠️
+- 
 
 ## ❣️Thanks To
 
