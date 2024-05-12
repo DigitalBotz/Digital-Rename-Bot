@@ -134,8 +134,7 @@ async def cb_handler(client, query: CallbackQuery):
         await query.message.edit_text(
             text=rkn.UPGRADE,
             disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup([[
-             InlineKeyboardButton("◀️ Bᴀᴄᴋ", callback_data = "start")]])) 
+            reply_markup=upgrade_button) 
       
     elif data == "thumbnail":
         await query.message.edit_text(
