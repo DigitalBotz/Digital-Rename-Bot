@@ -44,25 +44,33 @@ Tʜɪs Bᴏᴛ Wᴀs Cʀᴇᴀᴛᴇᴅ Bʏ : @RknDeveloper 💞</b>"""
 
     ABOUT_TXT = """<b>╭───────────⍟
 ├🤖 ᴍy ɴᴀᴍᴇ : {}
-├🖥️ Dᴇᴠᴇʟᴏᴩᴇʀꜱ : <a href=https://t.me/RknDeveloper/53>𝐑𝐊𝐍 𝐃𝐞𝐯𝐞𝐥𝐨𝐩𝐞𝐫</a> 
-├👨‍💻 Pʀᴏɢʀᴀᴍᴇʀ : <a href=https://github.com/RknDeveloper>Rᴋɴ Dᴇᴠᴇʟᴏᴘᴇʀ</a>
+├🖥️ Dᴇᴠᴇʟᴏᴩᴇʀꜱ : <a href=https://t.me/Digital_Botz>Digital Botz</a> 
+├👨‍💻 Pʀᴏɢʀᴀᴍᴇʀ : <a href=https://github.com/DigitalBotz>Digital Botz</a>
 ├📕 Lɪʙʀᴀʀy : <a href=https://github.com/pyrogram>Pyʀᴏɢʀᴀᴍ</a>
 ├✏️ Lᴀɴɢᴜᴀɢᴇ: <a href=https://www.python.org>Pyᴛʜᴏɴ 3</a>
 ├💾 Dᴀᴛᴀ Bᴀꜱᴇ: <a href=https://cloud.mongodb.com>Mᴏɴɢᴏ DB</a>
-├📊 ᴠᴇʀsɪᴏɴ: <a href=https://github.com/RknDeveloper/Rkn-rename-bot-V3>𝟸.𝟶.𝟶</a></b>     
+├📊 ᴠᴇʀsɪᴏɴ: <a href=https://github.com/DigitalBotz/Digital-Rename-Bot>3.𝟶.𝟶</a></b>     
 ╰───────────────⍟ """
 
     HELP_TXT = """
-🌌 <b><u>Hᴏᴡ Tᴏ Sᴇᴛ Tʜᴜᴍʙɴɪʟᴇ</u></b>
-  
-<b>•></b> /start Tʜᴇ Bᴏᴛ Aɴᴅ Sᴇɴᴅ Aɴy Pʜᴏᴛᴏ Tᴏ Aᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟy Sᴇᴛ Tʜᴜᴍʙɴɪʟᴇ.
-<b>•></b> /del_thumb Uꜱᴇ Tʜɪꜱ Cᴏᴍᴍᴀɴᴅ Tᴏ Dᴇʟᴇᴛᴇ Yᴏᴜʀ Oʟᴅ Tʜᴜᴍʙɴɪʟᴇ.
-<b>•></b> /view_thumb Uꜱᴇ Tʜɪꜱ Cᴏᴍᴍᴀɴᴅ Tᴏ Vɪᴇᴡ Yᴏᴜʀ Cᴜʀʀᴇɴᴛ Tʜᴜᴍʙɴɪʟᴇ
+<b>•></b> /start Tʜᴇ Bᴏᴛ.
+
 ✏️ <b><u>Hᴏᴡ Tᴏ Rᴇɴᴀᴍᴇ A Fɪʟᴇ</u></b>
 <b>•></b> Sᴇɴᴅ Aɴy Fɪʟᴇ Aɴᴅ Tyᴩᴇ Nᴇᴡ Fɪʟᴇ Nɴᴀᴍᴇ \nAɴᴅ Aᴇʟᴇᴄᴛ Tʜᴇ Fᴏʀᴍᴀᴛ [ document, video, audio ].           
-ℹ️ 𝗔𝗻𝘆 𝗢𝘁𝗵𝗲𝗿 𝗛𝗲𝗹𝗽 𝗖𝗼𝗻𝘁𝗮𝗰𝘁 :- <a href=https://t.me/RknDeveloperSupport>𝑺𝑼𝑷𝑷𝑶𝑹𝑻 𝑮𝑹𝑶𝑼𝑷</a>
+ℹ️ 𝗔𝗻𝘆 𝗢𝘁𝗵𝗲𝗿 𝗛𝗲𝗹𝗽 𝗖𝗼𝗻𝘁𝗮𝗰𝘁 :- <a href=https://t.me/DigitalBotz_Support>𝑺𝑼𝑷𝑷𝑶𝑹𝑻 𝑮𝑹𝑶𝑼𝑷</a>
 """
 
+    UPGRADE= """
+plans - date - price 
+bronze - 3days - 39
+silver - 7days - 59
+gold - 15days - 99
+platinum - 1month - 179
+diamond - 2month - 339
+
+- daily upload limit unlimited
+- discount all plan rs.9
+    """
     THUMBNAIL = """
 🌌 <b><u>Hᴏᴡ Tᴏ Sᴇᴛ Tʜᴜᴍʙɴɪʟᴇ</u></b>
 
@@ -84,22 +92,24 @@ Exᴀᴍᴩʟᴇ:- `/set_caption 📕 Fɪʟᴇ Nᴀᴍᴇ: {filename}
     BOT_STATUS = """
 ⚡️ ʙᴏᴛ sᴛᴀᴛᴜs ⚡️
 
-⌚️ ʙᴏᴛ ᴜᴩᴛɪᴍᴇ: {}
-👭 ᴛᴏᴛᴀʟ ᴜsᴇʀꜱ: {}
-💸 ᴛᴏᴛᴀʟ ᴘʀᴇᴍɪᴜᴍ ᴜsᴇʀs: {}
-֍ ᴜᴘʟᴏᴀᴅ: {}
-⊙ ᴅᴏᴡɴʟᴏᴀᴅ: {}
+⌚️ ʙᴏᴛ ᴜᴩᴛɪᴍᴇ: `{}`
+👭 ᴛᴏᴛᴀʟ ᴜsᴇʀꜱ: `{}`
+💸 ᴛᴏᴛᴀʟ ᴘʀᴇᴍɪᴜᴍ ᴜsᴇʀs: `{}`
+֍ ᴜᴘʟᴏᴀᴅ: `{}`
+⊙ ᴅᴏᴡɴʟᴏᴀᴅ: `{}`
 """
     LIVE_STATUS = """
 ⚡ ʟɪᴠᴇ sᴇʀᴠᴇʀ sᴛᴀᴛᴜs ⚡
 
-ᴜᴘᴛɪᴍᴇ: {}
-ᴄᴘᴜ: {}%
-ʀᴀᴍ: {}% 
-ᴛᴏᴛᴀʟ ᴅɪsᴋ: {}
-ᴜsᴇᴅ sᴘᴀᴄᴇ: {} {}%
-ғʀᴇᴇ sᴘᴀᴄᴇ: {}
-V𝟹.𝟻.𝟶 [STABLE]
+ᴜᴘᴛɪᴍᴇ: `{}`
+ᴄᴘᴜ: `{}%`
+ʀᴀᴍ: `{}%` 
+ᴛᴏᴛᴀʟ ᴅɪsᴋ: `{}`
+ᴜsᴇᴅ sᴘᴀᴄᴇ: `{} {}%`
+ғʀᴇᴇ sᴘᴀᴄᴇ: `{}`
+ᴜᴘʟᴏᴀᴅ: `{}`
+ᴅᴏᴡɴʟᴏᴀᴅ: `{}`
+V𝟹.𝟶.𝟶 [STABLE]
 """
     CUSTOM_FILE_NAME = """
 <u>🖋️ Custom File Name</u>
