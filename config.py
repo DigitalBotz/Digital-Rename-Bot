@@ -136,7 +136,7 @@ Exᴀᴍᴩʟᴇ:- `/set_prefix @Digital_Botz`
 
 • ❣️ <a href=https://github.com/RknDeveloper>RknDeveloper</a>
 • ❣️ <a href=https://github.com/DigitalBotz>DigitalBotz</a>
-• ❣️ <a href=https://github.com/JayMahakal>Jay Mahakal</a> """
+• ❣️ <a href=https://github.com/JayMahakal98>Jay Mahakal</a> """
     # ⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
 
     SEND_METADATA = """
