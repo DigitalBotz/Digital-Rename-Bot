@@ -19,7 +19,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 
 Telegram Link : https://t.me/Digital_Botz 
 Repo Link : https://github.com/DigitalBotz/Digital-Rename-Bot
-License Link : https://github.com/RknDeveloper/Digital-Rename-Bot/blob/main/LICENSE
+License Link : https://github.com/DigitalBotz/Digital-Rename-Bot/blob/main/LICENSE
 """
 
 import random, asyncio, datetime, pytz, time, psutil, shutil
