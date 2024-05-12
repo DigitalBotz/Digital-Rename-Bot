@@ -164,7 +164,7 @@ async def cb_handler(client, query: CallbackQuery):
       
     elif data == "digital_meta_data":
         await query.message.edit_text(
-            text=rkn.DIGITAL_METADTA,
+            text=rkn.SEND_METADATA,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup([[
              InlineKeyboardButton(" Bᴀᴄᴋ", callback_data = "help")]])) 
