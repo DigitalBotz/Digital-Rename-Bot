@@ -58,9 +58,13 @@ async def start(client, message):
 async def myplan(client, message):
     user_id  = message.from_user.id
     user = message.from_user.mention
-    if await db.has_premium_access(user_id):         
-        time_left_str = await db.checking_remaining_time(user_id)
-        expiry_str_in_ist = time_left_str + datetime.datetime.now()
+    if await db.has_premium_access(user_id):
+        print(user_id)
+        data = await db.get_user(user_id)
+        expiry_str_in_ist = data.get("expiry_time")
+        time_left_str = expiry_str_in_ist - datetime.datetime.now()
+       # time_left_str = await db.checking_remaining_time(user_id)
+        #expiry_str_in_ist = time_left_str + datetime.datetime.now()
         
         await message.reply_text(f"⚜️ ʏᴏᴜʀ ᴘʟᴀɴs ᴅᴇᴛᴀɪʟs ᴀʀᴇ :\n\n👤 ᴜꜱᴇʀ : {user}\n⚡ ᴜꜱᴇʀ ɪᴅ : <code>{user_id}</code>\n⏰ ᴛɪᴍᴇ ʟᴇꜰᴛ : {time_left_str}\n⌛️ ᴇxᴘɪʀʏ ᴅᴀᴛᴇ : {expiry_str_in_ist}")
     else:
