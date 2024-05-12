@@ -4,6 +4,7 @@
 # Telegram Channel @RknDeveloper & @Rkn_Bots
 # Developer @RknDeveloperr
 # Special Thanks To @ReshamOwner
+# Update Channel @Digital_Botz & @DigitalBotz_Support
 
 from pyrogram import Client, filters, enums
 from helper.database import db
@@ -69,3 +70,4 @@ async def see_suffix(client, message):
 # Telegram Channel @RknDeveloper & @Rkn_Bots
 # Developer @RknDeveloperr
 # Special Thanks To @ReshamOwner
+# Update Channel @Digital_Botz & @DigitalBotz_Support
