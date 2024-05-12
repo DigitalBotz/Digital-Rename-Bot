@@ -1,9 +1,9 @@
 {
     "name": "Renamer Bot",
     "description": "Telegram File Renamer Bot ",
-    "logo": "https://graph.org/file/9dc402f2ba612e3f6dfbf.jpg",
+    "logo": "https://telegra.ph/file/b746aadfe59959eb76f59.jpg",
     "keywords": ["Renamer Bot", "Mongo DB"],    
-    "repository": "https://github.com/RknDeveloper/Rkn-Powerful-Rename-Bot",
+    "repository": "https://github.com/DigitalBotz/Digital-Rename-Bot",
     "env": {
         "API_ID": {
             "description": "Your APP ID From my.telegram.org ",
@@ -13,10 +13,7 @@
             "description": "Your API Hash From my.telegram.org ",
             "value": ""
         },
-        "WEBHOOK": {
-            "description": "if your server is need web service! value = True else value = False",
-            "value": "False"
-        },
+        
         "FORCE_SUB": {
             "description": "Your force sub channel user name without [@] ",
             "value": "",
@@ -39,12 +36,12 @@
         },
         "DB_NAME":{ 
             "description":"Your Mongo DB Database Name ",
-            "value": "Rkn-Developer",
+            "value": "Digital_Rename_Bot",
             "required": false
         },
         "RKN_PIC": {
             "description": "Your Bot start cmd Pic from @RKN_Telegraphbot",
-            "value": "https://graph.org/file/9dc402f2ba612e3f6dfbf.jpg",
+            "value": "https://telegra.ph/file/b746aadfe59959eb76f59.jpg",
             "required": false
         }
     },
