@@ -105,7 +105,8 @@ class Database:
     async def checking_remaining_time(self, user_id):
         user_data = await self.get_user(user_id)
         expiry_time = user_data.get("expiry_time")
-        return expiry_time
+        time_left_str = expiry_time - datetime.datetime.now()
+        return time_left_str
 
     async def has_premium_access(self, user_id):
         user_data = await self.get_user(user_id)
