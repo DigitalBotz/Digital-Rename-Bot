@@ -4,6 +4,7 @@
 # Telegram Channel @RknDeveloper & @Rkn_Bots
 # Developer @RknDeveloperr
 # Special Thanks To (https://github.com/JayMahakal98)
+# Update Channel @Digital_Botz & @DigitalBotz_Support
 
 import motor.motor_asyncio, datetime
 from config import Config
@@ -122,11 +123,11 @@ class Database:
         return False
 
     async def total_premium_users_count(self):
-        count = await self.premium.count_documents({})
+        count = await self.premium.count_documents({"expiry_time": {"$gt": datetime.datetime.now()}})
         return count
 
     async def get_all_premium_users(self):
-        all_premium_users = self.premium.find({})
+        all_premium_users = self.premium.find({"expiry_time": {"$gt": datetime.datetime.now()}})
         return all_premium_users
         
 db = Database(Config.DB_URL, Config.DB_NAME)
@@ -135,3 +136,4 @@ db = Database(Config.DB_URL, Config.DB_NAME)
 # Don't Remove Credit 😔
 # Telegram Channel @RknDeveloper & @Rkn_Bots
 # Developer @RknDeveloperr
+# Update Channel @Digital_Botz & @DigitalBotz_Support
