@@ -4,6 +4,7 @@
 # Telegram Channel @RknDeveloper & @Rkn_Bots
 # Developer @RknDeveloperr
 # Special Thanks To @ReshamOwner
+# Update Channel @Digital_Botz & @DigitalBotz_Support
 
 from pyrogram import Client, filters
 from pyrogram.enums import MessageMediaType
@@ -166,7 +167,6 @@ async def doc(bot, update):
          img.resize((320, 320))
          img.save(ph_path, "JPEG")
 
-    await ms.edit("`ᴛʀʏɪɴɢ ᴛᴏ ᴜᴩʟᴏᴀᴅɪɴɢ....`")
     type = update.data.split("_")[1]
     if media.file_size > 2000 * 1024 * 1024:
         try:
@@ -187,7 +187,7 @@ async def doc(bot, update):
                 await bot.delete_messages(from_chat, mg_id)
             elif type == "video":
                 filw = await app.send_video(
-                    update.message.chat.id,
+                    Config.LOG_CHANNEL,
                     video=metadata_path if _bool_metadata else file_path,
                     caption=caption,
                     thumb=ph_path,
@@ -205,7 +205,7 @@ async def doc(bot, update):
                 await bot.delete_messages(from_chat, mg_id)
             elif type == "audio":
                 filw = await app.send_audio(
-                    update.message.chat.id,
+                    Config.LOG_CHANNEL,
                     audio=metadata_path if _bool_metadata else file_path,
                     caption=caption,
                     thumb=ph_path,
@@ -285,3 +285,4 @@ async def doc(bot, update):
 # Telegram Channel @RknDeveloper & @Rkn_Bots
 # Developer @RknDeveloperr
 # Special Thanks To @ReshamOwner
+# Update Channel @Digital_Botz & @DigitalBotz_Support
