@@ -34,7 +34,7 @@
 
 <details><summary>📌 Deploy to Render </summary>
   
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/RknDeveloper/Rkn-Powerful-Rename-Bot)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/DigitalBotz/Digital-Rename-Bot)
 
 </details>
 
@@ -44,7 +44,7 @@
 
 <details><summary>📌 Deploy to Heroku </summary>
 
-<a href="https://heroku.com/deploy?template=https://github.com/RknDeveloper/Rkn-Powerful-Rename-Bot"><img src="https://img.shields.io/badge/Deploy%20To%20Heroku-black?style=for-the-badge&logo=heroku" width="220" height="38.45"></p></a>
+<a href="https://heroku.com/deploy?template=https://github.com/DigitalBotz/Digital-Rename-Bot"><img src="https://img.shields.io/badge/Deploy%20To%20Heroku-black?style=for-the-badge&logo=heroku" width="220" height="38.45"></p></a>
 </details>
 
 ## ʀᴇǫᴜɪʀᴇᴅ ᴄᴏɴғɪɢs
