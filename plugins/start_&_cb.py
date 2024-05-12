@@ -170,6 +170,9 @@ async def cb_handler(client, query: CallbackQuery):
              InlineKeyboardButton(" Bᴀᴄᴋ", callback_data = "help")]])) 
       
     elif data == "bot_status":
+        total_users = await db.total_users_count()
+        sent = humanbytes(psutil.net_io_counters().bytes_sent)
+        recv = humanbytes(psutil.net_io_counters().bytes_recv)
         await query.message.edit_text(
             text=rkn.BOT_STATUS,
             disable_web_page_preview=True,
@@ -177,8 +180,18 @@ async def cb_handler(client, query: CallbackQuery):
              InlineKeyboardButton(" Bᴀᴄᴋ", callback_data = "about")]])) 
       
     elif data == "live_status":
+        currentTime = time.strftime("%Hh%Mm%Ss", time.gmtime(time.time() - BOT_START_TIME))
+        total, used, free = shutil.disk_usage(".")
+        total = humanbytes(total)
+        used = humanbytes(used)
+        free = humanbytes(free)
+        sent = humanbytes(psutil.net_io_counters().bytes_sent)
+        recv = humanbytes(psutil.net_io_counters().bytes_recv)
+        cpu_usage = psutil.cpu_percent()
+        ram_usage = psutil.virtual_memory().percent
+        disk_usage = psutil.disk_usage('/').percent
         await query.message.edit_text(
-            text=rkn.LIVE_STATUS,
+            text=rkn.LIVE_STATUS.format(currentTime, cpu_usage, ram_usage, total, used, disk_usage, free, sent, recv),
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup([[
              InlineKeyboardButton(" Bᴀᴄᴋ", callback_data = "about")]])) 
