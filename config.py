@@ -18,7 +18,7 @@ class Config(object):
     STRING_SESSION = os.environ.get("STRING_SESSION", "")
     
     # database config
-    DB_NAME = os.environ.get("DB_NAME","Rkn_RenameBot")     
+    DB_NAME = os.environ.get("DB_NAME","Digital_Rename_Bot")     
     DB_URL = os.environ.get("DB_URL","")
  
     # other configs
