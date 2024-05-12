@@ -92,20 +92,21 @@ class Database:
         user = await self.col.find_one({'_id': int(id)})
         return user.get('metadata_code', None)
 
+    async def get_user(self, user_id):
+        user_data = await self.premium.find_one({"id": user_id})
+        return user_data
+        
     async def addpremium(self, user_id, user_data):    
         await self.premium.update_one({"id": user_id}, {"$set": user_data}, upsert=True)
 
     async def remove_premium(self, user_id):
         await self.premium.update_one({"id": user_id}, {"$set": {"expiry_time": None}})
 
-    async def checking_remaining_time(self, id):
-        user = await self.premium.find_one({'id': int(id)})
-        return user.get('expiry_time', None)
+    async def checking_remaining_time(self, user_id):
+        user_data = await self.get_user(user_id)
+        expiry_time = user_data.get("expiry_time")
+        return expiry_time
 
-    async def get_user(self, user_id):
-        user_data = await self.premium.find_one({"id": user_id})
-        return user_data
-        
     async def has_premium_access(self, user_id):
         user_data = await self.get_user(user_id)
         if user_data:
