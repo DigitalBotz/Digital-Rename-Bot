@@ -80,7 +80,7 @@ Tʜɪs Bᴏᴛ Wᴀs Cʀᴇᴀᴛᴇᴅ Bʏ : @RknDeveloper 💞</b>"""
 Exᴀᴍᴩʟᴇ:- `/set_caption 📕 Fɪʟᴇ Nᴀᴍᴇ: {filename}
 💾 Sɪᴢᴇ: {filesize}
 ⏰ Dᴜʀᴀᴛɪᴏɴ: {duration}`
-""""
+"""
     BOT_STATUS = """
 ⚡️ ʙᴏᴛ sᴛᴀᴛᴜs ⚡️
 
@@ -97,7 +97,7 @@ Exᴀᴍᴩʟᴇ:- `/set_caption 📕 Fɪʟᴇ Nᴀᴍᴇ: {filename}
 ᴄᴘᴜ: {}%
 ʀᴀᴍ: {}% 
 ᴛᴏᴛᴀʟ ᴅɪsᴋ: {}
-ᴜsᴇᴅ sᴘᴀᴄᴇ: {}
+ᴜsᴇᴅ sᴘᴀᴄᴇ: {} {}%
 ғʀᴇᴇ sᴘᴀᴄᴇ: {}
 V𝟹.𝟻.𝟶 [STABLE]
 """
