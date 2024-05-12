@@ -4,13 +4,13 @@
 # Telegram Channel @RknDeveloper & @Rkn_Bots
 # Developer @RknDeveloperr
 # Special Thanks To @ReshamOwner
+# Update Channel @Digital_Botz & @DigitalBotz_Support
 
 from pyrogram import Client, filters
 from pyrogram.types import Message, CallbackQuery, InlineKeyboardButton, InlineKeyboardMarkup
 from helper.database import db
 from pyromod.exceptions import ListenerTimeout
 from config import rkn
-
 
 TRUE = [[InlineKeyboardButton('ᴍᴇᴛᴀᴅᴀᴛᴀ ᴏɴ', callback_data='metadata_1'),
        InlineKeyboardButton('✅', callback_data='metadata_1')
@@ -21,7 +21,6 @@ FALSE = [[InlineKeyboardButton('ᴍᴇᴛᴀᴅᴀᴛᴀ ᴏғғ', callback_data
        ],[
        InlineKeyboardButton('Sᴇᴛ Cᴜsᴛᴏᴍ Mᴇᴛᴀᴅᴀᴛᴀ', callback_data='cutom_metadata')]]
 
-
 @Client.on_message(filters.private & filters.command('metadata'))
 async def handle_metadata(bot: Client, message: Message):
     RknDev = await message.reply_text("**Please Wait...**", reply_to_message_id=message.id)
@@ -30,7 +29,6 @@ async def handle_metadata(bot: Client, message: Message):
     if bool_metadata:
         return await RknDev.edit(f"Your Current Metadata:-\n\n➜ `{user_metadata}` ", reply_markup=InlineKeyboardMarkup(TRUE))
     return await RknDev.edit(f"Your Current Metadata:-\n\n➜ `{user_metadata}` ", reply_markup=InlineKeyboardMarkup(FALSE))
-
 
 @Client.on_callback_query(filters.regex('.*?(custom_metadata|metadata).*?'))
 async def query_metadata(bot: Client, query: CallbackQuery):
@@ -65,3 +63,4 @@ async def query_metadata(bot: Client, query: CallbackQuery):
 # Telegram Channel @RknDeveloper & @Rkn_Bots
 # Developer @RknDeveloperr
 # Special Thanks To @ReshamOwner
+# Update Channel @Digital_Botz & @DigitalBotz_Support
