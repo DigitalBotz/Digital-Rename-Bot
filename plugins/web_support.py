@@ -3,6 +3,7 @@
 # Don't Remove Credit 😔
 # Telegram Channel @RknDeveloper & @Rkn_Bots
 # Developer @RknDeveloperr
+# Update Channel @Digital_Botz & @DigitalBotz_Support
 
 from aiohttp import web
 
@@ -21,3 +22,4 @@ async def web_server():
 # Don't Remove Credit 😔
 # Telegram Channel @RknDeveloper & @Rkn_Bots
 # Developer @RknDeveloperr
+# Update Channel @Digital_Botz & @DigitalBotz_Support
