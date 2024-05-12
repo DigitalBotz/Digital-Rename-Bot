@@ -191,8 +191,6 @@ async def doc(bot, update):
                     video=metadata_path if _bool_metadata else file_path,
                     caption=caption,
                     thumb=ph_path,
-                    width=width,
-                    height=height,
                     duration=duration,
                     progress=progress_for_pyrogram,
                     progress_args=(UPLOAD_TEXT, ms, time.time()))
@@ -245,8 +243,6 @@ async def doc(bot, update):
                     video=metadata_path if _bool_metadata else file_path,
                     caption=caption,
                     thumb=ph_path,
-                    width=width,
-                    height=height,
                     duration=duration,
                     progress=progress_for_pyrogram,
                     progress_args=(UPLOAD_TEXT, ms, time.time()))
