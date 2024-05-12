@@ -6,4 +6,4 @@ hachoir
 Pillow
 aiohttp
 pytz
- 
+psutil
