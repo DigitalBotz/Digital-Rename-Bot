@@ -22,7 +22,7 @@ Repo Link : https://github.com/DigitalBotz/Digital-Rename-Bot
 License Link : https://github.com/RknDeveloper/Digital-Rename-Bot/blob/main/LICENSE
 """
 
-import random, asyncio, datetime, pytz
+import random, asyncio, datetime, pytz, time, psutil, shutil
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ForceReply, CallbackQuery
 from helper.database import db
@@ -171,16 +171,18 @@ async def cb_handler(client, query: CallbackQuery):
       
     elif data == "bot_status":
         total_users = await db.total_users_count()
+        total_premium_users = await db.total_premium_users_count()
+        uptime = time.strftime("%Hh%Mm%Ss", time.gmtime(time.time() - client.uptime))    
         sent = humanbytes(psutil.net_io_counters().bytes_sent)
         recv = humanbytes(psutil.net_io_counters().bytes_recv)
         await query.message.edit_text(
-            text=rkn.BOT_STATUS,
+            text=rkn.BOT_STATUS.format(uptime, total_users, total_premium_users, sent, recv),
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup([[
              InlineKeyboardButton(" Bᴀᴄᴋ", callback_data = "about")]])) 
       
     elif data == "live_status":
-        currentTime = time.strftime("%Hh%Mm%Ss", time.gmtime(time.time() - BOT_START_TIME))
+        currentTime = time.strftime("%Hh%Mm%Ss", time.gmtime(time.time() - client.uptime))    
         total, used, free = shutil.disk_usage(".")
         total = humanbytes(total)
         used = humanbytes(used)
