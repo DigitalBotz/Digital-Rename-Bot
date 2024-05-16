@@ -33,7 +33,7 @@ async def not_subscribed(_, client, message):
         return False
     try:             
         user = await client.get_chat_member(Config.FORCE_SUB, message.from_user.id) 
-        if user.status == enums.ChatMemberStatus.BANNED:
+        if user.status in {enums.ChatMemberStatus.BANNED, enums.ChatMemberStatus.LEFT}:
             return True 
         else:
             return False                
@@ -50,6 +50,8 @@ async def forces_sub(client, message):
         user = await client.get_chat_member(Config.FORCE_SUB, message.from_user.id)    
         if user.status == enums.ChatMemberStatus.BANNED:                                   
             return await client.send_message(message.from_user.id, text="Sᴏʀʀy Yᴏᴜ'ʀᴇ Bᴀɴɴᴇᴅ Tᴏ Uꜱᴇ Mᴇ")  
+        elif user.status == enums.ChatMemberStatus.LEFT:
+            return await message.reply_text(text=text, reply_markup=InlineKeyboardMarkup(buttons))
     except UserNotParticipant:                       
         return await message.reply_text(text=text, reply_markup=InlineKeyboardMarkup(buttons))
     return await message.reply_text(text=text, reply_markup=InlineKeyboardMarkup(buttons))
