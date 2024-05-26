@@ -35,6 +35,13 @@ upgrade_button = InlineKeyboardMarkup([[
         InlineKeyboardButton("Bᴀᴄᴋ", callback_data = "start")
 ]])
 
+upgrade_trial_button = InlineKeyboardMarkup([[        
+        InlineKeyboardButton('buy premium ✓', user_id=int(6705898491)),
+         ],[
+        InlineKeyboardButton("ᴛʀɪᴀʟ - 𝟷𝟸 ʜᴏᴜʀs ✓", callback_data = "give_trial"),
+        InlineKeyboardButton("Bᴀᴄᴋ", callback_data = "start")
+]])
+
 start_button = InlineKeyboardMarkup([[        
         InlineKeyboardButton('Uᴩᴅᴀ𝚃ᴇꜱ', url='https://t.me/Digital_Botz'),
         InlineKeyboardButton('Sᴜᴩᴩᴏʀ𝚃', url='https://t.me/DigitalBotz_Support')
@@ -77,7 +84,11 @@ async def myplan(client, message):
 @Client.on_message(filters.private & filters.command("plans"))
 async def plans(client, message):
     user = message.from_user
-    await message.reply_text(text=rkn.UPGRADE.format(user.mention), reply_markup=upgrade_button, disable_web_page_preview=True)
+    free_trial_status = await db.get_free_trial_status(user.id)
+    if not free_trial_status:
+        await message.reply_text(text=rkn.UPGRADE.format(user.mention), reply_markup=upgrade_trial_button, disable_web_page_preview=True)
+    else:
+        await message.reply_text(text=rkn.UPGRADE.format(user.mention), reply_markup=upgrade_button, disable_web_page_preview=True)
    
   
 @Client.on_callback_query()
@@ -124,11 +135,31 @@ async def cb_handler(client, query: CallbackQuery):
            ]]))    
         
     elif data == "upgrade":
-        await query.message.edit_text(
+        free_trial_status = await db.get_free_trial_status(query.from_user.id)
+        if not free_trial_status:
+            await query.message.edit_text(
+            text=rkn.UPGRADE,
+            disable_web_page_preview=True,
+            reply_markup=upgrade_trial_button)
+        else:
+            await query.message.edit_text(
             text=rkn.UPGRADE,
             disable_web_page_preview=True,
             reply_markup=upgrade_button) 
-      
+
+        
+    elif data == "give_trial":
+        free_trial_status = await db.get_free_trial_status(query.from_user.id)
+        if not free_trial_status:            
+            await db.give_free_trail(query.from_user.id)
+            new_text = "**ʏᴏᴜʀ ᴘʀᴇᴍɪᴜᴍ ᴛʀɪᴀʟ ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ ғᴏʀ 𝟷𝟸 ʜᴏᴜʀs.\n\nʏᴏᴜ ᴄᴀɴ ᴜsᴇ ꜰʀᴇᴇ ᴛʀᴀɪʟ ꜰᴏʀ 𝟷𝟸 ʜᴏᴜʀs ꜰʀᴏᴍ ɴᴏᴡ 😀\n\nआप अब से 𝟷𝟸 घण्टा के लिए निःशुल्क ट्रायल का उपयोग कर सकते हैं 😀**"        
+            await query.message.edit_text(text=new_text)
+            return
+        else:
+            new_text= "**🤣 ʏᴏᴜ ᴀʟʀᴇᴀᴅʏ ᴜsᴇᴅ ғʀᴇᴇ ɴᴏᴡ ɴᴏ ᴍᴏʀᴇ ғʀᴇᴇ ᴛʀᴀɪʟ. ᴘʟᴇᴀsᴇ ʙᴜʏ sᴜʙsᴄʀɪᴘᴛɪᴏɴ ʜᴇʀᴇ ᴀʀᴇ ᴏᴜʀ 👉 /plans**"
+            await query.message.edit_text(text=new_text)
+            return
+                
     elif data == "thumbnail":
         await query.message.edit_text(
             text=rkn.THUMBNAIL,
