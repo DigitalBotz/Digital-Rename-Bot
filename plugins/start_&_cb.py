@@ -66,7 +66,7 @@ async def myplan(client, message):
     user_id  = message.from_user.id
     user = message.from_user.mention
     if await db.has_premium_access(user_id):
-        print(user_id)
+        
         data = await db.get_user(user_id)
         expiry_str_in_ist = data.get("expiry_time")
         time_left_str = expiry_str_in_ist - datetime.datetime.now()
@@ -85,8 +85,11 @@ async def myplan(client, message):
 async def plans(client, message):
     user = message.from_user
     free_trial_status = await db.get_free_trial_status(user.id)
-    if not free_trial_status:
-        await message.reply_text(text=rkn.UPGRADE.format(user.mention), reply_markup=upgrade_trial_button, disable_web_page_preview=True)
+    if not await db.has_premium_access(user.id):
+        if not free_trial_status:
+            await message.reply_text(text=rkn.UPGRADE.format(user.mention), reply_markup=upgrade_trial_button, disable_web_page_preview=True)
+        else:
+            await message.reply_text(text=rkn.UPGRADE.format(user.mention), reply_markup=upgrade_button, disable_web_page_preview=True)
     else:
         await message.reply_text(text=rkn.UPGRADE.format(user.mention), reply_markup=upgrade_button, disable_web_page_preview=True)
    
@@ -136,29 +139,24 @@ async def cb_handler(client, query: CallbackQuery):
         
     elif data == "upgrade":
         free_trial_status = await db.get_free_trial_status(query.from_user.id)
-        if not free_trial_status:
-            await query.message.edit_text(
-            text=rkn.UPGRADE,
-            disable_web_page_preview=True,
-            reply_markup=upgrade_trial_button)
+        if not await db.has_premium_access(query.from_user.id):
+            if not free_trial_status:
+                await query.message.edit_text(text=rkn.UPGRADE, disable_web_page_preview=True, reply_markup=upgrade_trial_button)   
+            else:
+                await query.message.edit_text(text=rkn.UPGRADE, disable_web_page_preview=True, reply_markup=upgrade_button)
         else:
-            await query.message.edit_text(
-            text=rkn.UPGRADE,
-            disable_web_page_preview=True,
-            reply_markup=upgrade_button) 
-
-        
+            await query.message.edit_text(text=rkn.UPGRADE, disable_web_page_preview=True, reply_markup=upgrade_button)
+           
     elif data == "give_trial":
         free_trial_status = await db.get_free_trial_status(query.from_user.id)
         if not free_trial_status:            
             await db.give_free_trail(query.from_user.id)
-            new_text = "**ʏᴏᴜʀ ᴘʀᴇᴍɪᴜᴍ ᴛʀɪᴀʟ ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ ғᴏʀ 𝟷𝟸 ʜᴏᴜʀs.\n\nʏᴏᴜ ᴄᴀɴ ᴜsᴇ ꜰʀᴇᴇ ᴛʀᴀɪʟ ꜰᴏʀ 𝟷𝟸 ʜᴏᴜʀs ꜰʀᴏᴍ ɴᴏᴡ 😀\n\nआप अब से 𝟷𝟸 घण्टा के लिए निःशुल्क ट्रायल का उपयोग कर सकते हैं 😀**"        
-            await query.message.edit_text(text=new_text)
-            return
+            new_text = "**ʏᴏᴜʀ ᴘʀᴇᴍɪᴜᴍ ᴛʀɪᴀʟ ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ ғᴏʀ 𝟷𝟸 ʜᴏᴜʀs.\n\nʏᴏᴜ ᴄᴀɴ ᴜsᴇ ꜰʀᴇᴇ ᴛʀᴀɪʟ ꜰᴏʀ 𝟷𝟸 ʜᴏᴜʀs ꜰʀᴏᴍ ɴᴏᴡ 😀\n\nआप अब से 𝟷𝟸 घण्टा के लिए निःशुल्क ट्रायल का उपयोग कर सकते हैं 😀**"
         else:
-            new_text= "**🤣 ʏᴏᴜ ᴀʟʀᴇᴀᴅʏ ᴜsᴇᴅ ғʀᴇᴇ ɴᴏᴡ ɴᴏ ᴍᴏʀᴇ ғʀᴇᴇ ᴛʀᴀɪʟ. ᴘʟᴇᴀsᴇ ʙᴜʏ sᴜʙsᴄʀɪᴘᴛɪᴏɴ ʜᴇʀᴇ ᴀʀᴇ ᴏᴜʀ 👉 /plans**"
-            await query.message.edit_text(text=new_text)
-            return
+            new_text = "**🤣 ʏᴏᴜ ᴀʟʀᴇᴀᴅʏ ᴜsᴇᴅ ғʀᴇᴇ ɴᴏᴡ ɴᴏ ᴍᴏʀᴇ ғʀᴇᴇ ᴛʀᴀɪʟ. ᴘʟᴇᴀsᴇ ʙᴜʏ sᴜʙsᴄʀɪᴘᴛɪᴏɴ ʜᴇʀᴇ ᴀʀᴇ ᴏᴜʀ 👉 /plans**"
+            
+       await query.message.delete()
+       await client.send_message(query.from_user.id, text=new_text)
                 
     elif data == "thumbnail":
         await query.message.edit_text(
