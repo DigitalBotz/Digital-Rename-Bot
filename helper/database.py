@@ -26,7 +26,8 @@ class Database:
             suffix=None,
             metadata_mode=False,
             metadata_code=""" -map 0 -c:s copy -c:a copy -c:v copy -metadata title="Powered By:- @Rkn_Bots" -metadata author="@RknDeveloper" -metadata:s:s title="Subtitled By :- @Rkn_Bots" -metadata:s:a title="By :- @RknDeveloper" -metadata:s:v title="By:- @Rkn_Bots" """,
-            expiry_time=None
+            expiry_time=None,
+            has_free_trial=False
         )
 
     async def add_user(self, b, m):
@@ -129,6 +130,18 @@ class Database:
     async def get_all_premium_users(self):
         all_premium_users = self.premium.find({"expiry_time": {"$gt": datetime.datetime.now()}})
         return all_premium_users
+
+    async def get_free_trial_status(self, user_id):
+        user_data = await self.get_user(user_id)
+        if user_data:
+            return user_data.get("has_free_trial", False)
+        return False
+
+    async def give_free_trail(self, user_id):
+        seconds = 720*60         
+        expiry_time = datetime.datetime.now() + datetime.timedelta(seconds=seconds)
+        user_data = {"id": user_id, "expiry_time": expiry_time, "has_free_trial": True}
+        await self.premium.update_one({"id": user_id}, {"$set": user_data}, upsert=True)
         
 db = Database(Config.DB_URL, Config.DB_NAME)
 
