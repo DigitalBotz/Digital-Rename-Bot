@@ -157,7 +157,8 @@ async def cb_handler(client, query: CallbackQuery):
             
        await query.message.delete()
        await client.send_message(query.from_user.id, text=new_text)
-                
+       return
+
     elif data == "thumbnail":
         await query.message.edit_text(
             text=rkn.THUMBNAIL,
