@@ -116,4 +116,4 @@ broadcast - Sᴇɴᴅ Mᴇssᴀɢᴇ Tᴏ Aʟʟ Usᴇʀs (Aᴅᴍɪɴ Oɴʟʏ)
 - Thanks To [JayMahakal](https://github.com/JayMahakal98) who have edited and modified this repo as now it is.
 
 ## Last Updated
-- `12-05-2024 10:04:43 PM`
+- `26-05-2024 09:08:20 PM`
