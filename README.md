@@ -57,7 +57,26 @@
 * `DB_NAME`  - Your Database Name From Mongodb.
 * `FORCE_SUB` - Your Force Sub Channel Username Without @
 * `LOG_CHANNEL` - Bot Logs Sending Channel. If You Don't Need This To Remove This Variable In Your Server
-* `STRING_SESSION` - Your Tg Premium Account SESSION STRING Required.
+* `STRING_SESSION` - Your Tg Premium Account String Session Required. `[Note :- If you remove the string session, 4GB files doesn't works on the bot.]`
+
+## 🥰 Features
+
+* Renames very fast .
+* Permanent Thumbnail support.
+* Force join for the user for use.
+* Supports Broadcasts.
+* Custom File Name Support...[Prefix_&_Suffix]
+* Set custom caption.
+* Has a custom Start-up pic.
+* Force subscribe available.
+* Supports ulimited renaming at a time.
+* Custom Metadata Support.
+* Admin Commond Available.
+* premium subscription available.
+* premium trial available.
+* Deploy to Koyeb + Heroku + Railway.
+* Developer Service 24x7. 🔥
+
 
 ## Botfather Commands
 ```
