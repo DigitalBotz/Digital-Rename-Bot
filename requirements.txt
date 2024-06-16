@@ -1,5 +1,5 @@
 pyrogram==2.0.93
-TgCrypto==1.2.5 
+TgCrypto
 motor
 dnspython
 hachoir
