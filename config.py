@@ -9,7 +9,7 @@ import re, os, time
 id_pattern = re.compile(r'^.\d+$') 
 
 class Config(object):
-    # pyro client config
+    # digital_botz client config
     API_ID = os.environ.get("API_ID", "")
     API_HASH = os.environ.get("API_HASH", "")
     BOT_TOKEN = os.environ.get("BOT_TOKEN", "") 
@@ -24,9 +24,14 @@ class Config(object):
     # other configs
     RKN_PIC = os.environ.get("RKN_PIC", "https://telegra.ph/file/b746aadfe59959eb76f59.jpg")
     ADMIN = [int(admin) if id_pattern.search(admin) else admin for admin in os.environ.get('ADMIN', '6705898491').split()]
-    FORCE_SUB = os.environ.get("FORCE_SUB", "Digital_Botz") 
     LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", "-1002123429361"))
 
+    #force subs
+    try:
+        FORCE_SUB = int(os.environ.get("FORCE_SUB", "")) 
+    except:
+        FORCE_SUB = os.environ.get("FORCE_SUB", "Digital_Botz")
+        
     # wes response configuration     
     PORT = int(os.environ.get("PORT", "8080"))
     BOT_UPTIME = time.time()
@@ -61,12 +66,12 @@ Tʜɪs Bᴏᴛ Wᴀs Cʀᴇᴀᴛᴇᴅ Bʏ : @Digital_Botz 💞</b>"""
 """
 
     UPGRADE= """
-•⪼ ★𝘗𝘭𝘢𝘯𝘴    - ⏳𝘋𝘢𝘵𝘦 - 💸𝘗𝘳𝘪𝘤𝘦 
-•⪼ 🥉𝘉𝘳𝘰𝘯𝘻𝘦  -  3𝘥𝘢𝘺𝘴 -  39
-•⪼ 🥈𝘚𝘪𝘭𝘷𝘦𝘳    - 7𝘥𝘢𝘺𝘴 -  59
-•⪼ 🥇𝘎𝘰𝘭𝘥    - 15𝘥𝘢𝘺𝘴 -  99
-•⪼ 🏆𝘗𝘭𝘢𝘵𝘪𝘯𝘶𝘮 - 1𝘮𝘰𝘯𝘵𝘩 -  179
-•⪼ 💎𝘋𝘪𝘢𝘮𝘰𝘯𝘥 - 2𝘮𝘰𝘯𝘵𝘩 -  339
+•⪼ ★𝘗𝘭𝘢𝘯𝘴     -    ⏳𝘋𝘢𝘵𝘦 -  💸𝘗𝘳𝘪𝘤𝘦 
+•⪼ 🥉𝘉𝘳𝘰𝘯𝘻𝘦   -     3𝘥𝘢𝘺𝘴 -    39
+•⪼ 🥈𝘚𝘪𝘭𝘷𝘦𝘳    -     7𝘥𝘢𝘺𝘴 -    59
+•⪼ 🥇𝘎𝘰𝘭𝘥     -    15𝘥𝘢𝘺𝘴 -   99
+•⪼ 🏆𝘗𝘭𝘢𝘵𝘪𝘯𝘶𝘮  -    1𝘮𝘰𝘯𝘵𝘩 -   179
+•⪼ 💎𝘋𝘪𝘢𝘮𝘰𝘯𝘥  -    2𝘮𝘰𝘯𝘵𝘩 -   339
 
 - 𝘋𝘢𝘪𝘭𝘺 𝘜𝘱𝘭𝘰𝘢𝘥 𝘓𝘪𝘮𝘪𝘵 𝘜𝘯𝘭𝘪𝘮𝘪𝘵𝘦𝘥
 - 𝘋𝘪𝘴𝘤𝘰𝘶𝘯𝘵 𝘈𝘭𝘭 𝘗𝘭𝘢𝘯 𝘙𝘴.9
