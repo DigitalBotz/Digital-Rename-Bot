@@ -9,6 +9,7 @@
 from pyrogram import Client, filters
 from pyrogram.enums import MessageMediaType
 from pyrogram.errors import FloodWait
+from pyrogram.file_id import FileId
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ForceReply
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
@@ -26,15 +27,19 @@ app = Client("4gb_FileRenameBot", api_id=Config.API_ID, api_hash=Config.API_HASH
 async def rename_start(client, message):
     user_id  = message.from_user.id
     if await db.has_premium_access(user_id):
-        file = getattr(message, message.media.value)
-        filename = file.file_name
+        rkn_file = getattr(message, message.media.value)
+        filename = rkn_file.file_name
+        filesize=humanbytes(rkn_file.file_size)
+        mime_type = rkn_file.mime_type
+        dcid = FileId.decode(rkn_file.file_id).dc_id
+        extension_type = mime_type.split('/')[1]
         if not Config.STRING_SESSION:
-            if file.file_size > 2000 * 1024 * 1024:
+            if rkn_file.file_size > 2000 * 1024 * 1024:
                  return await message.reply_text("Sᴏʀʀy Bʀᴏ Tʜɪꜱ Bᴏᴛ Iꜱ Dᴏᴇꜱɴ'ᴛ Sᴜᴩᴩᴏʀᴛ Uᴩʟᴏᴀᴅɪɴɢ Fɪʟᴇꜱ Bɪɢɢᴇʀ Tʜᴀɴ 2Gʙ+")
 
         try:
             await message.reply_text(
-            text=f"**__Pʟᴇᴀꜱᴇ Eɴᴛᴇʀ Nᴇᴡ Fɪʟᴇɴᴀᴍᴇ...__**\n\n**Oʟᴅ Fɪʟᴇ Nᴀᴍᴇ** :- `{filename}`",
+            text=f"**__ᴍᴇᴅɪᴀ ɪɴꜰᴏ\n\n◈ ᴏʟᴅ ꜰɪʟᴇ ɴᴀᴍᴇ: `{filename}`\n\n◈ ᴇxᴛᴇɴꜱɪᴏɴ: `{extension_type.upper()}`\n◈ ꜰɪʟᴇ ꜱɪᴢᴇ: `{filesize}`\n◈ ᴍɪᴍᴇ ᴛʏᴇᴩ: `{extension_type}`\n◈ ᴅᴄ ɪᴅ: `{dcid}`\n\nᴘʟᴇᴀsᴇ ᴇɴᴛᴇʀ ᴛʜᴇ ɴᴇᴡ ғɪʟᴇɴᴀᴍᴇ ᴡɪᴛʜ ᴇxᴛᴇɴsɪᴏɴ ᴀɴᴅ ʀᴇᴘʟʏ ᴛʜɪs ᴍᴇssᴀɢᴇ....__**",
 	    reply_to_message_id=message.id,  
 	    reply_markup=ForceReply(True)
         )       
@@ -42,7 +47,7 @@ async def rename_start(client, message):
         except FloodWait as e:
             await sleep(e.value)
             await message.reply_text(
-            text=f"**__Pʟᴇᴀꜱᴇ Eɴᴛᴇʀ Nᴇᴡ Fɪʟᴇɴᴀᴍᴇ...__**\n\n**Oʟᴅ Fɪʟᴇ Nᴀᴍᴇ** :- `{filename}`",
+            text=f"**__ᴍᴇᴅɪᴀ ɪɴꜰᴏ\n\n◈ ᴏʟᴅ ꜰɪʟᴇ ɴᴀᴍᴇ: `{filename}`\n\n◈ ᴇxᴛᴇɴꜱɪᴏɴ: `{extension_type.upper()}`\n◈ ꜰɪʟᴇ ꜱɪᴢᴇ: `{filesize}`\n◈ ᴍɪᴍᴇ ᴛʏᴇᴩ: `{extension_type}`\n◈ ᴅᴄ ɪᴅ: `{dcid}`\n\nᴘʟᴇᴀsᴇ ᴇɴᴛᴇʀ ᴛʜᴇ ɴᴇᴡ ғɪʟᴇɴᴀᴍᴇ ᴡɪᴛʜ ᴇxᴛᴇɴsɪᴏɴ ᴀɴᴅ ʀᴇᴘʟʏ ᴛʜɪs ᴍᴇssᴀɢᴇ....__**",
 	    reply_to_message_id=message.id,  
 	    reply_markup=ForceReply(True)
         )
@@ -57,7 +62,6 @@ async def rename_start(client, message):
         await message.reply_text(f"**😢 You Don't Have Any Premium Subscription.\n\n Check Out Our Premium /plan**",reply_markup=reply_markup)
         await sleep(20)
         await m.delete()
-
 
 @Client.on_message(filters.private & filters.reply)
 async def refunc(client, message):
@@ -105,16 +109,23 @@ async def doc(bot, update):
         new_filename = add_prefix_suffix(new_filename_, prefix, suffix)
     except Exception as e:
         return await update.message.edit(f"⚠️ Something went wrong can't able to set Prefix or Suffix ☹️ \n\n❄️ Contact My Creator -> @RknDeveloperr\nError: {e}")
-	    
-    file_path = f"downloads/{new_filename}"
-    file = update.message.reply_to_message
 
+    # msg file location 
+    file = update.message.reply_to_message
+	
     ms = await update.message.edit("`Tʀʏ Tᴏ Dᴏᴡɴʟᴏᴀᴅ....`")    
     try:
-     	path = await bot.download_media(message=file, file_name=file_path, progress=progress_for_pyrogram, progress_args=("ᴅᴏᴡɴʟᴏᴀᴅ sᴛᴀʀᴛᴇᴅ....", ms, time.time()))                    
+        # file downloading started...
+        downloading = f"downloads/{user_id}/rkn{new_filename}"
+     	path = await bot.download_media(message=file, file_name=downloading, progress=progress_for_pyrogram, progress_args=("ᴅᴏᴡɴʟᴏᴀᴅ sᴛᴀʀᴛᴇᴅ....", ms, time.time()))                    
     except Exception as e:
      	return await ms.edit(e)
      	     
+    # file downloading path
+    file_path = f"downloads/{user_id}/{new_filename}"
+	
+    os.rename(path, file_path)
+
     _bool_metadata = await db.get_metadata_mode(user_id)
     if (_bool_metadata):
         metadata_path = f"Metadata/{new_filename}"
@@ -151,6 +162,7 @@ async def doc(bot, update):
 
     if c_caption:
          try:
+             # adding custom caption 
              caption = c_caption.format(filename=new_filename, filesize=humanbytes(media.file_size), duration=convert(duration))
          except Exception as e:
              return await ms.edit(text=f"Yᴏᴜʀ Cᴀᴩᴛɪᴏɴ Eʀʀᴏʀ Exᴄᴇᴩᴛ Kᴇyᴡᴏʀᴅ Aʀɢᴜᴍᴇɴᴛ ●> ({e})")             
@@ -158,6 +170,7 @@ async def doc(bot, update):
          caption = f"**{new_filename}**"
  
     if (media.thumbs or c_thumb):
+         # downloading thumbnail path
          if c_thumb:
              ph_path = await bot.download_media(c_thumb) 
          else:
@@ -266,6 +279,12 @@ async def doc(bot, update):
                 os.remove(path)
             return await ms.edit(f" Eʀʀᴏʀ {e}")
 
+# some new feature adding soon ( sample screenshot & sample video )
+# please give fork & star and share with your friends repo
+# please don't sell the repo ( it's free 🥰)
+# please give 200 Fork & 200 star target 🎯 
+# fast guys now support again started 
+	
     await ms.delete()
     if ph_path:
         os.remove(ph_path)
