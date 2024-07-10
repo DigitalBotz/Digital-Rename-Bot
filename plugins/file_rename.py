@@ -117,7 +117,7 @@ async def doc(bot, update):
     try:
         # file downloading started...
         downloading = f"downloads/{user_id}/rkn{new_filename}"
-     	path = await bot.download_media(message=file, file_name=downloading, progress=progress_for_pyrogram, progress_args=("ᴅᴏᴡɴʟᴏᴀᴅ sᴛᴀʀᴛᴇᴅ....", ms, time.time()))                    
+        path = await bot.download_media(message=file, file_name=downloading, progress=progress_for_pyrogram, progress_args=("ᴅᴏᴡɴʟᴏᴀᴅ sᴛᴀʀᴛᴇᴅ....", ms, time.time()))                    
     except Exception as e:
      	return await ms.edit(e)
      	     
