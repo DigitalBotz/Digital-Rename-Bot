@@ -24,10 +24,11 @@ Telegram Link : https://t.me/RknDeveloper
 Repo Link : https://github.com/RknDeveloper/RknFileRenameBot
 License Link : https://github.com/RknDeveloper/Rkn-rename-bot-V3/blob/main/LICENSE
 """
-__name__ = "Rename-Bot"
-__version__ = "3.0.2"
+__name__ = "Digital-Rename-Bot"
+__version__ = "3.0.3"
 __license__ = " Apache License, Version 2.0"
 __copyright__ = "Copyright (C) 2022-present RknDeveloper <https://github.com/RknDeveloper>"
+__developer__ = "RknDeveloper <https://github.com/RknDeveloper>"
 
 # main working files 
 # - bot.py
