@@ -71,7 +71,7 @@
 * Force subscribe available.
 * Supports ulimited renaming at a time.
 * Custom Metadata Support.
-* Admin Commond Available.
+* Admin Command Available.
 * premium subscription available.
 * premium trial available.
 * Deploy to Koyeb + Heroku + Railway.
