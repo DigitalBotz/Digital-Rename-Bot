@@ -19,7 +19,8 @@ class Database:
 
     def new_user(self, id):
         return dict(
-            _id=int(id),                                   
+            _id=int(id),
+            join_date=datetime.date.today().isoformat(),
             file_id=None,
             caption=None,
             prefix=None,
@@ -27,7 +28,13 @@ class Database:
             metadata_mode=False,
             metadata_code=""" -map 0 -c:s copy -c:a copy -c:v copy -metadata title="Powered By:- @Rkn_Bots" -metadata author="@RknDeveloper" -metadata:s:s title="Subtitled By :- @Rkn_Bots" -metadata:s:a title="By :- @RknDeveloper" -metadata:s:v title="By:- @Rkn_Bots" """,
             expiry_time=None,
-            has_free_trial=False
+            has_free_trial=False,
+            ban_status=dict(
+                is_banned=False,
+                ban_duration=0,
+                banned_on=datetime.date.max.isoformat(),
+                ban_reason=''
+            )
         )
 
     async def add_user(self, b, m):
@@ -142,6 +149,38 @@ class Database:
         expiry_time = datetime.datetime.now() + datetime.timedelta(seconds=seconds)
         user_data = {"id": user_id, "expiry_time": expiry_time, "has_free_trial": True}
         await self.premium.update_one({"id": user_id}, {"$set": user_data}, upsert=True)
+
+    async def remove_ban(self, id):
+        ban_status = dict(
+            is_banned=False,
+            ban_duration=0,
+            banned_on=datetime.date.max.isoformat(),
+            ban_reason=''
+        )
+        await self.col.update_one({'_id': int(id)}, {'$set': {'ban_status': ban_status}})
+
+    async def ban_user(self, user_id, ban_duration, ban_reason):
+        ban_status = dict(
+            is_banned=True,
+            ban_duration=ban_duration,
+            banned_on=datetime.date.today().isoformat(),
+            ban_reason=ban_reason
+        )
+        await self.col.update_one({'_id': int(user_id)}, {'$set': {'ban_status': ban_status}})
+
+    async def get_ban_status(self, id):
+        default = dict(
+            is_banned=False,
+            ban_duration=0,
+            banned_on=datetime.date.max.isoformat(),
+            ban_reason=''
+        )
+        user = await self.col.find_one({'_id': int(id)})
+        return user.get('ban_status', default)
+
+    async def get_all_banned_users(self):
+        banned_users = self.col.find({'ban_status.is_banned': True})
+        return banned_users
         
 db = Database(Config.DB_URL, Config.DB_NAME)
 
