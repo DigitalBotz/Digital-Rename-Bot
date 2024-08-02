@@ -10,6 +10,7 @@ import math, time, re
 from datetime import datetime
 from pytz import timezone
 from config import Config, rkn 
+from helper.database import db
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 async def progress_for_pyrogram(current, total, ud_type, message, start):
@@ -78,7 +79,7 @@ def convert(seconds):
 
 async def send_log(b, u):
     if Config.LOG_CHANNEL is not None:
-        curr = datetime.now(timezone("Asia/Kolkata"))
+        curr = datetime.datetime.now(timezone("Asia/Kolkata"))
         date = curr.strftime('%d %B, %Y')
         time = curr.strftime('%I:%M:%S %p')
         await b.send_message(
@@ -86,6 +87,18 @@ async def send_log(b, u):
             f"**--Nᴇᴡ Uꜱᴇʀ Sᴛᴀʀᴛᴇᴅ Tʜᴇ Bᴏᴛ--**\n\nUꜱᴇʀ: {u.mention}\nIᴅ: `{u.id}`\nUɴ: @{u.username}\n\nDᴀᴛᴇ: {date}\nTɪᴍᴇ: {time}\n\nBy: {b.mention}"
         )
 
+async def handle_banned_user_status(bot, message):
+    chat_id = message.from_user.id
+    ban_status = await db.get_ban_status(chat_id)
+    if ban_status["is_banned"]:
+        if ( datetime.date.today() - datetime.date.fromisoformat(ban_status["banned_on"])
+        ).days > ban_status["ban_duration"]:
+            await db.remove_ban(chat_id)
+        else:
+            await message.reply_text("You are Banned!.. Please Contact - @DigitalBotz", quote=True)
+            return
+    await message.continue_propagation()
+    
 async def get_seconds(time_string):
     def extract_value_and_unit(ts):
         value = ""
