@@ -10,7 +10,7 @@ from helper.utils import get_seconds
 from pyrogram.types import Message
 from pyrogram import Client, filters, Client as Digital_4gbRenameBot
 from pyrogram.errors import FloodWait, InputUserDeactivated, UserIsBlocked, PeerIdInvalid
-import os, sys, time, asyncio, logging, datetime, pytz
+import os, sys, time, asyncio, logging, datetime, pytz, traceback
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
