@@ -54,7 +54,9 @@ start_button = InlineKeyboardMarkup([[
 
 @Client.on_message(filters.private)
 async def _(bot, message):
-    print(f'your are banned mr. {message.from_user.mention}')
+    ban_status = await db.get_ban_status(message.from_user.id)
+    if ban_status["is_banned"]:
+        print(f'your are banned mr. {message.from_user.first_name}')
     await handle_banned_user_status(bot, message)
         
 @Client.on_message(filters.private & filters.command("start"))
@@ -70,8 +72,7 @@ async def start(client, message):
 async def myplan(client, message):
     user_id  = message.from_user.id
     user = message.from_user.mention
-    if await db.has_premium_access(user_id):
-        
+    if await db.has_premium_access(user_id):        
         data = await db.get_user(user_id)
         expiry_str_in_ist = data.get("expiry_time")
         time_left_str = expiry_str_in_ist - datetime.datetime.now()
