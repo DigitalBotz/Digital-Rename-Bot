@@ -77,16 +77,6 @@ def convert(seconds):
     seconds %= 60      
     return "%d:%02d:%02d" % (hour, minutes, seconds)
 
-async def send_log(b, u):
-    if Config.LOG_CHANNEL is not None:
-        curr = datetime.datetime.now(timezone("Asia/Kolkata"))
-        date = curr.strftime('%d %B, %Y')
-        time = curr.strftime('%I:%M:%S %p')
-        await b.send_message(
-            Config.LOG_CHANNEL,
-            f"**--Nᴇᴡ Uꜱᴇʀ Sᴛᴀʀᴛᴇᴅ Tʜᴇ Bᴏᴛ--**\n\nUꜱᴇʀ: {u.mention}\nIᴅ: `{u.id}`\nUɴ: @{u.username}\n\nDᴀᴛᴇ: {date}\nTɪᴍᴇ: {time}\n\nBy: {b.mention}"
-        )
-
 async def handle_banned_user_status(bot, message):
     chat_id = message.from_user.id
     ban_status = await db.get_ban_status(chat_id)
@@ -98,7 +88,17 @@ async def handle_banned_user_status(bot, message):
             await message.reply_text("You are Banned!.. Please Contact - @DigitalBotz", quote=True)
             return
     await message.continue_propagation()
-    
+
+async def send_log(b, u):
+    if Config.LOG_CHANNEL is not None:
+        curr = datetime.datetime.now(timezone("Asia/Kolkata"))
+        date = curr.strftime('%d %B, %Y')
+        time = curr.strftime('%I:%M:%S %p')
+        await b.send_message(
+            Config.LOG_CHANNEL,
+            f"**--Nᴇᴡ Uꜱᴇʀ Sᴛᴀʀᴛᴇᴅ Tʜᴇ Bᴏᴛ--**\n\nUꜱᴇʀ: {u.mention}\nIᴅ: `{u.id}`\nUɴ: @{u.username}\n\nDᴀᴛᴇ: {date}\nTɪᴍᴇ: {time}\n\nBy: {b.mention}"
+        )
+        
 async def get_seconds(time_string):
     def extract_value_and_unit(ts):
         value = ""
