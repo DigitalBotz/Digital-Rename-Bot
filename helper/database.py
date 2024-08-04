@@ -6,9 +6,8 @@
 # Special Thanks To (https://github.com/JayMahakal98)
 # Update Channel @Digital_Botz & @DigitalBotz_Support
 
-import motor.motor_asyncio, datetime
+import motor.motor_asyncio, datetime, pytz
 from config import Config
-from helper.utils import send_log
 
 class Database:
     def __init__(self, uri, database_name):
@@ -184,6 +183,16 @@ class Database:
         
 db = Database(Config.DB_URL, Config.DB_NAME)
 
+async def send_log(b, u):
+    if Config.LOG_CHANNEL is not None:
+        curr = datetime.datetime.now(pytz.timezone("Asia/Kolkata"))
+        date = curr.strftime('%d %B, %Y')
+        time = curr.strftime('%I:%M:%S %p')
+        await b.send_message(
+            Config.LOG_CHANNEL,
+            f"**--Nᴇᴡ Uꜱᴇʀ Sᴛᴀʀᴛᴇᴅ Tʜᴇ Bᴏᴛ--**\n\nUꜱᴇʀ: {u.mention}\nIᴅ: `{u.id}`\nUɴ: @{u.username}\n\nDᴀᴛᴇ: {date}\nTɪᴍᴇ: {time}\n\nBy: {b.mention}"
+        )
+        
 # Rkn Developer 
 # Don't Remove Credit 😔
 # Telegram Channel @RknDeveloper & @Rkn_Bots
