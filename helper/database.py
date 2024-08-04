@@ -8,7 +8,7 @@
 
 import motor.motor_asyncio, datetime
 from config import Config
-from .utils import send_log
+from helper.utils import send_log
 
 class Database:
     def __init__(self, uri, database_name):
