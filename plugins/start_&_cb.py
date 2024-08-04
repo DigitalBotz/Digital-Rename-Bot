@@ -54,6 +54,7 @@ start_button = InlineKeyboardMarkup([[
 
 @Client.on_message(filters.private)
 async def _(bot, message):
+    print(f'your are banned mr. {message.from_user.mention}')
     await handle_banned_user_status(bot, message)
         
 @Client.on_message(filters.private & filters.command("start"))
