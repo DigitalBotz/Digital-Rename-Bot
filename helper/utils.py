@@ -6,9 +6,7 @@
 # Special Thanks To (https://github.com/JayMahakal98) & @ReshamOwner
 # Update Channel @Digital_Botz & @DigitalBotz_Support
 
-import math, time, re
-from datetime import datetime
-from pytz import timezone
+import math, time, re, datetime, pytz
 from config import Config, rkn 
 from helper.database import db
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
@@ -78,14 +76,14 @@ def convert(seconds):
     return "%d:%02d:%02d" % (hour, minutes, seconds)
 
 async def handle_banned_user_status(bot, message):
-    chat_id = message.from_user.id
-    ban_status = await db.get_ban_status(chat_id)
+    user_id = message.from_user.id
+    ban_status = await db.get_ban_status(user_id)
     if ban_status["is_banned"]:
         if ( datetime.date.today() - datetime.date.fromisoformat(ban_status["banned_on"])
         ).days > ban_status["ban_duration"]:
-            await db.remove_ban(chat_id)
+            await db.remove_ban(user_id)
         else:
-            await message.reply_text("You are Banned!.. Please Contact - @DigitalBotz", quote=True)
+            await message.reply_text("Sorry Sir, 😔 You are Banned!.. Please Contact - @DigitalBotz")
             return
     await message.continue_propagation()
 
