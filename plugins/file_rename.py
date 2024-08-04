@@ -32,7 +32,7 @@ async def rename_start(client, message):
         filesize=humanbytes(rkn_file.file_size)
         mime_type = rkn_file.mime_type
         dcid = FileId.decode(rkn_file.file_id).dc_id
-        extension_type = mime_type.split('/')[2]
+        extension_type = mime_type.split('/')[0]
         if not Config.STRING_SESSION:
             if rkn_file.file_size > 2000 * 1024 * 1024:
                  return await message.reply_text("Sᴏʀʀy Bʀᴏ Tʜɪꜱ Bᴏᴛ Iꜱ Dᴏᴇꜱɴ'ᴛ Sᴜᴩᴩᴏʀᴛ Uᴩʟᴏᴀᴅɪɴɢ Fɪʟᴇꜱ Bɪɢɢᴇʀ Tʜᴀɴ 2Gʙ+")
