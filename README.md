@@ -71,9 +71,10 @@
 * Force subscribe available.
 * Supports ulimited renaming at a time.
 * Custom Metadata Support.
-* Admin Commond Available.
+* Admin Command Available.
 * premium subscription available.
 * premium trial available.
+* handle ban/unban members using command.
 * Deploy to Koyeb + Heroku + Railway.
 * Developer Service 24x7. 🔥
 
@@ -98,6 +99,9 @@ del_suffix - Dᴇʟᴇᴛᴇ Yᴏᴜʀ Sᴜғғɪx !!
 restart - ᴛᴏ ʀᴇsᴛᴀʀᴛ ᴛʜᴇ ʙᴏᴛ ᴀɴᴅ sᴇɴᴅ ᴍᴇssᴀɢᴇ ᴀʟʟ ᴅʙ ᴜsᴇʀs (Aᴅᴍɪɴ Oɴʟʏ)
 addpremium - ᴀᴅᴅ ᴘʀᴇᴍɪᴜᴍ (Aᴅᴍɪɴ Oɴʟʏ)
 remove_premium - ʀᴇᴍᴏᴠᴇ ᴘʀᴇᴍɪᴜᴍ (Aᴅᴍɪɴ Oɴʟʏ)
+ban - ban members using command (admin only)
+unban - unban members using command (admin only)
+banned_users - check bot all ban users using command (admin only)
 logs - ᴄʜᴇᴄᴋ ʙᴏᴛ ʟᴏɢs (Aᴅᴍɪɴ Oɴʟʏ)
 status - Cʜᴇᴄᴋ Bᴏᴛ Sᴛᴀᴛᴜs (Aᴅᴍɪɴ Oɴʟʏ)
 broadcast - Sᴇɴᴅ Mᴇssᴀɢᴇ Tᴏ Aʟʟ Usᴇʀs (Aᴅᴍɪɴ Oɴʟʏ)
@@ -109,11 +113,11 @@ broadcast - Sᴇɴᴅ Mᴇssᴀɢᴇ Tᴏ Aʟʟ Usᴇʀs (Aᴅᴍɪɴ Oɴʟʏ)
 - Importing this repo instead of forking is strictly prohibited, Kindly fork and edit as your wish. Must Give Credits for developer(s)
 - If you find any bugs or errors, [report](https://t.me/DigitalBotz) it
 
-## ❣️Thanks To
+## ❣️ Special Thanks 👍
 
 - Thanks To TEAM-PYRO-BOTZ For His Awesome [PYRO-RENAME-BOT](https://github.com/TEAM-PYRO-BOTZ/PYRO-RENAME-BOT.git)
 - Thanks To [RknDeveloper](https://github.com/RknDeveloper) who have edited and modified this repo as now it is. (It's me 😂)
 - Thanks To [JayMahakal](https://github.com/JayMahakal98) who have edited and modified this repo as now it is.
 
 ## Last Updated
-- `10-06-2024 11:33:55 PM`
+- `04-08-2024 10:44:55 PM`
