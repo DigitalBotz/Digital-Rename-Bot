@@ -112,27 +112,23 @@ async def doc(bot, update):
 
     # msg file location 
     file = update.message.reply_to_message
+
+    # file downloaded path
+    file_path = f"Digital_Botz_Downloaded/{user_id}/{new_filename}"
 	
     ms = await update.message.edit("`Tʀʏ Tᴏ Dᴏᴡɴʟᴏᴀᴅ....`")    
     try:
-        # file downloading started...
-        downloading = f"downloads/{user_id}/rkn{new_filename}"
-        path = await bot.download_media(message=file, file_name=downloading, progress=progress_for_pyrogram, progress_args=("ᴅᴏᴡɴʟᴏᴀᴅ sᴛᴀʀᴛᴇᴅ....", ms, time.time()))                    
+        await bot.download_media(message=file, file_name=file_path, progress=progress_for_pyrogram, progress_args=("ᴅᴏᴡɴʟᴏᴀᴅ sᴛᴀʀᴛᴇᴅ....", ms, time.time()))                    
     except Exception as e:
      	return await ms.edit(e)
-     	     
-    # file downloading path
-    file_path = f"downloads/{user_id}/{new_filename}"
-	
-    os.rename(path, file_path)
 
     _bool_metadata = await db.get_metadata_mode(user_id)
     if (_bool_metadata):
-        metadata_path = f"Metadata/{new_filename}"
+        metadata_path = f"Digital_Botz_Metadata/{user_id}/{new_filename}"
         metadata = await db.get_metadata_code(user_id)
         if metadata:
             await ms.edit("I Fᴏᴜɴᴅ Yᴏᴜʀ Mᴇᴛᴀᴅᴀᴛᴀ\n\n__**Pʟᴇᴀsᴇ Wᴀɪᴛ...**__\n**Aᴅᴅɪɴɢ Mᴇᴛᴀᴅᴀᴛᴀ Tᴏ Fɪʟᴇ....**")
-            cmd = f"""ffmpeg -i {path} {metadata} {metadata_path}"""
+            cmd = f"""ffmpeg -i {file_path} {metadata} {metadata_path}"""
             process = await asyncio.create_subprocess_shell(cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE)
             stdout, stderr = await process.communicate()
             er = stderr.decode()
@@ -149,7 +145,7 @@ async def doc(bot, update):
     try:
         parser = createParser(file_path)
         metadata = extractMetadata(parser)
-        if metadata.has("duration"):
+      if metadata.has("duration"):
             duration = metadata.get('duration').seconds
         parser.close()
     except:
