@@ -114,21 +114,24 @@ async def doc(bot, update):
     file = update.message.reply_to_message
 
     # file downloaded path
-    file_path = f"Digital_Botz_Downloaded/{user_id}/{new_filename}"
+    file_path = f"Renames/{new_filename}"
+    
+    # metadata downloaded path
+    metadata_path = f"Metadata/{new_filename}"
 	
-    ms = await update.message.edit("`Tʀʏ Tᴏ Dᴏᴡɴʟᴏᴀᴅ....`")    
+    ms = await update.message.edit("`Try To Download....`")    
     try:
-        path = await bot.download_media(message=file, file_name=file_path, progress=progress_for_pyrogram, progress_args=("ᴅᴏᴡɴʟᴏᴀᴅ sᴛᴀʀᴛᴇᴅ....", ms, time.time()))                    
+        dl_path = await bot.download_media(message=file, file_name=file_path, progress=progress_for_pyrogram, progress_args=("ᴅᴏᴡɴʟᴏᴀᴅ sᴛᴀʀᴛᴇᴅ....", ms, time.time()))                    
     except Exception as e:
      	return await ms.edit(e)
 
-    _bool_metadata = await db.get_metadata_mode(user_id)
-    if (_bool_metadata):
-        metadata_path = f"Digital_Botz_Metadata/{user_id}/{new_filename}"
+    metadata_mode = await db.get_metadata_mode(user_id)
+    if (metadata_mode):
         metadata = await db.get_metadata_code(user_id)
         if metadata:
             await ms.edit("I Fᴏᴜɴᴅ Yᴏᴜʀ Mᴇᴛᴀᴅᴀᴛᴀ\n\n__**Pʟᴇᴀsᴇ Wᴀɪᴛ...**__\n**Aᴅᴅɪɴɢ Mᴇᴛᴀᴅᴀᴛᴀ Tᴏ Fɪʟᴇ....**")
-            cmd = f"""ffmpeg -i {path} {metadata} {metadata_path}"""
+            cmd = f"""ffmpeg -i "{dl_path}" {metadata} "{metadata_path}" """
+	    
             process = await asyncio.create_subprocess_shell(cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE)
             stdout, stderr = await process.communicate()
             er = stderr.decode()
@@ -182,7 +185,7 @@ async def doc(bot, update):
             if type == "document":
                 filw = await app.send_document(
                     Config.LOG_CHANNEL,
-                    document=metadata_path if _bool_metadata else file_path,
+                    document=metadata_path if metadata_mode else file_path,
                     thumb=ph_path,
                     caption=caption,
                     progress=progress_for_pyrogram,
@@ -197,7 +200,7 @@ async def doc(bot, update):
             elif type == "video":
                 filw = await app.send_video(
                     Config.LOG_CHANNEL,
-                    video=metadata_path if _bool_metadata else file_path,
+                    video=metadata_path if metadata_mode else file_path,
                     caption=caption,
                     thumb=ph_path,
                     duration=duration,
@@ -213,7 +216,7 @@ async def doc(bot, update):
             elif type == "audio":
                 filw = await app.send_audio(
                     Config.LOG_CHANNEL,
-                    audio=metadata_path if _bool_metadata else file_path,
+                    audio=metadata_path if metadata_mode else file_path,
                     caption=caption,
                     thumb=ph_path,
                     duration=duration,
@@ -233,15 +236,15 @@ async def doc(bot, update):
                 os.remove(ph_path)
             if metadata_path:
                 os.remove(metadata_path)
-            if path:
-                os.remove(path)
+            if dl_path:
+                os.remove(dl_path)
             return await ms.edit(f" Eʀʀᴏʀ {e}")
     else:
         try:
             if type == "document":
                 await bot.send_document(
                     update.message.chat.id,
-                    document=metadata_path if _bool_metadata else file_path,
+                    document=metadata_path if metadata_mode else file_path,
                     thumb=ph_path,
                     caption=caption,
                     progress=progress_for_pyrogram,
@@ -249,7 +252,7 @@ async def doc(bot, update):
             elif type == "video":
                 await bot.send_video(
                     update.message.chat.id,
-                    video=metadata_path if _bool_metadata else file_path,
+                    video=metadata_path if metadata_mode else file_path,
                     caption=caption,
                     thumb=ph_path,
                     duration=duration,
@@ -258,7 +261,7 @@ async def doc(bot, update):
             elif type == "audio":
                 await bot.send_audio(
                     update.message.chat.id,
-                    audio=metadata_path if _bool_metadata else file_path,
+                    audio=metadata_path if metadata_mode else file_path,
                     caption=caption,
                     thumb=ph_path,
                     duration=duration,
@@ -271,8 +274,8 @@ async def doc(bot, update):
                 os.remove(ph_path)
             if metadata_path:
                 os.remove(metadata_path)
-            if path:
-                os.remove(path)
+            if dl_path:
+                os.remove(dl_path)
             return await ms.edit(f" Eʀʀᴏʀ {e}")
 
 # some new feature adding soon ( sample screenshot & sample video )
