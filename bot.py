@@ -36,10 +36,12 @@ class Digital_FileRenameBot(Client):
         self.mention = me.mention
         self.username = me.username  
         self.uptime = Config.BOT_UPTIME
+        
         app = aiohttp.web.AppRunner(await web_server())
         await app.setup()
         bind_address = "0.0.0.0"
         await aiohttp.web.TCPSite(app, bind_address, Config.PORT).start()
+        
         path = "plugins/*.py"
         files = glob.glob(path)
         for name in files:
@@ -55,6 +57,7 @@ class Digital_FileRenameBot(Client):
                 print("Digital Botz Imported " + plugin_name)
                 
         print(f"{me.first_name} Iꜱ Sᴛᴀʀᴛᴇᴅ.....✨️")
+        
         for id in Config.ADMIN:
             if Config.STRING_SESSION:
                 try: await self.send_message(id, f"𝟮𝗚𝗕+ ғɪʟᴇ sᴜᴘᴘᴏʀᴛ ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ ᴛᴏ ʏᴏᴜʀ ʙᴏᴛ.\n\nNote: 𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦 𝐩𝐫𝐞𝐦𝐢𝐮𝐦 𝐚𝐜𝐜𝐨𝐮𝐧𝐭 𝐬𝐭𝐫𝐢𝐧𝐠 𝐬𝐞𝐬𝐬𝐢𝐨𝐧 𝐫𝐞𝐪𝐮𝐢𝐫𝐞𝐝 𝐓𝐡𝐞𝐧 𝐬𝐮𝐩𝐩𝐨𝐫𝐭𝐬 𝟐𝐆𝐁+ 𝐟𝐢𝐥𝐞𝐬.\n\n**__{me.first_name}  Iꜱ Sᴛᴀʀᴛᴇᴅ.....✨️__**")                                
@@ -62,6 +65,7 @@ class Digital_FileRenameBot(Client):
             else:
                 try: await self.send_message(id, f"𝟮𝗚𝗕- ғɪʟᴇ sᴜᴘᴘᴏʀᴛ ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ ᴛᴏ ʏᴏᴜʀ ʙᴏᴛ.\n\n**__{me.first_name}  Iꜱ Sᴛᴀʀᴛᴇᴅ.....✨️__**")                                
                 except: pass
+                    
         if Config.LOG_CHANNEL:
             try:
                 curr = datetime.datetime.now(pytz.timezone("Asia/Kolkata"))
@@ -72,6 +76,9 @@ class Digital_FileRenameBot(Client):
                 print("Pʟᴇᴀꜱᴇ Mᴀᴋᴇ Tʜɪꜱ Iꜱ Aᴅᴍɪɴ Iɴ Yᴏᴜʀ Lᴏɢ Cʜᴀɴɴᴇʟ")
 
     async def stop(self, *args):
+        for id in Config.ADMIN:
+            try: await self.send_message(id, f"**Bot Stopped....**")                                
+            except: pass
         await super().stop()
         print("Bot Stopped 🙄")
 
@@ -85,8 +92,7 @@ def main():
                 bot_instance.start()  # Start the bot instance
             )
         else:
-            await asyncio.gather(
-                bot_instance.start())
+            await asyncio.gather(bot_instance.start()) # Start the bot instance
             
     loop = asyncio.get_event_loop()
     loop.run_until_complete(start_services())
@@ -98,6 +104,6 @@ if __name__ == "__main__":
     
 # Rkn Developer 
 # Don't Remove Credit 😔
-# Telegram Channel @RknDeveloper & @Rkn_Bots
+# Telegram Channel @RknDeveloper & @Rkn_Botz
 # Developer @RknDeveloperr
 # Update Channel @Digital_Botz & @DigitalBotz_Support
