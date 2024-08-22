@@ -27,7 +27,7 @@ from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ForceReply, CallbackQuery
 from helper.database import db
 from config import Config, rkn
-from helper.utils import humanbytes, handle_banned_user_status
+from helper.utils import humanbytes
 
 upgrade_button = InlineKeyboardMarkup([[        
         InlineKeyboardButton('buy premium ✓', user_id=int(6705898491)),
@@ -51,13 +51,6 @@ start_button = InlineKeyboardMarkup([[
         ],[
         InlineKeyboardButton('💸 ᴜᴘɢʀᴀᴅᴇ ᴛᴏ ᴘʀᴇᴍɪᴜᴍ 💸', callback_data='upgrade')
          ]])
-
-@Client.on_message(filters.private)
-async def _(bot, message):
-    ban_status = await db.get_ban_status(message.from_user.id)
-    if ban_status["is_banned"]:
-        print(f'your are banned mr. {message.from_user.first_name}')
-    await handle_banned_user_status(bot, message)
         
 @Client.on_message(filters.private & filters.command("start"))
 async def start(client, message):
