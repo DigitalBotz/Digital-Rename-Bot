@@ -13,6 +13,9 @@ from pyrogram.raw.all import layer
 from config import Config
 from plugins.web_support import web_server
 from plugins.file_rename import app
+import pyrogram.utils
+
+pyrogram.utils.MIN_CHANNEL_ID = -1009999999999
 
 # Get logging configurations
 logging.config.fileConfig("logging.conf")
