@@ -8,7 +8,7 @@
 
 from pyrogram import Client, filters
 from pyrogram.types import Message, CallbackQuery, InlineKeyboardButton, InlineKeyboardMarkup
-from helper.database import db
+from helper.database import digital_botz
 from pyromod.exceptions import ListenerTimeout
 from config import rkn
 
@@ -24,8 +24,8 @@ FALSE = [[InlineKeyboardButton('ᴍᴇᴛᴀᴅᴀᴛᴀ ᴏғғ', callback_data
 @Client.on_message(filters.private & filters.command('metadata'))
 async def handle_metadata(bot: Client, message: Message):
     RknDev = await message.reply_text("**Please Wait...**", reply_to_message_id=message.id)
-    bool_metadata = await db.get_metadata_mode(message.from_user.id)
-    user_metadata = await db.get_metadata_code(message.from_user.id)
+    bool_metadata = await digital_botz.get_metadata_mode(message.from_user.id)
+    user_metadata = await digital_botz.get_metadata_code(message.from_user.id)
     if bool_metadata:
         return await RknDev.edit(f"Your Current Metadata:-\n\n➜ `{user_metadata}` ", reply_markup=InlineKeyboardMarkup(TRUE))
     return await RknDev.edit(f"Your Current Metadata:-\n\n➜ `{user_metadata}` ", reply_markup=InlineKeyboardMarkup(FALSE))
@@ -35,12 +35,12 @@ async def query_metadata(bot: Client, query: CallbackQuery):
     data = query.data
     if data.startswith('metadata_'):
         _bool = data.split('_')[1]
-        user_metadata = await db.get_metadata_code(query.from_user.id)
+        user_metadata = await digital_botz.get_metadata_code(query.from_user.id)
         if bool(eval(_bool)):
-            await db.set_metadata_mode(query.from_user.id, bool_meta=False)
+            await digital_botz.set_metadata_mode(query.from_user.id, bool_meta=False)
             await query.message.edit(f"Your Current Metadata:-\n\n➜ `{user_metadata}` ", reply_markup=InlineKeyboardMarkup(FALSE))
         else:
-            await db.set_metadata_mode(query.from_user.id, bool_meta=True)
+            await digital_botz.set_metadata_mode(query.from_user.id, bool_meta=True)
             await query.message.edit(f"Your Current Metadata:-\n\n➜ `{user_metadata}` ", reply_markup=InlineKeyboardMarkup(TRUE))
 
     elif data == 'cutom_metadata':
@@ -53,7 +53,7 @@ async def query_metadata(bot: Client, query: CallbackQuery):
                 return
             print(metadata.text)
             RknDev = await query.message.reply_text("**Please Wait...**", reply_to_message_id=metadata.id)
-            await db.set_metadata_code(query.from_user.id, metadata_code=metadata.text)
+            await digital_botz.set_metadata_code(query.from_user.id, metadata_code=metadata.text)
             await RknDev.edit("**Your Metadta Code Set Successfully ✅**")
         except Exception as e:
             print(e)
