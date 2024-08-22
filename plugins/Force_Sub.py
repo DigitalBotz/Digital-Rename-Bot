@@ -26,6 +26,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from pyrogram.errors import UserNotParticipant
 from config import Config
 from helper.database import db
+from helper.utils import handle_banned_user_status
 
 async def not_subscribed(_, client, message):
     await db.add_user(client, message)
@@ -41,7 +42,13 @@ async def not_subscribed(_, client, message):
         pass
     return True
 
-
+@Client.on_message(filters.private)
+async def _(bot, message):
+    ban_status = await db.get_ban_status(message.from_user.id)
+    if ban_status["is_banned"]:
+        print(f'your are banned mr. {message.from_user.first_name}')
+    await handle_banned_user_status(bot, message)
+    
 @Client.on_message(filters.private & filters.create(not_subscribed))
 async def forces_sub(client, message):
     buttons = [[InlineKeyboardButton(text="📢 Join Update Channel 📢", url=f"https://t.me/{Config.FORCE_SUB}") ]]
