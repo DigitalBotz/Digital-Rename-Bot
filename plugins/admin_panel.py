@@ -5,7 +5,7 @@
 # Developer @RknDeveloperr
 
 from config import Config
-from helper.database import db
+from helper.database import digital_botz
 from helper.utils import get_seconds
 from pyrogram.types import Message
 from pyrogram import Client, filters, Client as Digital_4gbRenameBot
@@ -17,8 +17,8 @@ logger.setLevel(logging.INFO)
  
 @Client.on_message(filters.command(["stats", "status"]) & filters.user(Config.ADMIN))
 async def get_stats(bot, message):
-    total_users = await db.total_users_count()
-    total_premium_users = await db.total_premium_users_count()
+    total_users = await digital_botz.total_users_count()
+    total_premium_users = await digital_botz.total_premium_users_count()
     uptime = time.strftime("%Hh%Mm%Ss", time.gmtime(time.time() - bot.uptime))    
     start_t = time.time()
     rkn = await message.reply('**ᴘʀᴏᴄᴇssɪɴɢ.....**')    
@@ -46,8 +46,8 @@ async def add_premium(client, message):
         if seconds > 0:
             expiry_time = datetime.datetime.now() + datetime.timedelta(seconds=seconds)
             user_data = {"id": user_id, "expiry_time": expiry_time}  # Using "id" instead of "user_id"  
-            await db.addpremium(user_id, user_data)
-            data = await db.get_user(user_id)
+            await digital_botz.addpremium(user_id, user_data)
+            data = await digital_botz.get_user(user_id)
             expiry = data.get("expiry_time")   
             expiry_str_in_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata")).strftime("%d-%m-%Y\n⏱️ ᴇxᴘɪʀʏ ᴛɪᴍᴇ : %I:%M:%S %p")         
             await message.reply_text(f"ᴘʀᴇᴍɪᴜᴍ ᴀᴅᴅᴇᴅ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ ✅\n\n👤 ᴜꜱᴇʀ : {user.mention}\n⚡ ᴜꜱᴇʀ ɪᴅ : <code>{user_id}</code>\n⏰ ᴘʀᴇᴍɪᴜᴍ ᴀᴄᴄᴇꜱꜱ : <code>{time}</code>\n\n⏳ ᴊᴏɪɴɪɴɢ ᴅᴀᴛᴇ : {current_time}\n\n⌛️ ᴇxᴘɪʀʏ ᴅᴀᴛᴇ : {expiry_str_in_ist}", disable_web_page_preview=True)
@@ -55,8 +55,7 @@ async def add_premium(client, message):
                 chat_id=user_id,
                 text=f"👋 ʜᴇʏ {user.mention},\nᴛʜᴀɴᴋ ʏᴏᴜ ꜰᴏʀ ᴘᴜʀᴄʜᴀꜱɪɴɢ ᴘʀᴇᴍɪᴜᴍ.\nᴇɴᴊᴏʏ !! ✨🎉\n\n⏰ ᴘʀᴇᴍɪᴜᴍ ᴀᴄᴄᴇꜱꜱ : <code>{time}</code>\n⏳ ᴊᴏɪɴɪɴɢ ᴅᴀᴛᴇ : {current_time}\n\n⌛️ ᴇxᴘɪʀʏ ᴅᴀᴛᴇ : {expiry_str_in_ist}", disable_web_page_preview=True              
             )    
-           # await client.send_message(PREMIUM_LOGS, text=f"#Added_Premium\n\n👤 ᴜꜱᴇʀ : {user.mention}\n⚡ ᴜꜱᴇʀ ɪᴅ : <code>{user_id}</code>\n⏰ ᴘʀᴇᴍɪᴜᴍ ᴀᴄᴄᴇꜱꜱ : <code>{time}</code>\n\n⏳ ᴊᴏɪɴɪɴɢ ᴅᴀᴛᴇ : {current_time}\n\n⌛️ ᴇxᴘɪʀʏ ᴅᴀᴛᴇ : {expiry_str_in_ist}", disable_web_page_preview=True)
-            return
+            return 
         await message.reply_text("Invalid time format. Please use '1 day for days', '1 hour for hours', or '1 min for minutes', or '1 month for months' or '1 year for year'")
         return
     await message.reply_text("Usage : /addpremium user_id time (e.g., '1 day for days', '1 hour for hours', or '1 min for minutes', or '1 month for months' or '1 year for year')")
@@ -67,8 +66,8 @@ async def remove_premium(bot, message):
     if len(message.command) == 2:
         user_id = int(message.command[1])  # Convert the user_id to integer
         user = await bot.get_users(user_id)
-        if await db.has_premium_access(user_id):
-            await db.remove_premium(user_id)
+        if await digital_botz.has_premium_access(user_id):
+            await digital_botz.remove_premium(user_id)
             await message.reply_text(f"ᴜsᴇʀ {user.mention}, ᴘʀᴇᴍɪᴜᴍ ᴘʟᴀɴ sᴜᴄᴄᴇssғᴜʟʟʏ ʀᴇᴍᴏᴠᴇᴅ.")
             await bot.send_message(
                 chat_id=user_id,
@@ -89,8 +88,8 @@ async def restart_bot(b, m):
     deactivated = 0
     blocked = 0
     start_time = time.time()
-    total_users = await db.total_users_count()
-    all_users = await db.get_all_users()
+    total_users = await digital_botz.total_users_count()
+    all_users = await digital_botz.get_all_users()
     async for user in all_users:
         try:
             restart_msg = f"ʜᴇʏ, {(await b.get_users(user['_id'])).mention}\n\n**🔄 ᴘʀᴏᴄᴇssᴇs sᴛᴏᴘᴘᴇᴅ. ʙᴏᴛ ɪs ʀᴇsᴛᴀʀᴛɪɴɢ.....\n\n✅️ ʙᴏᴛ ɪs ʀᴇsᴛᴀʀᴛᴇᴅ. ɴᴏᴡ ʏᴏᴜ ᴄᴀɴ ᴜsᴇ ᴍᴇ.**"
@@ -98,13 +97,13 @@ async def restart_bot(b, m):
             success += 1
         except InputUserDeactivated:
             deactivated +=1
-            await db.delete_user(user['_id'])
+            await digital_botz.delete_user(user['_id'])
         except UserIsBlocked:
             blocked +=1
-            await db.delete_user(user['_id'])
+            await digital_botz.delete_user(user['_id'])
         except Exception as e:
             failed += 1
-            await db.delete_user(user['_id'])
+            await digital_botz.delete_user(user['_id'])
             print(e)
             pass
         try:
@@ -144,7 +143,7 @@ async def ban(c: Client, m: Message):
             traceback.print_exc()
             ban_log_text += f"\n\nUser notification failed! \n\n`{traceback.format_exc()}`"
 
-        await db.ban_user(user_id, ban_duration, ban_reason)
+        await digital_botz.ban_user(user_id, ban_duration, ban_reason)
         print(ban_log_text)
         await m.reply_text(
             ban_log_text,
@@ -182,7 +181,7 @@ async def unban(c: Client, m: Message):
         except:
             traceback.print_exc()
             unban_log_text += f"\n\nUser notification failed! \n\n`{traceback.format_exc()}`"
-        await db.remove_ban(user_id)
+        await digital_botz.remove_ban(user_id)
         print(unban_log_text)
         await m.reply_text(
             unban_log_text,
@@ -198,7 +197,7 @@ async def unban(c: Client, m: Message):
 
 @Client.on_message(filters.private & filters.command("banned_users") & filters.user(Config.ADMIN))
 async def _banned_users(_, m: Message):
-    all_banned_users = await db.get_all_banned_users()
+    all_banned_users = await digital_botz.get_all_banned_users()
     banned_usr_count = 0
     text = ''
 
@@ -222,14 +221,14 @@ async def _banned_users(_, m: Message):
 @Client.on_message(filters.command("broadcast") & filters.user(Config.ADMIN) & filters.reply)
 async def broadcast_handler(bot: Client, m: Message):
     await bot.send_message(Config.LOG_CHANNEL, f"{m.from_user.mention} or {m.from_user.id} Iꜱ ꜱᴛᴀʀᴛᴇᴅ ᴛʜᴇ Bʀᴏᴀᴅᴄᴀꜱᴛ......")
-    all_users = await db.get_all_users()
+    all_users = await digital_botz.get_all_users()
     broadcast_msg = m.reply_to_message
     sts_msg = await m.reply_text("Bʀᴏᴀᴅᴄᴀꜱᴛ Sᴛᴀʀᴛᴇᴅ..!") 
     done = 0
     failed = 0
     success = 0
     start_time = time.time()
-    total_users = await db.total_users_count()
+    total_users = await digital_botz.total_users_count()
     async for user in all_users:
         sts = await send_msg(user['_id'], broadcast_msg)
         if sts == 200:
@@ -237,7 +236,7 @@ async def broadcast_handler(bot: Client, m: Message):
         else:
            failed += 1
         if sts == 400:
-           await db.delete_user(user['_id'])
+           await digital_botz.delete_user(user['_id'])
         done += 1
         if not done % 20:
            await sts_msg.edit(f"Bʀᴏᴀᴅᴄᴀꜱᴛ Iɴ Pʀᴏɢʀᴇꜱꜱ: \nTᴏᴛᴀʟ Uꜱᴇʀꜱ {total_users} \nCᴏᴍᴩʟᴇᴛᴇᴅ: {done} / {total_users}\nSᴜᴄᴄᴇꜱꜱ: {success}\nFᴀɪʟᴇᴅ: {failed}")
