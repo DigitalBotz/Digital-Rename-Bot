@@ -25,11 +25,11 @@ from pyrogram import Client, filters, enums
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from pyrogram.errors import UserNotParticipant
 from config import Config
-from helper.database import db
+from helper.database import digital_botz
 from helper.utils import handle_banned_user_status
 
 async def not_subscribed(_, client, message):
-    await db.add_user(client, message)
+    await digital_botz.add_user(client, message)
     if not Config.FORCE_SUB:
         return False
     try:             
@@ -42,9 +42,21 @@ async def not_subscribed(_, client, message):
         pass
     return True
 
+async def handle_banned_user_status(bot, message):
+    user_id = message.from_user.id
+    ban_status = await digital_botz.get_ban_status(user_id)
+    if ban_status["is_banned"]:
+        if ( datetime.date.today() - datetime.date.fromisoformat(ban_status["banned_on"])
+        ).days > ban_status["ban_duration"]:
+            await digital_botz.remove_ban(user_id)
+        else:
+            await message.reply_text("Sorry Sir, 😔 You are Banned!.. Please Contact - @DigitalBotz")
+            return
+    await message.continue_propagation()
+    
 @Client.on_message(filters.private)
 async def _(bot, message):
-    ban_status = await db.get_ban_status(message.from_user.id)
+    ban_status = await digital_botz.get_ban_status(message.from_user.id)
     if ban_status["is_banned"]:
         print(f'your are banned mr. {message.from_user.first_name}')
     await handle_banned_user_status(bot, message)
@@ -67,6 +79,6 @@ async def forces_sub(client, message):
 # (c) @RknDeveloperr
 # Rkn Developer 
 # Don't Remove Credit 😔
-# Telegram Channel @RknDeveloper & @Rkn_Bots
+# Telegram Channel @RknDeveloper & @Rkn_Botz
 # Developer @RknDeveloperr
 # Update Channel @Digital_Botz & @DigitalBotz_Support
