@@ -1,14 +1,13 @@
 # (c) @RknDeveloperr
 # Rkn Developer 
 # Don't Remove Credit 😔
-# Telegram Channel @RknDeveloper & @Rkn_Bots
+# Telegram Channel @RknDeveloper & @Rkn_Botz
 # Developer @RknDeveloperr
 # Special Thanks To (https://github.com/JayMahakal98) & @ReshamOwner
 # Update Channel @Digital_Botz & @DigitalBotz_Support
 
 import math, time, re, datetime, pytz
 from config import Config, rkn 
-from helper.database import db
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 async def progress_for_pyrogram(current, total, ud_type, message, start):
@@ -75,17 +74,15 @@ def convert(seconds):
     seconds %= 60      
     return "%d:%02d:%02d" % (hour, minutes, seconds)
 
-async def handle_banned_user_status(bot, message):
-    user_id = message.from_user.id
-    ban_status = await db.get_ban_status(user_id)
-    if ban_status["is_banned"]:
-        if ( datetime.date.today() - datetime.date.fromisoformat(ban_status["banned_on"])
-        ).days > ban_status["ban_duration"]:
-            await db.remove_ban(user_id)
-        else:
-            await message.reply_text("Sorry Sir, 😔 You are Banned!.. Please Contact - @DigitalBotz")
-            return
-    await message.continue_propagation()
+async def send_log(b, u):
+    if Config.LOG_CHANNEL is not None:
+        curr = datetime.datetime.now(pytz.timezone("Asia/Kolkata"))
+        date = curr.strftime('%d %B, %Y')
+        time = curr.strftime('%I:%M:%S %p')
+        await b.send_message(
+            Config.LOG_CHANNEL,
+            f"**--Nᴇᴡ Uꜱᴇʀ Sᴛᴀʀᴛᴇᴅ Tʜᴇ Bᴏᴛ--**\n\nUꜱᴇʀ: {u.mention}\nIᴅ: `{u.id}`\nUɴ: @{u.username}\n\nDᴀᴛᴇ: {date}\nTɪᴍᴇ: {time}\n\nBy: {b.mention}"
+        )
 
 async def get_seconds(time_string):
     def extract_value_and_unit(ts):
@@ -137,7 +134,7 @@ def add_prefix_suffix(input_string, prefix='', suffix=''):
 # (c) @RknDeveloperr
 # Rkn Developer 
 # Don't Remove Credit 😔
-# Telegram Channel @RknDeveloper & @Rkn_Bots
+# Telegram Channel @RknDeveloper & @Rkn_Botz
 # Developer @RknDeveloperr
 # Special Thanks To @ReshamOwner
 # Update Channel @Digital_Botz & @DigitalBotz_Support
