@@ -1,7 +1,7 @@
 # (c) @RknDeveloperr
 # Rkn Developer 
 # Don't Remove Credit 😔
-# Telegram Channel @RknDeveloper & @Rkn_Bots
+# Telegram Channel @RknDeveloper & @Rkn_Botz
 # Developer @RknDeveloperr
 # Special Thanks To @ReshamOwner
 # Update Channel @Digital_Botz & @DigitalBotz_Support
@@ -14,7 +14,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ForceRepl
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from helper.utils import progress_for_pyrogram, convert, humanbytes, add_prefix_suffix
-from helper.database import db
+from helper.database import digital_botz
 from asyncio import sleep
 from PIL import Image
 import os, time, asyncio
@@ -26,7 +26,7 @@ app = Client("4gb_FileRenameBot", api_id=Config.API_ID, api_hash=Config.API_HASH
 @Client.on_message(filters.private & (filters.document | filters.audio | filters.video))
 async def rename_start(client, message):
     user_id  = message.from_user.id
-    if await db.has_premium_access(user_id):
+    if await digital_botz.has_premium_access(user_id):
         rkn_file = getattr(message, message.media.value)
         filename = rkn_file.file_name
         filesize=humanbytes(rkn_file.file_size)
@@ -104,8 +104,8 @@ async def doc(bot, update):
     new_filename_ = new_name.split(":-")[1]
     try:
         # adding prefix and suffix
-        prefix = await db.get_prefix(user_id)
-        suffix = await db.get_suffix(user_id)
+        prefix = await digital_botz.get_prefix(user_id)
+        suffix = await digital_botz.get_suffix(user_id)
         new_filename = add_prefix_suffix(new_filename_, prefix, suffix)
     except Exception as e:
         return await update.message.edit(f"⚠️ Something went wrong can't able to set Prefix or Suffix ☹️ \n\n❄️ Contact My Creator -> @RknDeveloperr\nError: {e}")
@@ -125,12 +125,12 @@ async def doc(bot, update):
     except Exception as e:
      	return await ms.edit(e)
 
-    metadata_mode = await db.get_metadata_mode(user_id)
+    metadata_mode = await digital_botz.get_metadata_mode(user_id)
     if (metadata_mode):
-        metadata = await db.get_metadata_code(user_id)
+        metadata = await digital_botz.get_metadata_code(user_id)
         if metadata:
             await ms.edit("I Fᴏᴜɴᴅ Yᴏᴜʀ Mᴇᴛᴀᴅᴀᴛᴀ\n\n__**Pʟᴇᴀsᴇ Wᴀɪᴛ...**__\n**Aᴅᴅɪɴɢ Mᴇᴛᴀᴅᴀᴛᴀ Tᴏ Fɪʟᴇ....**")
-            cmd = f"""ffmpeg -i "{dl_path}" {metadata} "{metadata_path}" """
+            cmd = f"""ffmpeg -i {dl_path} {metadata} {metadata_path}"""
 	    
             process = await asyncio.create_subprocess_shell(cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE)
             stdout, stderr = await process.communicate()
@@ -156,8 +156,8 @@ async def doc(bot, update):
 	    
     ph_path = None
     media = getattr(file, file.media.value)
-    c_caption = await db.get_caption(user_id)
-    c_thumb = await db.get_thumbnail(user_id)
+    c_caption = await digital_botz.get_caption(user_id)
+    c_thumb = await digital_botz.get_thumbnail(user_id)
 
     if c_caption:
          try:
@@ -296,7 +296,7 @@ async def doc(bot, update):
 #✅ Team-RknDeveloper
 # Rkn Developer 
 # Don't Remove Credit 😔
-# Telegram Channel @RknDeveloper & @Rkn_Bots
+# Telegram Channel @RknDeveloper & @Rkn_Botz
 # Developer @RknDeveloperr
 # Special Thanks To @ReshamOwner
 # Update Channel @Digital_Botz & @DigitalBotz_Support
