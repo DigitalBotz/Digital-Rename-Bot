@@ -20,7 +20,9 @@ from PIL import Image
 import os, time, asyncio
 from config import Config
 
-UPLOAD_TEXT = """ᴜᴩʟᴏᴀᴅ sᴛᴀʀᴛᴇᴅ...."""
+UPLOAD_TEXT = """Uploading Started...."""
+DOWNLOAD_TEXT = """Download Started..."""
+
 app = Client("4gb_FileRenameBot", api_id=Config.API_ID, api_hash=Config.API_HASH, session_string=Config.STRING_SESSION)
    
 @Client.on_message(filters.private & (filters.document | filters.audio | filters.video))
@@ -121,7 +123,7 @@ async def doc(bot, update):
 	
     ms = await update.message.edit("`Try To Download....`")    
     try:
-        dl_path = await bot.download_media(message=file, file_name=file_path, progress=progress_for_pyrogram, progress_args=("ᴅᴏᴡɴʟᴏᴀᴅ sᴛᴀʀᴛᴇᴅ....", ms, time.time()))                    
+        dl_path = await bot.download_media(message=file, file_name=file_path, progress=progress_for_pyrogram, progress_args=(DOWNLOAD_TEXT, ms, time.time()))                    
     except Exception as e:
      	return await ms.edit(e)
 
@@ -142,7 +144,7 @@ async def doc(bot, update):
                 pass
         await ms.edit("**Metadata added to the file successfully ✅**\n\n**Tʀyɪɴɢ Tᴏ Uᴩʟᴏᴀᴅɪɴɢ....**")
     else:
-        await ms.edit("`Tʀʏɪɴɢ Tᴏ Uᴩʟᴏᴀᴅɪɴɢ....`")
+        await ms.edit("`Try To Uploading....`")
 	    
     duration = 0
     try:
@@ -289,6 +291,8 @@ async def doc(bot, update):
         os.remove(ph_path)
     if file_path:
         os.remove(file_path)
+    if dl_path:
+        os.remove(dl_path)
     if metadata_path:
         os.remove(metadata_path)
     
