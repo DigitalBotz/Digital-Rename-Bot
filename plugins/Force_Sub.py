@@ -26,7 +26,6 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from pyrogram.errors import UserNotParticipant
 from config import Config
 from helper.database import digital_botz
-from helper.utils import handle_banned_user_status
 
 async def not_subscribed(_, client, message):
     await digital_botz.add_user(client, message)
