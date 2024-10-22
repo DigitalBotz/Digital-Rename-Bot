@@ -116,7 +116,11 @@ class Database:
   
     async def set_reset_dailylimit(self, id, date):
         await self.col.update_one({'_id': int(id)}, {'$set': {'daily': date}})
-    
+
+    async def get_user_data(self, id) -> dict:
+        user_data = await self.col.find_one({'_id': int(id)})
+        return user_data or None
+        
     async def get_user(self, user_id):
         user_data = await self.premium.find_one({"id": user_id})
         return user_data
