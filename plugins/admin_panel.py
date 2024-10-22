@@ -41,12 +41,19 @@ async def add_premium(client, message):
         current_time = time_zone.strftime("%d-%m-%Y\n⏱️ ᴊᴏɪɴɪɴɢ ᴛɪᴍᴇ : %I:%M:%S %p") 
         user_id = int(message.command[1])  # Convert the user_id to integer
         user = await client.get_users(user_id)
-        time = message.command[2]+" "+message.command[3]
+        time = message.command[3]+" "+message.command[4]
+        plan_type = message.command[2]
+        if plan_type == "Pro":
+            limit = 107374182400 # 100gb limit calculation (100*1024*1024*1024=results)
+            type = "Pro"
+        elif plan_type == "UltraPro":
+            limit = 1073741824000 # 1000gb limit calculation (1000*1024*1024*1024=results)
+            type = "UltraPro"
         seconds = await get_seconds(time)
         if seconds > 0:
             expiry_time = datetime.datetime.now() + datetime.timedelta(seconds=seconds)
             user_data = {"id": user_id, "expiry_time": expiry_time}  # Using "id" instead of "user_id"  
-            await digital_botz.addpremium(user_id, user_data)
+            await digital_botz.addpremium(user_id, user_data, limit, type)
             data = await digital_botz.get_user(user_id)
             expiry = data.get("expiry_time")   
             expiry_str_in_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata")).strftime("%d-%m-%Y\n⏱️ ᴇxᴘɪʀʏ ᴛɪᴍᴇ : %I:%M:%S %p")         
@@ -58,7 +65,7 @@ async def add_premium(client, message):
             return 
         await message.reply_text("Invalid time format. Please use '1 day for days', '1 hour for hours', or '1 min for minutes', or '1 month for months' or '1 year for year'")
         return
-    await message.reply_text("Usage : /addpremium user_id time (e.g., '1 day for days', '1 hour for hours', or '1 min for minutes', or '1 month for months' or '1 year for year')")
+    await message.reply_text("Usage : /addpremium user_id Plan_Type (e.g... `Pro`, `UltraPro`) time (e.g., '1 day for days', '1 hour for hours', or '1 min for minutes', or '1 month for months' or '1 year for year')")
     return
 
 @Digital_4gbRenameBot.on_message(filters.command(["removepremium", "remove_premium"]) & filters.user(Config.ADMIN))
