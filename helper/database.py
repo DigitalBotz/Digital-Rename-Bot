@@ -25,6 +25,10 @@ class Database:
             caption=None,
             prefix=None,
             suffix=None,
+            used_limit=0,
+            usertype="Free",
+            uploadlimit=0,
+            daily=0,
             metadata_mode=False,
             metadata_code=""" -map 0 -c:s copy -c:a copy -c:v copy -metadata title="Powered By:- @Rkn_Bots" -metadata author="@RknDeveloper" -metadata:s:s title="Subtitled By :- @Rkn_Bots" -metadata:s:a title="By :- @RknDeveloper" -metadata:s:v title="By:- @Rkn_Bots" """,
             expiry_time=None,
@@ -101,6 +105,18 @@ class Database:
         user = await self.col.find_one({'_id': int(id)})
         return user.get('metadata_code', None)
 
+    async def set_used_limit(self, id, used):
+        await self.col.update_one({'_id': int(id)}, {'$set': {'used_limit': used}})
+      
+    async def set_usertype(self, id, type):
+        await self.col.update_one({'_id': int(id)}, {'$set': {'usertype': type}})
+
+    async def set_uploadlimit(self, id, limit):
+        await self.col.update_one({'_id': int(id)}, {'$set': {'uploadlimit': limit}})
+  
+    async def set_reset_dailylimit(self, id, date):
+        await self.col.update_one({'_id': int(id)}, {'$set': {'daily': date}})
+    
     async def get_user(self, user_id):
         user_data = await self.premium.find_one({"id": user_id})
         return user_data
