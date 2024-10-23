@@ -26,6 +26,7 @@ class Config(object):
     ADMIN = [int(admin) if id_pattern.search(admin) else admin for admin in os.environ.get('ADMIN', '6705898491').split()]
     LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", "-1002123429361"))
 
+    FREE_UPLOAD_LIMIT = 6442450944 # calculation 6*1024*1024*1024=results 
     #force subs
     try:
         FORCE_SUB = int(os.environ.get("FORCE_SUB", "")) 
