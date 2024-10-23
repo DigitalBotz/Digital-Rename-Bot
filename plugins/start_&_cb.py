@@ -65,17 +65,21 @@ async def start(client, message):
 async def myplan(client, message):
     user_id  = message.from_user.id
     user = message.from_user.mention
-    if await digital_botz.has_premium_access(user_id):        
+    user_data = await digital_botz.get_user_data(user_id)
+    limit = user_data.get('uploadlimit', 0)
+    used = user_data.get('used_limit', 0)
+    type = user_data.get('usertype', "Free")
+    if await digital_botz.has_premium_access(user_id):
         data = await digital_botz.get_user(user_id)
         expiry_str_in_ist = data.get("expiry_time")
         time_left_str = expiry_str_in_ist - datetime.datetime.now()
        # time_left_str = await digital_botz.checking_remaining_time(user_id)
         #expiry_str_in_ist = time_left_str + datetime.datetime.now()
         
-        await message.reply_text(f"⚜️ ʏᴏᴜʀ ᴘʟᴀɴs ᴅᴇᴛᴀɪʟs ᴀʀᴇ :\n\n👤 ᴜꜱᴇʀ : {user}\n⚡ ᴜꜱᴇʀ ɪᴅ : <code>{user_id}</code>\n⏰ ᴛɪᴍᴇ ʟᴇꜰᴛ : {time_left_str}\n⌛️ ᴇxᴘɪʀʏ ᴅᴀᴛᴇ : {expiry_str_in_ist}")
+        await message.reply_text(f"⚜️ ʏᴏᴜʀ ᴘʟᴀɴs ᴅᴇᴛᴀɪʟs ᴀʀᴇ :\n\n👤 ᴜꜱᴇʀ : {user}\n⚡ ᴜꜱᴇʀ ɪᴅ : <code>{user_id}</code>\nPlan Type: `{type}`\nDaily Upload: `{limit}`\nToday Used: `{used}`\n⏰ ᴛɪᴍᴇ ʟᴇꜰᴛ : {time_left_str}\n⌛️ ᴇxᴘɪʀʏ ᴅᴀᴛᴇ : {expiry_str_in_ist}")
     else:
         m=await message.reply_sticker("CAACAgIAAxkBAAIBTGVjQbHuhOiboQsDm35brLGyLQ28AAJ-GgACglXYSXgCrotQHjibHgQ")
-        await message.reply_text(f"ʜᴇʏ {user},\n\nʏᴏᴜ ᴅᴏ ɴᴏᴛ ʜᴀᴠᴇ ᴀɴʏ ᴀᴄᴛɪᴠᴇ ᴘʀᴇᴍɪᴜᴍ ᴘʟᴀɴs, ɪꜰ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ᴛᴀᴋᴇ ᴘʀᴇᴍɪᴜᴍ ᴛʜᴇɴ ᴄʟɪᴄᴋ ᴏɴ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴ 👇",
+        await message.reply_text(f"ʜᴇʏ {user},\n\n👤 ᴜꜱᴇʀ : {user}\n⚡ ᴜꜱᴇʀ ɪᴅ : <code>{user_id}</code>\nPlan Type: `{type}`\nDaily Upload: `{limit}`\nToday Used: `{used}`\n Time: Lifetime, ɪꜰ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ᴛᴀᴋᴇ ᴘʀᴇᴍɪᴜᴍ ᴛʜᴇɴ ᴄʟɪᴄᴋ ᴏɴ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴ 👇",
         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("💸 ᴄʜᴇᴄᴋᴏᴜᴛ ᴘʀᴇᴍɪᴜᴍ ᴘʟᴀɴꜱ 💸", callback_data='upgrade')]]))			 
         await asyncio.sleep(2)
         await m.delete()
