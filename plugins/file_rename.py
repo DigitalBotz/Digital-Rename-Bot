@@ -66,7 +66,7 @@ async def rename_start(client, message):
             pass
     else:
         if rkn_file.file_size > 2000 * 1024 * 1024:
-             return await message.reply_text("If you want to rename 4GB+ files then you will have to buy premium. \plans")
+            return await message.reply_text("If you want to rename 4GB+ files then you will have to buy premium. \plans")
 
         try:
             await message.reply_text(
@@ -148,6 +148,7 @@ async def doc(bot, update):
     used = user_data.get('used_limit', 0)
 
     ms = await update.message.edit("`Try To Download....`")
+    await digital_botz.set_used_limit(user_id, media.file_size)
     total_used = used + int(media.file_size)
     await digital_botz.set_used_limit(user_id, total_used)
     try:
@@ -155,7 +156,7 @@ async def doc(bot, update):
     except Exception as e:
         used_remove = used - int(media.file_size)
         await digital_botz.set_used_limit(user_id, used_remove)
-     	return await ms.edit(e)
+        return await ms.edit(e)
 
     metadata_mode = await digital_botz.get_metadata_mode(user_id)
     if (metadata_mode):
