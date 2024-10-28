@@ -6,15 +6,15 @@
 
 
 <p align="center">
-  <img src="https://telegra.ph/file/b746aadfe59959eb76f59.jpg" alt="RKN RENAME BOT V2">
+  <img src="https://telegra.ph/file/b746aadfe59959eb76f59.jpg" alt="RKN RENAME BOT V3">
 </p>
 
 <p align="center">
 
-![Fork](https://img.shields.io/github/forks/RknDeveloper/Rkn-Powerful-Rename-Bot?style=for-the-badge)
-![Stars](https://img.shields.io/github/stars/RknDeveloper/Rkn-Powerful-Rename-Bot?color=%23&style=for-the-badge)
-![License](https://img.shields.io/github/license/RknDeveloper/Rkn-Powerful-Rename-Bot?style=for-the-badge)
-![Issues](https://img.shields.io/github/issues/RknDeveloper/Rkn-Powerful-Rename-Bot?style=for-the-badge)
+![Fork](https://img.shields.io/github/forks/DigitalBotz/Digital-Rename-Bot?style=for-the-badge)
+![Stars](https://img.shields.io/github/stars/DigitalBotz/Digital-Rename-Bot?color=%23&style=for-the-badge)
+![License](https://img.shields.io/github/license/DigitalBotz/Digital-Rename-Bot?style=for-the-badge)
+![Issues](https://img.shields.io/github/issues/DigitalBotz/Digital-Rename-Bot?style=for-the-badge)
 
 </p>
 
@@ -29,7 +29,7 @@
 
 <details><summary>📌 Deploy to Koyeb </summary>
   
-[![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/deploy?type=git&repository=github.com/RknDeveloper/Rkn-Powerful-Rename-Bot&env[BOT_TOKEN]&env[API_ID]&env[API_HASH]&env[WEBHOOK]=True&env[ADMIN]&env[DB_URL]&env[DB_NAME]=Rkn-Developer&env[FORCE_SUB]&env[START_PIC]&env[LOG_CHANNEL]=You%20Dont%20Need%20LogChannel%20To%20Remove%20This%20Variable&run_command=python%20bot.py&branch=main&name=rkn-rename) 
+[![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/deploy?type=git&repository=github.com/RknDeveloper/Digital-Rename-Bot&env[BOT_TOKEN]&env[API_ID]&env[API_HASH]&env[WEBHOOK]=True&env[ADMIN]&env[DB_URL]&env[DB_NAME]=Rkn-Developer&env[FORCE_SUB]&env[START_PIC]&env[LOG_CHANNEL]=You%20Dont%20Need%20LogChannel%20To%20Remove%20This%20Variable&run_command=python%20bot.py&branch=main&name=rkn-rename) 
 </details>
 
 <details><summary>📌 Deploy to Render </summary>
@@ -47,7 +47,7 @@
 <a href="https://heroku.com/deploy?template=https://github.com/DigitalBotz/Digital-Rename-Bot"><img src="https://img.shields.io/badge/Deploy%20To%20Heroku-black?style=for-the-badge&logo=heroku" width="220" height="38.45"></p></a>
 </details>
 
-## ʀᴇǫᴜɪʀᴇᴅ ᴄᴏɴғɪɢs
+## Rᴇǫᴜɪʀᴇᴅ Cᴏɴғɪɢs
 
 * `BOT_TOKEN`  - Get Bot Token From @BotFather
 * `API_ID` - From my.telegram.org
@@ -75,7 +75,7 @@
 * premium subscription available.
 * premium trial available.
 * handle ban/unban members using command.
-* Deploy to Koyeb + Heroku + Railway.
+* Deploy to Koyeb + Heroku + Railway + Render.
 * Developer Service 24x7. 🔥
 
 
@@ -107,17 +107,20 @@ status - Cʜᴇᴄᴋ Bᴏᴛ Sᴛᴀᴛᴜs (Aᴅᴍɪɴ Oɴʟʏ)
 broadcast - Sᴇɴᴅ Mᴇssᴀɢᴇ Tᴏ Aʟʟ Usᴇʀs (Aᴅᴍɪɴ Oɴʟʏ)
 ```
 
-## ᴡᴀʀɴɪɴɢ ᴅᴇᴠᴇʟᴏᴘᴇʀ ⚠️ & ɴᴏᴛᴇ
+## Note:
 
-- ᴡʜᴏᴇᴠᴇʀ ɪs ᴅᴇᴘʟᴏʏɪɴɢ ᴛʜɪs ʀᴇᴘᴏ ɪs ᴡᴀʀɴᴇᴅ ⚠️ ᴅᴏ ɴᴏᴛ ʀᴇᴍᴏᴠᴇ ᴄʀᴇᴅɪᴛs ɢɪᴠᴇɴ ɪɴ ᴛʜɪs ʀᴇᴘᴏ #ғɪʀsᴛ ᴀɴᴅ ʟᴀsᴛ ᴡᴀʀɴɪɴɢ ⚠️
+- Please, Just Fork The Repo And Edit As Per Your Needs. # Don't Remove My Credit.
+- ᴅᴏ ɴᴏᴛ ʀᴇᴍᴏᴠᴇ ᴄʀᴇᴅɪᴛs ɢɪᴠᴇɴ ɪɴ ᴛʜɪs ʀᴇᴘᴏ.
 - Importing this repo instead of forking is strictly prohibited, Kindly fork and edit as your wish. Must Give Credits for developer(s)
-- If you find any bugs or errors, [report](https://t.me/DigitalBotz) it
+- If you find any bugs or errors, [report](https://t.me/DigitalBotz_Support) it
 
 ## ❣️ Special Thanks 👍
 
 - Thanks To TEAM-PYRO-BOTZ For His Awesome [PYRO-RENAME-BOT](https://github.com/TEAM-PYRO-BOTZ/PYRO-RENAME-BOT.git)
 - Thanks To [RknDeveloper](https://github.com/RknDeveloper) who have edited and modified this repo as now it is. (It's me 😂)
 - Thanks To [JayMahakal](https://github.com/JayMahakal98) who have edited and modified this repo as now it is.
+- Thanks To Rkn Developer Teams ✅ (Edit & New Feature Added)
+- Special Repo Owner Thanks To Digital Botz 🥲
 
 ## Last Updated
-- `04-08-2024 10:44:55 PM`
+- `28-10-2024 03:44:55 PM`

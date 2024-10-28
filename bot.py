@@ -1,44 +1,82 @@
 # (c) @RknDeveloperr
 # Rkn Developer 
 # Don't Remove Credit 😔
-# Telegram Channel @RknDeveloper & @Rkn_Bots
+# Telegram Channel @RknDeveloper & @Rkn_Botz
 # Developer @RknDeveloperr
+# Special Thanks To @ReshamOwner
 # Update Channel @Digital_Botz & @DigitalBotz_Support
+"""
+Apache License 2.0
+Copyright (c) 2022 @Digital_Botz
 
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Telegram Link : https://t.me/Digital_Botz 
+Repo Link : https://github.com/DigitalBotz/Digital-Rename-Bot
+License Link : https://github.com/DigitalBotz/Digital-Rename-Bot/blob/main/LICENSE
+"""
+
+# extra imports
 import aiohttp, asyncio, warnings, pytz, datetime
-import logging, logging.config, glob, sys, importlib, pyromod
+import logging
+import logging.config
+import glob, sys, importlib, pyromod
 from pathlib import Path
-from pyrogram import Client, __version__
+
+# pyrogram imports
+import pyrogram.utils
+from pyrogram import Client, __version__, errors
 from pyrogram.raw.all import layer
+
+# bots imports
 from config import Config
 from plugins.web_support import web_server
 from plugins.file_rename import app
-import pyrogram.utils
+
 
 pyrogram.utils.MIN_CHANNEL_ID = -1009999999999
 
 # Get logging configurations
-logging.config.fileConfig("logging.conf")
-logging.getLogger().setLevel(logging.INFO)
-logging.getLogger("cinemagoer").setLevel(logging.ERROR)
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    handlers=[logging.FileHandler('BotLog.txt'),
+             logging.StreamHandler()]
+)
+#logger = logging.getLogger(__name__)
+logging.getLogger("pyrogram").setLevel(logging.WARNING)
 
-class Digital_FileRenameBot(Client):
+class DigitalRenameBot(Client):
     def __init__(self):
         super().__init__(
-            name="Digital_FileRenameBot",
+            name="DigitalRenameBot",
             api_id=Config.API_ID,
             api_hash=Config.API_HASH,
             bot_token=Config.BOT_TOKEN,
             workers=200,
             plugins={"root": "plugins"},
             sleep_threshold=15)
-        
+                
+         
     async def start(self):
         await super().start()
         me = await self.get_me()
         self.mention = me.mention
         self.username = me.username  
         self.uptime = Config.BOT_UPTIME
+       # self.log = logger
         
         app = aiohttp.web.AppRunner(await web_server())
         await app.setup()
@@ -82,10 +120,11 @@ class Digital_FileRenameBot(Client):
         for id in Config.ADMIN:
             try: await self.send_message(id, f"**Bot Stopped....**")                                
             except: pass
-        await super().stop()
         print("Bot Stopped 🙄")
+        await super().stop()
+        
 
-bot_instance = Digital_FileRenameBot()
+bot_instance = DigitalRenameBot()
 
 def main():
     async def start_services():
@@ -103,7 +142,13 @@ def main():
 
 if __name__ == "__main__":
     warnings.filterwarnings("ignore", message="There is no current event loop")
-    main()
+    try:
+        main()
+    except errors.FloodWait as ft:
+        print(f"Flood Wait Occured, Sleeping For {ft}")
+        asyncio.sleep(ft.value)
+        print("Now Ready For Deploying !")
+        main()
     
 # Rkn Developer 
 # Don't Remove Credit 😔

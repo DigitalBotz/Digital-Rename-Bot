@@ -1,9 +1,33 @@
 # (c) @RknDeveloperr
 # Rkn Developer 
 # Don't Remove Credit 😔
-# Telegram Channel @RknDeveloper & @Rkn_Bots
+# Telegram Channel @RknDeveloper & @Rkn_Botz
 # Developer @RknDeveloperr
+# Special Thanks To @ReshamOwner
 # Update Channel @Digital_Botz & @DigitalBotz_Support
+"""
+Apache License 2.0
+Copyright (c) 2022 @Digital_Botz
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Telegram Link : https://t.me/Digital_Botz 
+Repo Link : https://github.com/DigitalBotz/Digital-Rename-Bot
+License Link : https://github.com/DigitalBotz/Digital-Rename-Bot/blob/main/LICENSE
+"""
 
 import re, os, time
 id_pattern = re.compile(r'^.\d+$') 
@@ -26,8 +50,10 @@ class Config(object):
     ADMIN = [int(admin) if id_pattern.search(admin) else admin for admin in os.environ.get('ADMIN', '6705898491').split()]
     LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", "-1002123429361"))
 
-    FREE_UPLOAD_LIMIT = 6442450944 # calculation 6*1024*1024*1024=results 
-    #force subs
+    # free upload limit 
+    FREE_UPLOAD_LIMIT = 6442450944 # calculation 6*1024*1024*1024=results
+    
+    #vforce subs
     try:
         FORCE_SUB = int(os.environ.get("FORCE_SUB", "")) 
     except:
@@ -50,12 +76,12 @@ Tʜɪs Bᴏᴛ Wᴀs Cʀᴇᴀᴛᴇᴅ Bʏ : @Digital_Botz 💞</b>"""
 
     ABOUT_TXT = """<b>╭───────────⍟
 ├🤖 ᴍy ɴᴀᴍᴇ : {}
-├🖥️ Dᴇᴠᴇʟᴏᴩᴇʀꜱ : <a href=https://t.me/Digital_Botz>Digital Botz</a> 
-├👨‍💻 Pʀᴏɢʀᴀᴍᴇʀ : <a href=https://github.com/DigitalBotz>Digital Botz</a>
-├📕 Lɪʙʀᴀʀy : <a href=https://github.com/pyrogram>Pyʀᴏɢʀᴀᴍ</a>
-├✏️ Lᴀɴɢᴜᴀɢᴇ: <a href=https://www.python.org>Pyᴛʜᴏɴ 3</a>
-├💾 Dᴀᴛᴀ Bᴀꜱᴇ: <a href=https://cloud.mongodb.com>Mᴏɴɢᴏ DB</a>
-├📊 ᴠᴇʀsɪᴏɴ: <a href=https://github.com/DigitalBotz/Digital-Rename-Bot>3.𝟶.𝟶</a></b>     
+├🖥️ Dᴇᴠᴇʟᴏᴩᴇʀꜱ : {}
+├👨‍💻 Pʀᴏɢʀᴀᴍᴇʀ : {}
+├📕 Lɪʙʀᴀʀy : {}
+├✏️ Lᴀɴɢᴜᴀɢᴇ: {}
+├💾 Dᴀᴛᴀ Bᴀꜱᴇ: {}
+├📊 ᴠᴇʀsɪᴏɴ: <a href=https://github.com/DigitalBotz/Digital-Rename-Bot>{}</a></b>     
 ╰───────────────⍟ """
 
     HELP_TXT = """
@@ -67,14 +93,10 @@ Tʜɪs Bᴏᴛ Wᴀs Cʀᴇᴀᴛᴇᴅ Bʏ : @Digital_Botz 💞</b>"""
 """
 
     UPGRADE= """
-•⪼ ★𝘗𝘭𝘢𝘯𝘴     -    ⏳𝘋𝘢𝘵𝘦 -  💸𝘗𝘳𝘪𝘤𝘦 
-•⪼ 🥉𝘉𝘳𝘰𝘯𝘻𝘦   -     3𝘥𝘢𝘺𝘴 -    39
-•⪼ 🥈𝘚𝘪𝘭𝘷𝘦𝘳    -     7𝘥𝘢𝘺𝘴 -    59
-•⪼ 🥇𝘎𝘰𝘭𝘥     -    15𝘥𝘢𝘺𝘴 -   99
-•⪼ 🏆𝘗𝘭𝘢𝘵𝘪𝘯𝘶𝘮  -    1𝘮𝘰𝘯𝘵𝘩 -   179
-•⪼ 💎𝘋𝘪𝘢𝘮𝘰𝘯𝘥  -    2𝘮𝘰𝘯𝘵𝘩 -   339
+•⪼ ★𝘗𝘭𝘢𝘯𝘴     -    ⏳𝘋𝘢𝘵𝘦 -  💸𝘗𝘳𝘪𝘤𝘦 - limit 
+•⪼ 🏆𝘗ro -    1𝘮𝘰𝘯𝘵𝘩 -   179 - 100gb
+•⪼ 💎 Ultra Pro  -   1𝘮𝘰𝘯𝘵𝘩 -   199 - 1000gb
 
-- 𝘋𝘢𝘪𝘭𝘺 𝘜𝘱𝘭𝘰𝘢𝘥 𝘓𝘪𝘮𝘪𝘵 𝘜𝘯𝘭𝘪𝘮𝘪𝘵𝘦𝘥
 - 𝘋𝘪𝘴𝘤𝘰𝘶𝘯𝘵 𝘈𝘭𝘭 𝘗𝘭𝘢𝘯 𝘙𝘴.9
     """
     THUMBNAIL = """
