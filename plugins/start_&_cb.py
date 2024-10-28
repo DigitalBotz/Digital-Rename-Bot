@@ -1,3 +1,10 @@
+# (c) @RknDeveloperr
+# Rkn Developer 
+# Don't Remove Credit 😔
+# Telegram Channel @RknDeveloper & @Rkn_Botz
+# Developer @RknDeveloperr
+# Special Thanks To @ReshamOwner
+# Update Channel @Digital_Botz & @DigitalBotz_Support
 """
 Apache License 2.0
 Copyright (c) 2022 @Digital_Botz
@@ -22,12 +29,18 @@ Repo Link : https://github.com/DigitalBotz/Digital-Rename-Bot
 License Link : https://github.com/DigitalBotz/Digital-Rename-Bot/blob/main/LICENSE
 """
 
+# extra imports
 import random, asyncio, datetime, pytz, time, psutil, shutil
+
+# pyrogram imports
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ForceReply, CallbackQuery
+
+# bots imports
 from helper.database import digital_botz
 from config import Config, rkn
 from helper.utils import humanbytes
+from plugins import __version__ as _bot_version_, __developer__, __database__, __library__, __language__, __programer__
 
 upgrade_button = InlineKeyboardMarkup([[        
         InlineKeyboardButton('buy premium ✓', user_id=int(6705898491)),
@@ -64,25 +77,31 @@ async def start(client, message):
 @Client.on_message(filters.private & filters.command("myplan"))
 async def myplan(client, message):
     user_id  = message.from_user.id
-    user = message.from_user.mention
-    user_data = await digital_botz.get_user_data(user_id)
-    limit = user_data.get('uploadlimit', 0)
-    used = user_data.get('used_limit', 0)
-    type = user_data.get('usertype', "Free")
+    user = message.from_user.mention        
+    await digital_botz.reset_uploadlimit_access(user_id)        
     if await digital_botz.has_premium_access(user_id):
+        user_data = await digital_botz.get_user_data(user_id)
+        limit = user_data.get('uploadlimit', 0)
+        used = user_data.get('used_limit', 0)
+        remain = int(limit)- int(used)
+        type = user_data.get('usertype', "Free")
+            
         data = await digital_botz.get_user(user_id)
         expiry_str_in_ist = data.get("expiry_time")
         time_left_str = expiry_str_in_ist - datetime.datetime.now()
        # time_left_str = await digital_botz.checking_remaining_time(user_id)
         #expiry_str_in_ist = time_left_str + datetime.datetime.now()
         
-        await message.reply_text(f"⚜️ ʏᴏᴜʀ ᴘʟᴀɴs ᴅᴇᴛᴀɪʟs ᴀʀᴇ :\n\n👤 ᴜꜱᴇʀ : {user}\n⚡ ᴜꜱᴇʀ ɪᴅ : <code>{user_id}</code>\nPlan Type: `{type}`\nDaily Upload: `{limit}`\nToday Used: `{used}`\n⏰ ᴛɪᴍᴇ ʟᴇꜰᴛ : {time_left_str}\n⌛️ ᴇxᴘɪʀʏ ᴅᴀᴛᴇ : {expiry_str_in_ist}")
+        await message.reply_text(f"👤 ᴜꜱᴇʀ :- {user}\n⚡ ᴜꜱᴇʀ ɪᴅ :- <code>{user_id}</code>\nᴘʟᴀɴ :- `{type}`\nᴅᴀɪʟʏ ᴜᴘʟᴏᴀᴅ ʟɪᴍɪᴛ :- `{humanbytes(limit)}`\nᴛᴏᴅᴀʏ ᴜsᴇᴅ :- `{humanbytes(used)}\n`ʀᴇᴍᴀɪɴ :- `{humanbytes(remain)}`\n⏰ ᴛɪᴍᴇ ʟᴇꜰᴛ : {time_left_str}\n⌛️ ᴇxᴘɪʀʏ ᴅᴀᴛᴇ : {expiry_str_in_ist}", quote=True)
     else:
-        m=await message.reply_sticker("CAACAgIAAxkBAAIBTGVjQbHuhOiboQsDm35brLGyLQ28AAJ-GgACglXYSXgCrotQHjibHgQ")
-        await message.reply_text(f"ʜᴇʏ {user},\n\n👤 ᴜꜱᴇʀ : {user}\n⚡ ᴜꜱᴇʀ ɪᴅ : <code>{user_id}</code>\nPlan Type: `{type}`\nDaily Upload: `{limit}`\nToday Used: `{used}`\n Time: Lifetime, ɪꜰ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ᴛᴀᴋᴇ ᴘʀᴇᴍɪᴜᴍ ᴛʜᴇɴ ᴄʟɪᴄᴋ ᴏɴ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴ 👇",
-        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("💸 ᴄʜᴇᴄᴋᴏᴜᴛ ᴘʀᴇᴍɪᴜᴍ ᴘʟᴀɴꜱ 💸", callback_data='upgrade')]]))			 
-        await asyncio.sleep(2)
-        await m.delete()
+        user_data = await digital_botz.get_user_data(user_id)
+        limit = user_data.get('uploadlimit', 0)
+        used = user_data.get('used_limit', 0)
+        remain = int(limit)- int(used)
+        type = user_data.get('usertype', "Free")
+        await message.reply_text(f"👤 ᴜꜱᴇʀ :- {user}\n⚡ ᴜꜱᴇʀ ɪᴅ :- <code>{user_id}</code>\nᴘʟᴀɴ :- `{type}`\nᴅᴀɪʟʏ ᴜᴘʟᴏᴀᴅ ʟɪᴍɪᴛ :- `{humanbytes(limit)}`\nᴛᴏᴅᴀʏ ᴜsᴇᴅ :- `{humanbytes(used)}\n`ʀᴇᴍᴀɪɴ :- `{humanbytes(remain)}`\n⏰ ᴇxᴘɪʀᴇᴅ ᴅᴀᴛᴇ :- ʟɪғᴇᴛɪᴍᴇ\n\nɪꜰ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ᴛᴀᴋᴇ ᴘʀᴇᴍɪᴜᴍ ᴛʜᴇɴ ᴄʟɪᴄᴋ ᴏɴ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴ 👇",
+        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("💸 ᴄʜᴇᴄᴋᴏᴜᴛ ᴘʀᴇᴍɪᴜᴍ ᴘʟᴀɴꜱ 💸", callback_data='upgrade')]]), quote=True)			 
+ 
 
 @Client.on_message(filters.private & filters.command("plans"))
 async def plans(client, message):
@@ -125,7 +144,7 @@ async def cb_handler(client, query: CallbackQuery):
         
     elif data == "about":
         await query.message.edit_text(
-            text=rkn.ABOUT_TXT.format(client.mention),
+            text=rkn.ABOUT_TXT.format(client.mention, __developer__, __programer__, __library__, __language__, __database__, _bot_version_),
             disable_web_page_preview = True,
             reply_markup=InlineKeyboardMarkup([[
                 #⚠️ don't change source code & source link ⚠️ #

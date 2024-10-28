@@ -1,6 +1,7 @@
 """
 Apache License 2.0
-Copyright (c) 2022 @RknDeveloper 
+Copyright (c) 2022 @Digital_Botz
+
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
@@ -14,16 +15,19 @@ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-Telegram Link : https://t.me/RknDeveloper 
-Repo Link : https://github.com/RknDeveloper/Digital-rename-bot
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Telegram Link : https://t.me/Digital_Botz 
+Repo Link : https://github.com/DigitalBotz/Digital-Rename-Bot
 License Link : https://github.com/DigitalBotz/Digital-Rename-Bot/blob/main/LICENSE
 """
 
+# pyrogram imports
 from pyrogram import Client, filters, enums 
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from pyrogram.errors import UserNotParticipant
+
+# extra imports
 from config import Config
 from helper.database import digital_botz
 
@@ -42,6 +46,7 @@ async def not_subscribed(_, client, message):
     return True
 
 async def handle_banned_user_status(bot, message):
+    await digital_botz.add_user(bot, message) 
     user_id = message.from_user.id
     ban_status = await digital_botz.get_ban_status(user_id)
     if ban_status["is_banned"]:
@@ -49,15 +54,11 @@ async def handle_banned_user_status(bot, message):
         ).days > ban_status["ban_duration"]:
             await digital_botz.remove_ban(user_id)
         else:
-            await message.reply_text("Sorry Sir, 😔 You are Banned!.. Please Contact - @DigitalBotz")
-            return
+            return await message.reply_text("Sorry Sir, 😔 You are Banned!.. Please Contact - @DigitalBotz") 
     await message.continue_propagation()
     
 @Client.on_message(filters.private)
 async def _(bot, message):
-    ban_status = await digital_botz.get_ban_status(message.from_user.id)
-    if ban_status["is_banned"]:
-        print(f'your are banned mr. {message.from_user.first_name}')
     await handle_banned_user_status(bot, message)
     
 @Client.on_message(filters.private & filters.create(not_subscribed))

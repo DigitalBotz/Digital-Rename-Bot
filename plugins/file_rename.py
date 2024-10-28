@@ -5,20 +5,51 @@
 # Developer @RknDeveloperr
 # Special Thanks To @ReshamOwner
 # Update Channel @Digital_Botz & @DigitalBotz_Support
+"""
+Apache License 2.0
+Copyright (c) 2022 @Digital_Botz
 
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Telegram Link : https://t.me/Digital_Botz 
+Repo Link : https://github.com/DigitalBotz/Digital-Rename-Bot
+License Link : https://github.com/DigitalBotz/Digital-Rename-Bot/blob/main/LICENSE
+"""
+
+# pyrogram imports
 from pyrogram import Client, filters
 from pyrogram.enums import MessageMediaType
 from pyrogram.errors import FloodWait
 from pyrogram.file_id import FileId
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ForceReply
+
+# hachoir imports
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
-from helper.utils import progress_for_pyrogram, convert, humanbytes, add_prefix_suffix
-from helper.database import digital_botz
-from asyncio import sleep
 from PIL import Image
-import os, time, asyncio
+
+# bots imports
+from helper.utils import progress_for_pyrogram, convert, humanbytes, add_prefix_suffix, remove_path
+from helper.database import digital_botz
 from config import Config
+
+# extra imports
+from asyncio import sleep
+import os, time, asyncio
+
 
 UPLOAD_TEXT = """Uploading Started...."""
 DOWNLOAD_TEXT = """Download Started..."""
@@ -34,11 +65,12 @@ async def rename_start(client, message):
     mime_type = rkn_file.mime_type
     dcid = FileId.decode(rkn_file.file_id).dc_id
     extension_type = mime_type.split('/')[0]
-	
+
+    await digital_botz.reset_uploadlimit_access(user_id)
     user_data = await digital_botz.get_user_data(user_id)
     limit = user_data.get('uploadlimit', 0)
     used = user_data.get('used_limit', 0)
-    remain = limit - used
+    remain = int(limit) - int(used)
     if remain < int(rkn_file.file_size):
         return await message.reply_text(f"100% Of Daily Upload Limit {humanbytes(limit)}.\n\n Media Size: {humanbytes(file.file_size)}\n Your Used Daily Limit {humanbytes(used)}\n\nYou have only **{humanbytes(remain)}** Data.\nPlease, Buy Premium Plan s.", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🪪 Uᴘɢʀᴀᴅᴇ", callback_data="plans")]]))
          
@@ -66,7 +98,7 @@ async def rename_start(client, message):
             pass
     else:
         if rkn_file.file_size > 2000 * 1024 * 1024:
-            return await message.reply_text("If you want to rename 4GB+ files then you will have to buy premium. \plans")
+            return await message.reply_text("If you want to rename 4GB+ files then you will have to buy premium. /plans")
 
         try:
             await message.reply_text(
@@ -117,6 +149,8 @@ async def refunc(client, message):
 
 @Client.on_callback_query(filters.regex("upload"))
 async def doc(bot, update):
+    rkn_processing = await update.message.edit("`Processing...`")
+	
     # Creating Directory for Metadata
     if not os.path.isdir("Metadata"):
         os.mkdir("Metadata")
@@ -132,7 +166,7 @@ async def doc(bot, update):
         suffix = await digital_botz.get_suffix(user_id)
         new_filename = add_prefix_suffix(new_filename_, prefix, suffix)
     except Exception as e:
-        return await update.message.edit(f"⚠️ Something went wrong can't able to set Prefix or Suffix ☹️ \n\n❄️ Contact My Creator -> @RknDeveloperr\nError: {e}")
+        return await rkn_processing.edit(f"⚠️ Something went wrong can't able to set Prefix or Suffix ☹️ \n\n❄️ Contact My Creator -> @RknDeveloperr\nError: {e}")
 
     # msg file location 
     file = update.message.reply_to_message
@@ -147,22 +181,23 @@ async def doc(bot, update):
     limit = user_data.get('uploadlimit', 0)
     used = user_data.get('used_limit', 0)
 
-    ms = await update.message.edit("`Try To Download....`")
+    await rkn_processing.edit("`Try To Download....`")
     await digital_botz.set_used_limit(user_id, media.file_size)
-    total_used = used + int(media.file_size)
+    total_used = int(used) + int(media.file_size)
     await digital_botz.set_used_limit(user_id, total_used)
+	
     try:
-        dl_path = await bot.download_media(message=file, file_name=file_path, progress=progress_for_pyrogram, progress_args=(DOWNLOAD_TEXT, ms, time.time()))                    
+        dl_path = await bot.download_media(message=file, file_name=file_path, progress=progress_for_pyrogram, progress_args=(DOWNLOAD_TEXT, rkn_processing, time.time()))                    
     except Exception as e:
-        used_remove = used - int(media.file_size)
+        used_remove = int(used) - int(media.file_size)
         await digital_botz.set_used_limit(user_id, used_remove)
-        return await ms.edit(e)
+        return await rkn_processing.edit(e)
 
     metadata_mode = await digital_botz.get_metadata_mode(user_id)
     if (metadata_mode):
         metadata = await digital_botz.get_metadata_code(user_id)
         if metadata:
-            await ms.edit("I Fᴏᴜɴᴅ Yᴏᴜʀ Mᴇᴛᴀᴅᴀᴛᴀ\n\n__**Pʟᴇᴀsᴇ Wᴀɪᴛ...**__\n**Aᴅᴅɪɴɢ Mᴇᴛᴀᴅᴀᴛᴀ Tᴏ Fɪʟᴇ....**")
+            await rkn_processing.edit("I Fᴏᴜɴᴅ Yᴏᴜʀ Mᴇᴛᴀᴅᴀᴛᴀ\n\n__**Pʟᴇᴀsᴇ Wᴀɪᴛ...**__\n**Aᴅᴅɪɴɢ Mᴇᴛᴀᴅᴀᴛᴀ Tᴏ Fɪʟᴇ....**")
             cmd = f"""ffmpeg -i {dl_path} {metadata} {metadata_path}"""
 	    
             process = await asyncio.create_subprocess_shell(cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE)
@@ -170,12 +205,12 @@ async def doc(bot, update):
             er = stderr.decode()
             try:
                 if er:
-                    return await ms.edit(str(er) + "\n\n**Error**")
+                    return await rkn_processing.edit(str(er) + "\n\n**Error**")
             except BaseException:
                 pass
-        await ms.edit("**Metadata added to the file successfully ✅**\n\n**Tʀyɪɴɢ Tᴏ Uᴩʟᴏᴀᴅɪɴɢ....**")
+        await rkn_processing.edit("**Metadata added to the file successfully ✅**\n\n**Tʀyɪɴɢ Tᴏ Uᴩʟᴏᴀᴅɪɴɢ....**")
     else:
-        await ms.edit("`Try To Uploading....`")
+        await rkn_processing.edit("`Try To Uploading....`")
 	    
     duration = 0
     try:
@@ -196,9 +231,9 @@ async def doc(bot, update):
              # adding custom caption 
              caption = c_caption.format(filename=new_filename, filesize=humanbytes(media.file_size), duration=convert(duration))
          except Exception as e:
-             used_remove = used - int(media.file_size)
+             used_remove = int(used) - int(media.file_size)
              await digital_botz.set_used_limit(user_id, used_remove)
-             return await ms.edit(text=f"Yᴏᴜʀ Cᴀᴩᴛɪᴏɴ Eʀʀᴏʀ Exᴄᴇᴩᴛ Kᴇyᴡᴏʀᴅ Aʀɢᴜᴍᴇɴᴛ ●> ({e})")             
+             return await rkn_processing.edit(text=f"Yᴏᴜʀ Cᴀᴩᴛɪᴏɴ Eʀʀᴏʀ Exᴄᴇᴩᴛ Kᴇyᴡᴏʀᴅ Aʀɢᴜᴍᴇɴᴛ ●> ({e})")             
     else:
          caption = f"**{new_filename}**"
  
@@ -223,13 +258,12 @@ async def doc(bot, update):
                     thumb=ph_path,
                     caption=caption,
                     progress=progress_for_pyrogram,
-                    progress_args=(UPLOAD_TEXT, ms, time.time()))
+                    progress_args=(UPLOAD_TEXT, rkn_processing, time.time()))
 
                 from_chat = filw.chat.id
                 mg_id = filw.id
                 time.sleep(2)
                 await bot.copy_message(update.from_user.id, from_chat, mg_id)
-                await ms.delete()
                 await bot.delete_messages(from_chat, mg_id)
             elif type == "video":
                 filw = await app.send_video(
@@ -239,13 +273,12 @@ async def doc(bot, update):
                     thumb=ph_path,
                     duration=duration,
                     progress=progress_for_pyrogram,
-                    progress_args=(UPLOAD_TEXT, ms, time.time()))
+                    progress_args=(UPLOAD_TEXT, rkn_processing, time.time()))
 
                 from_chat = filw.chat.id
                 mg_id = filw.id
                 time.sleep(2)
                 await bot.copy_message(update.from_user.id, from_chat, mg_id)
-                await ms.delete()
                 await bot.delete_messages(from_chat, mg_id)
             elif type == "audio":
                 filw = await app.send_audio(
@@ -255,26 +288,18 @@ async def doc(bot, update):
                     thumb=ph_path,
                     duration=duration,
                     progress=progress_for_pyrogram,
-                    progress_args=(UPLOAD_TEXT, ms, time.time()))
+                    progress_args=(UPLOAD_TEXT, rkn_processing, time.time()))
 
                 from_chat = filw.chat.id
                 mg_id = filw.id
                 time.sleep(2)
                 await bot.copy_message(update.from_user.id, from_chat, mg_id)
-                await ms.delete()
                 await bot.delete_messages(from_chat, mg_id)
         except Exception as e:
-            used_remove = used - int(media.file_size)
+            used_remove = int(used) - int(media.file_size)
             await digital_botz.set_used_limit(user_id, used_remove)
-            if file_path:
-                os.remove(file_path)
-            if ph_path:
-                os.remove(ph_path)
-            if metadata_path:
-                os.remove(metadata_path)
-            if dl_path:
-                os.remove(dl_path)
-            return await ms.edit(f" Eʀʀᴏʀ {e}")
+            await remove_path(ph_path, file_path, dl_path, metadata_path)
+            return await rkn_processing.edit(f" Eʀʀᴏʀ {e}")
     else:
         try:
             if type == "document":
@@ -284,7 +309,7 @@ async def doc(bot, update):
                     thumb=ph_path,
                     caption=caption,
                     progress=progress_for_pyrogram,
-                    progress_args=(UPLOAD_TEXT, ms, time.time()))
+                    progress_args=(UPLOAD_TEXT, rkn_processing, time.time()))
             elif type == "video":
                 await bot.send_video(
                     update.message.chat.id,
@@ -293,7 +318,7 @@ async def doc(bot, update):
                     thumb=ph_path,
                     duration=duration,
                     progress=progress_for_pyrogram,
-                    progress_args=(UPLOAD_TEXT, ms, time.time()))
+                    progress_args=(UPLOAD_TEXT, rkn_processing, time.time()))
             elif type == "audio":
                 await bot.send_audio(
                     update.message.chat.id,
@@ -302,35 +327,17 @@ async def doc(bot, update):
                     thumb=ph_path,
                     duration=duration,
                     progress=progress_for_pyrogram,
-                    progress_args=(UPLOAD_TEXT, ms, time.time()))
+                    progress_args=(UPLOAD_TEXT, rkn_processing, time.time()))
         except Exception as e:
-            used_remove = used - int(media.file_size)
+            used_remove = int(used) - int(media.file_size)
             await digital_botz.set_used_limit(user_id, used_remove)
-            if file_path:
-                os.remove(file_path)
-            if ph_path:
-                os.remove(ph_path)
-            if metadata_path:
-                os.remove(metadata_path)
-            if dl_path:
-                os.remove(dl_path)
-            return await ms.edit(f" Eʀʀᴏʀ {e}")
+            await remove_path(ph_path, file_path, dl_path, metadata_path)
+            return await rkn_processing.edit(f" Eʀʀᴏʀ {e}")
 
-# some new feature adding soon ( sample screenshot & sample video )
-# please give fork & star and share with your friends repo
-# please don't sell the repo ( it's free 🥰)
-# please give 200 Fork & 200 star target 🎯 
-# fast guys now support again started 
-	
-    await ms.delete()
-    if ph_path:
-        os.remove(ph_path)
-    if file_path:
-        os.remove(file_path)
-    if dl_path:
-        os.remove(dl_path)
-    if metadata_path:
-        os.remove(metadata_path)
+# please give credit 🙏🥲
+		    
+    await remove_path(ph_path, file_path, dl_path, metadata_path)
+    return await rkn_processing.edit("Uploaded Successfully....")
     
 #@RknDeveloper
 #✅ Team-RknDeveloper
