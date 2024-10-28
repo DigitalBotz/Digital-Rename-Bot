@@ -159,14 +159,18 @@ def add_prefix_suffix(input_string, prefix='', suffix=''):
         return input_string
 
 async def remove_path(ph_path, file_path, dl_path, metadata_path):
-    if os.path.lexists(ph_path):
-        os.remove(ph_path)
-    if os.path.lexists(file_path):
-        os.remove(file_path)
-    if os.path.lexists(dl_path):
-        os.remove(dl_path)
-    if os.path.lexists(metadata_path):
-        os.remove(metadata_path)
+    if ph_path:
+        if os.path.lexists(ph_path):
+            os.remove(ph_path)
+    if file_path: 
+        if os.path.lexists(file_path):
+            os.remove(file_path)
+    if dl_path:
+        if os.path.lexists(dl_path):
+            os.remove(dl_path)
+    if metadata_path:
+        if os.path.lexists(metadata_path):
+             os.remove(metadata_path)
 
 # (c) @RknDeveloperr
 # Rkn Developer 
