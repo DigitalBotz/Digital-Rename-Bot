@@ -72,7 +72,8 @@ async def rename_start(client, message):
     used = user_data.get('used_limit', 0)
     remain = int(limit) - int(used)
     if remain < int(rkn_file.file_size):
-        return await message.reply_text(f"100% Of Daily Upload Limit {humanbytes(limit)}.\n\n Media Size: {humanbytes(file.file_size)}\n Your Used Daily Limit {humanbytes(used)}\n\nYou have only **{humanbytes(remain)}** Data.\nPlease, Buy Premium Plan s.", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🪪 Uᴘɢʀᴀᴅᴇ", callback_data="plans")]]))
+	percentage = f"{(int(limit) / int(used)) * 100:.1f}".rstrip('0').rstrip('.')
+        return await message.reply_text(f"{percentage}% Of Daily Upload Limit {humanbytes(limit)}.\n\n Media Size: {humanbytes(file.file_size)}\n Your Used Daily Limit {humanbytes(used)}\n\nYou have only **{humanbytes(remain)}** Data.\nPlease, Buy Premium Plan s.", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🪪 Uᴘɢʀᴀᴅᴇ", callback_data="plans")]]))
          
 	    
     if await digital_botz.has_premium_access(user_id):
