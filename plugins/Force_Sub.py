@@ -37,7 +37,7 @@ async def not_subscribed(_, client, message):
         return False
     try:             
         user = await client.get_chat_member(Config.FORCE_SUB, message.from_user.id) 
-        if user.status in {enums.ChatMemberStatus.BANNED, enums.ChatMemberStatus.LEFT}:
+        if user.status in [enums.ChatMemberStatus.BANNED, enums.ChatMemberStatus.LEFT]:
             return True 
         else:
             return False                
@@ -50,8 +50,7 @@ async def handle_banned_user_status(bot, message):
     user_id = message.from_user.id
     ban_status = await digital_botz.get_ban_status(user_id)
     if ban_status["is_banned"]:
-        if ( datetime.date.today() - datetime.date.fromisoformat(ban_status["banned_on"])
-        ).days > ban_status["ban_duration"]:
+        if ( datetime.date.today() - datetime.date.fromisoformat(ban_status["banned_on"])).days > ban_status["ban_duration"]:
             await digital_botz.remove_ban(user_id)
         else:
             return await message.reply_text("Sorry Sir, 😔 You are Banned!.. Please Contact - @DigitalBotz") 
