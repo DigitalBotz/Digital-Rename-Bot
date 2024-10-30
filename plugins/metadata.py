@@ -52,9 +52,8 @@ async def handle_metadata(bot: Client, message: Message):
     RknDev = await message.reply_text("**Please Wait...**", reply_to_message_id=message.id)
     bool_metadata = await digital_botz.get_metadata_mode(message.from_user.id)
     user_metadata = await digital_botz.get_metadata_code(message.from_user.id)
-    if bool_metadata:
-        return await RknDev.edit(f"Your Current Metadata:-\n\n➜ `{user_metadata}` ", reply_markup=InlineKeyboardMarkup(TRUE))
-    return await RknDev.edit(f"Your Current Metadata:-\n\n➜ `{user_metadata}` ", reply_markup=InlineKeyboardMarkup(FALSE))
+    await RknDev.edit(f"Your Current Metadata:-\n\n➜ `{user_metadata}` ", reply_markup=InlineKeyboardMarkup(FALSE) if not bool_metadata else InlineKeyboardMarkup(TRUE))
+    return
 
 @Client.on_callback_query(filters.regex('.*?(custom_metadata|metadata).*?'))
 async def query_metadata(bot: Client, query: CallbackQuery):
