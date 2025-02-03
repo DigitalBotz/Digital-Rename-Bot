@@ -1,6 +1,8 @@
 # Use the official Python image
 FROM python:3.9-slim-buster
 
+RUN apt-get update -qq && apt-get -y install ffmpeg
+
 # Set the working directory in the container
 WORKDIR /app
 

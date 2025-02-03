@@ -76,6 +76,8 @@ class DigitalRenameBot(Client):
         self.mention = me.mention
         self.username = me.username  
         self.uptime = Config.BOT_UPTIME
+        self.premium = Config.PREMIUM_MODE
+        self.uploadlimit = Config.UPLOAD_LIMIT_MODE
        # self.log = logger
         
         app = aiohttp.web.AppRunner(await web_server())
