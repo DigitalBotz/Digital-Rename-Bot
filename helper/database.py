@@ -1,7 +1,7 @@
 # (c) @RknDeveloperr
 # Rkn Developer 
 # Don't Remove Credit 😔
-# Telegram Channel @RknDeveloper & @Rkn_Bots
+# Telegram Channel @RknDeveloper & @Rkn_Botz
 # Developer @RknDeveloperr
 # Special Thanks To (https://github.com/JayMahakal98)
 # Update Channel @Digital_Botz & @DigitalBotz_Support
@@ -57,7 +57,7 @@ class Database:
             uploadlimit=Config.FREE_UPLOAD_LIMIT,
             daily=0,
             metadata_mode=False,
-            metadata_code=""" -map 0 -c:s copy -c:a copy -c:v copy -metadata title="Powered By:- @Rkn_Bots" -metadata author="@RknDeveloper" -metadata:s:s title="Subtitled By :- @Rkn_Bots" -metadata:s:a title="By :- @RknDeveloper" -metadata:s:v title="By:- @Rkn_Bots" """,
+            metadata_code="--change-title @Rkn_Botz\n--change-video-title @Rkn_Botz\n--change-audio-title @Rkn_Botz\n--change-subtitle-title @Rkn_Botz\n--change-author @Rkn_Botz",
             expiry_time=None,
             has_free_trial=False,
             ban_status=dict(
@@ -169,15 +169,17 @@ class Database:
         user_data = await self.premium.find_one({"id": user_id})
         return user_data
         
-    async def addpremium(self, user_id, user_data, limit, type):    
+    async def addpremium(self, user_id, user_data, limit=None, type=None):    
         await self.premium.update_one({"id": user_id}, {"$set": user_data}, upsert=True)
-        await self.col.update_one({'_id': user_id}, {'$set': {'usertype': type}})
-        await self.col.update_one({'_id': user_id}, {'$set': {'uploadlimit': limit}})
+        if limit and type and Config.UPLOAD_LIMIT_MODE:
+            await self.col.update_one({'_id': user_id}, {'$set': {'usertype': type}})
+            await self.col.update_one({'_id': user_id}, {'$set': {'uploadlimit': limit}})
         
     async def remove_premium(self, user_id, limit=Config.FREE_UPLOAD_LIMIT, type="Free"):
         await self.premium.update_one({"id": user_id}, {"$set": {"expiry_time": None}})
-        await self.col.update_one({'_id': user_id}, {'$set': {'usertype': type}})
-        await self.col.update_one({'_id': user_id}, {'$set': {'uploadlimit': limit}})
+        if limit and type and Config.UPLOAD_LIMIT_MODE:
+            await self.col.update_one({'_id': user_id}, {'$set': {'usertype': type}})
+            await self.col.update_one({'_id': user_id}, {'$set': {'uploadlimit': limit}})
     
     async def checking_remaining_time(self, user_id):
         user_data = await self.get_user(user_id)
@@ -213,11 +215,16 @@ class Database:
         return False
 
     async def give_free_trail(self, user_id):
-        seconds, type, limit = 720*60, "Trial", 536870912000 # calculation 500*1024*1024*1024=results      
+        seconds = 720*60
         expiry_time = datetime.datetime.now() + datetime.timedelta(seconds=seconds)
         user_data = {"id": user_id, "expiry_time": expiry_time, "has_free_trial": True}
-        await self.addpremium(user_id, user_data, limit, type)
-      
+        
+        if Config.UPLOAD_LIMIT_MODE:
+            type, limit = "Trial", 536870912000 # calculation 500*1024*1024*1024=results        
+            await self.addpremium(user_id, user_data, limit, type)
+        else:
+            await self.addpremium(user_id, user_data)
+            
     async def remove_ban(self, id):
         ban_status = dict(
             is_banned=False,
@@ -232,8 +239,7 @@ class Database:
             is_banned=True,
             ban_duration=ban_duration,
             banned_on=datetime.date.today().isoformat(),
-            ban_reason=ban_reason
-        )
+            ban_reason=ban_reason)
         await self.col.update_one({'_id': int(user_id)}, {'$set': {'ban_status': ban_status}})
 
     async def get_ban_status(self, id):
@@ -241,8 +247,7 @@ class Database:
             is_banned=False,
             ban_duration=0,
             banned_on=datetime.date.max.isoformat(),
-            ban_reason=''
-        )
+            ban_reason='')
         user = await self.col.find_one({'_id': int(id)})
         return user.get('ban_status', default)
 
@@ -254,6 +259,6 @@ digital_botz = Database(Config.DB_URL, Config.DB_NAME)
 
 # Rkn Developer 
 # Don't Remove Credit 😔
-# Telegram Channel @RknDeveloper & @Rkn_Bots
+# Telegram Channel @RknDeveloper & @Rkn_Botz
 # Developer @RknDeveloperr
 # Update Channel @Digital_Botz & @DigitalBotz_Support
