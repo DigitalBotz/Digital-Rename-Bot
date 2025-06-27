@@ -133,13 +133,10 @@ bot_instance = DigitalRenameBot()
 def main():
     async def start_services():
         if Config.STRING_SESSION:
-            await asyncio.gather(
-                app.start(),        # Start the Pyrogram Client
-                bot_instance.start()  # Start the bot instance
-            )
+            await asyncio.gather(app.start(), bot_instance.start())
         else:
-            await asyncio.gather(bot_instance.start()) # Start the bot instance
-            
+            await asyncio.gather(bot_instance.start())
+
     loop = asyncio.get_event_loop()
     loop.run_until_complete(start_services())
     loop.run_forever()
@@ -149,8 +146,8 @@ if __name__ == "__main__":
     try:
         main()
     except errors.FloodWait as ft:
-        print(f"Flood Wait Occured, Sleeping For {ft}")
-        asyncio.sleep(ft.value)
+        print(f"⏳ FloodWait: Sleeping for {ft.value} seconds")
+        asyncio.run(asyncio.sleep(ft.value))
         print("Now Ready For Deploying !")
         main()
     
