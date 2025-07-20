@@ -1,6 +1,6 @@
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
-![Typing SVG](https://readme-typing-svg.herokuapp.com/?lines=𝗪𝗘𝗟𝗖𝗢𝗠+𝗧𝗢+𝗗𝗜𝗚𝗜𝗧𝗔𝗟+𝗥𝗘𝗡𝗔𝗠𝗘+𝗕𝗢𝗧!;𝗖𝗥𝗘𝗔𝗧𝗘𝗗+𝗕𝗬+𝗗𝗜𝗚𝗜𝗧𝗔𝗟+𝗕𝗢𝗧𝗭!;𝗜+𝗔𝗠+𝗣𝗢𝗪𝗘𝗥𝗙𝗨𝗟+𝗧𝗚+𝗥𝗘𝗡𝗔𝗠𝗘+𝗕𝗢𝗧!)</p>
+![Typing SVG](https://readme-typing-svg.herokuapp.com/?lines=𝗪𝗘𝗟𝗖𝗢𝗠+𝗧𝗢+TANVEER+𝗥𝗘𝗡𝗔𝗠𝗘+𝗕𝗢𝗧!;𝗖𝗥𝗘𝗔𝗧𝗘𝗗+𝗕𝗬+TANVEER+𝗕𝗢𝗧𝗭!;𝗜+𝗔𝗠+𝗣𝗢𝗪𝗘𝗥𝗙𝗨𝗟+𝗧𝗚+𝗥𝗘𝗡𝗔𝗠𝗘+𝗕𝗢𝗧!)</p>
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
@@ -19,10 +19,6 @@
 </p>
 
 
-### Sᴀᴍᴩʟᴇ Bᴏᴛ (Official Digital Rename Bot)
-
-* [Rkn_RenameBot](http://t.me/Rkn_RenameBot)
-* [Digital_Rename_Bot](http://t.me/Digital_Rename_Bot)
 
 
 ## Deploy Me 🥀
@@ -112,15 +108,9 @@ broadcast - Sᴇɴᴅ Mᴇssᴀɢᴇ Tᴏ Aʟʟ Usᴇʀs (Aᴅᴍɪɴ Oɴʟʏ)
 - Please, Just Fork The Repo And Edit As Per Your Needs. # Don't Remove My Credit.
 - ᴅᴏ ɴᴏᴛ ʀᴇᴍᴏᴠᴇ ᴄʀᴇᴅɪᴛs ɢɪᴠᴇɴ ɪɴ ᴛʜɪs ʀᴇᴘᴏ.
 - Importing this repo instead of forking is strictly prohibited, Kindly fork and edit as your wish. Must Give Credits for developer(s)
-- If you find any bugs or errors, [report](https://t.me/DigitalBotz_Support) it
+- If you find any bugs or errors, [report] it
 
-## ❣️ Special Thanks 👍
 
-- Thanks To TEAM-PYRO-BOTZ For His Awesome [PYRO-RENAME-BOT](https://github.com/TEAM-PYRO-BOTZ/PYRO-RENAME-BOT.git)
-- Thanks To [RknDeveloper](https://github.com/RknDeveloper) who have edited and modified this repo as now it is. (It's me 😂)
-- Thanks To [JayMahakal](https://github.com/JayMahakal98) who have edited and modified this repo as now it is.
-- Thanks To Rkn Developer Teams ✅ (Edit & New Feature Added)
-- Special Repo Owner Thanks To Digital Botz 🥲
 
 ## Last Updated
 - `03-02-2024 08:45:30 PM`
