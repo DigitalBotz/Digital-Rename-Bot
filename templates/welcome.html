@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Botz ™- Bot Status</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: 'Orbitron', 'Courier New', monospace;
+            background: #0a0a16;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Background effects */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .grid-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .glow-effect {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+            top: 20%;
+            left: 10%;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .glow-effect-2 {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 0, 128, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+            bottom: 10%;
+            right: 10%;
+            animation: float 12s infinite ease-in-out reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(20px, 30px) rotate(5deg); }
+            50% { transform: translate(-15px, 20px) rotate(-5deg); }
+            75% { transform: translate(10px, -15px) rotate(3deg); }
+        }
+
+        /* Loading Animation Styles */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a16;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        .loading-logo {
+            font-size: 3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            background: linear-gradient(90deg, #00ffff, #ff00ff, #ffff00, #00ff00);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 4s ease infinite;
+            margin-bottom: 2rem;
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(0, 255, 255, 0.3);
+            border-top: 3px solid #00ffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+        
+        .loading-text {
+            color: #00ffff;
+            font-size: 1rem;
+            letter-spacing: 2px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Main container */
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Logo and branding */
+        .logo-container {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 4.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            background: linear-gradient(90deg, #00ffff, #ff00ff, #ffff00, #00ff00);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 4s ease infinite, glitch 2s infinite;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: #00ffff;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 300;
+            margin-top: 0.5rem;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+        }
+
+        /* Status panels container */
+        .panels-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            width: 100%;
+            max-width: 1200px;
+            margin: 2rem 0;
+        }
+
+        /* Status panel */
+        .status-panel {
+            background: rgba(10, 15, 30, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .status-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #00ffff, #ff00ff, #ffff00);
+            animation: gradientShift 3s ease infinite;
+        }
+
+        .status-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .status-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ffffff;
+        }
+
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            background: rgba(0, 255, 0, 0.2);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 255, 0, 0.5);
+        }
+
+        .pulse {
+            width: 12px;
+            height: 12px;
+            background: #00ff00;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 10px #00ff00;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.9); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+            100% { transform: scale(0.9); opacity: 1; }
+        }
+
+        .status-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .status-item {
+            background: rgba(0, 20, 40, 0.5);
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 3px solid #00ffff;
+        }
+
+        .status-label {
+            font-size: 0.9rem;
+            color: #88ffff;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .status-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .status-uptime {
+            background: rgba(0, 20, 40, 0.5);
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 3px solid #ff00ff;
+            margin-top: 1rem;
+        }
+
+        /* System stats */
+        .system-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .system-item {
+            background: rgba(0, 20, 40, 0.5);
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 3px solid #ffff00;
+        }
+
+        /* Progress bars */
+        .progress-container {
+            margin-top: 0.5rem;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .cpu-progress {
+            background: linear-gradient(90deg, #ff00ff, #ff5500);
+        }
+
+        .ram-progress {
+            background: linear-gradient(90deg, #00ffff, #00ff00);
+        }
+
+        .disk-progress {
+            background: linear-gradient(90deg, #ffff00, #ffaa00);
+        }
+
+        /* Action buttons */
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.9rem 1.8rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 50px;
+            background: linear-gradient(90deg, #6a11cb, #2575fc);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 1px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-telegram {
+            background: linear-gradient(90deg, #0088cc, #34b7f1);
+        }
+
+        .btn-github {
+            background: linear-gradient(90deg, #333, #6e5494);
+        }
+
+        .btn i {
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+
+        /* Animations */
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes glitch {
+            0% {
+                text-shadow: 2px 2px 0px #ff00ff, -2px -2px 0px #00ffff;
+            }
+            25% {
+                text-shadow: -2px -2px 0px #ff00ff, 2px 2px 0px #00ffff;
+            }
+            50% {
+                text-shadow: 2px -2px 0px #ff00ff, -2px 2px 0px #00ffff;
+            }
+            75% {
+                text-shadow: -2px 2px 0px #ff00ff, 2px -2px 0px #00ffff;
+            }
+            100% {
+                text-shadow: 2px 2px 0px #ff00ff, -2px -2px 0px #00ffff;
+            }
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 3rem;
+            text-align: center;
+            color: #88ffff;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .footer a {
+            color: #ff00ff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: #ffff00;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 3.5rem;
+            }
+            
+            .status-details, .system-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 2.5rem;
+                letter-spacing: 3px;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            .status-panel {
+                padding: 1.5rem;
+            }
+            
+            .status-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-logo">Digital Botz ™</div>
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Initializing Status Dashboard...</div>
+    </div>
+
+    <!-- Background effects -->
+    <div class="background">
+        <div class="grid-lines"></div>
+        <div class="glow-effect"></div>
+        <div class="glow-effect-2"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="logo-container">
+            <div class="logo">Digital Botz ™</div>
+            <div class="tagline">Advanced Automation Solutions</div>
+        </div>
+
+        <div class="panels-container">
+            <!-- Bot Status Panel -->
+            <div class="status-panel">
+                <div class="status-header">
+                    <div class="status-title">Bot Status</div>
+                    <div class="live-indicator">
+                        <div class="pulse"></div>
+                        <span>LIVE</span>
+                    </div>
+                </div>
+                
+                <div class="status-details">
+                    <div class="status-item">
+                        <div class="status-label">Status</div>
+                        <div class="status-value">{{bot_status}}</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-label">Version</div>
+                        <div class="status-value">{{bot_version}}</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-label">Users</div>
+                        <div class="status-value">{{total_users}}</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-label">Premium Users</div>
+                        <div class="status-value">{{premium_users}}</div>
+                    </div>
+                </div>
+                
+                <div class="status-uptime">
+                    <div class="status-label">Uptime</div>
+                    <div class="status-value">{{bot_uptime}}</div>
+                </div>
+            </div>
+
+            <!-- System Status Panel -->
+            <div class="status-panel">
+                <div class="status-header">
+                    <div class="status-title">System Status</div>
+                    <div class="live-indicator">
+                        <div class="pulse"></div>
+                        <span>LIVE</span>
+                    </div>
+                </div>
+                
+                <div class="status-details">
+                    <div class="status-item">
+                        <div class="status-label">Uptime</div>
+                        <div class="status-value">{{system_uptime}}</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-label">CPU Usage</div>
+                        <div class="status-value">{{cpu_usage}}%</div>
+                        <div class="progress-container">
+                            <div class="progress-bar cpu-progress" style="width: {{cpu_usage}}%"></div>
+                        </div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-label">RAM Usage</div>
+                        <div class="status-value">{{ram_usage}}%</div>
+                        <div class="progress-container">
+                            <div class="progress-bar ram-progress" style="width: {{ram_usage}}%"></div>
+                        </div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-label">Disk Usage</div>
+                        <div class="status-value">{{disk_usage}}%</div>
+                        <div class="progress-container">
+                            <div class="progress-bar disk-progress" style="width: {{disk_usage}}%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="system-stats">
+                    <div class="system-item">
+                        <div class="status-label">Total Disk</div>
+                        <div class="status-value">{{total_disk}}</div>
+                    </div>
+                    <div class="system-item">
+                        <div class="status-label">Used Disk</div>
+                        <div class="status-value">{{used_disk}}</div>
+                    </div>
+                    <div class="system-item">
+                        <div class="status-label">Free Disk</div>
+                        <div class="status-value">{{free_disk}}</div>
+                    </div>
+                    <div class="system-item">
+                        <div class="status-label">Data Sent</div>
+                        <div class="status-value">{{system_sent}}</div>
+                    </div>
+                    <div class="system-item">
+                        <div class="status-label">Data Received</div>
+                        <div class="status-value">{{system_recv}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="actions">
+            <a href="https://t.me/Digital_Botz" class="btn btn-telegram">
+                <i class="fab fa-telegram-plane"></i> Join Telegram
+            </a>
+            <a href="https://github.com/RknDeveloper" class="btn btn-github">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+        </div>
+
+        <div class="footer">
+            <p>© 2023 RknDeveloper | Powered by <a href="https://t.me/Digital_Botz">Digital Botz™</a> | Repo: <a href="https://github.com/DigitalBotz/Digital-Rename-Bot">Digital-Rename-Bot</a></p>
+            <p>Special Thanks To <a href="https://t.me/Shivshankar_Official">Shivshankar Official</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Hide loading screen after page load
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loadingScreen').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loadingScreen').style.display = 'none';
+                }, 500);
+            }, 1000);
+        });
+
+        // Auto refresh REMOVED as requested
+    </script>
+</body>
+</html>
