@@ -35,21 +35,17 @@ import logging
 import logging.config
 import glob, sys
 import importlib.util
-import pyromod
 from pathlib import Path
 
 # pyrogram imports
-import pyrogram.utils
 from pyrogram import Client, __version__, errors
 from pyrogram.raw.all import layer
+from pyrogram import idle
 
 # bots imports
 from config import Config
 from plugins.web_support import web_server
 from plugins.file_rename import app
-
-
-pyrogram.utils.MIN_CHANNEL_ID = -1009999999999
 
 # Get logging configurations
 logging.basicConfig(
@@ -80,7 +76,7 @@ class DigitalRenameBot(Client):
         self.uptime = Config.BOT_UPTIME
         self.premium = Config.PREMIUM_MODE
         self.uploadlimit = Config.UPLOAD_LIMIT_MODE
-       # self.log = logger
+        Config.BOT = self
         
         app = aiohttp.web.AppRunner(await web_server())
         await app.setup()
@@ -102,6 +98,7 @@ class DigitalRenameBot(Client):
                 print("Digital Botz Imported " + plugin_name)
                 
         print(f"{me.first_name} Iꜱ Sᴛᴀʀᴛᴇᴅ.....✨️")
+
         
         for id in Config.ADMIN:
             if Config.STRING_SESSION:
@@ -124,22 +121,36 @@ class DigitalRenameBot(Client):
         for id in Config.ADMIN:
             try: await self.send_message(id, f"**Bot Stopped....**")                                
             except: pass
+                
         print("Bot Stopped 🙄")
         await super().stop()
-        
 
-bot_instance = DigitalRenameBot()
+
+digital_instance = DigitalRenameBot()
 
 def main():
     async def start_services():
         if Config.STRING_SESSION:
-            await asyncio.gather(app.start(), bot_instance.start())
+            await asyncio.gather(app.start(), digital_instance.start())
         else:
-            await asyncio.gather(bot_instance.start())
+            await asyncio.gather(digital_instance.start())
+        
+        # Idle mode start karo
+        await idle()
+        
+        # Bot stop karo
+        if Config.STRING_SESSION:
+            await asyncio.gather(app.stop(), digital_instance.stop())
+        else:
+            await asyncio.gather(digital_instance.stop())
 
     loop = asyncio.get_event_loop()
-    loop.run_until_complete(start_services())
-    loop.run_forever()
+    try:
+        loop.run_until_complete(start_services())
+    except KeyboardInterrupt:
+        print("\n🛑 Bot stopped by user!")
+    finally:
+        loop.close()
 
 if __name__ == "__main__":
     warnings.filterwarnings("ignore", message="There is no current event loop")
@@ -148,9 +159,10 @@ if __name__ == "__main__":
     except errors.FloodWait as ft:
         print(f"⏳ FloodWait: Sleeping for {ft.value} seconds")
         asyncio.run(asyncio.sleep(ft.value))
-        print("Now Ready For Deploying !")
+        print("Now Ready For Deploying!")
         main()
-    
+        
+
 # Rkn Developer 
 # Don't Remove Credit 😔
 # Telegram Channel @RknDeveloper & @Rkn_Botz
