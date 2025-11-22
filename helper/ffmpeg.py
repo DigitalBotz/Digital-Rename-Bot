@@ -1,8 +1,8 @@
 import os, time, asyncio, subprocess, json
 from helper.utils import metadata_text
 
-def change_metadata(input_file, output_file, metadata):
-    author, title, video_title, audio_title, subtitle_title = metadata_text(metadata)
+async def change_metadata(input_file, output_file, metadata):
+    author, title, video_title, audio_title, subtitle_title = await metadata_text(metadata)
     
     # Get the video metadata
     output = subprocess.check_output(['ffprobe', '-v', 'error', '-show_streams', '-print_format', 'json', input_file])
