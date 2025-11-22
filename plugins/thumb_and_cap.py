@@ -1,7 +1,7 @@
 # (c) @RknDeveloperr
 # Rkn Developer 
 # Don't Remove Credit 😔
-# Telegram Channel @RknDeveloper & @Rkn_Botz
+# Telegram Channel @RknDeveloper & @Rkn_Botz & @Rkn_Bots_Updates
 # Developer @RknDeveloperr
 # Special Thanks To @ReshamOwner
 # Update Channel @Digital_Botz & @DigitalBotz_Support
@@ -37,7 +37,7 @@ from helper.database import digital_botz
 async def add_caption(client, message):
     rkn = await message.reply_text("__**ᴘʟᴇᴀsᴇ ᴡᴀɪᴛ**__")
     if len(message.command) == 1:
-       return await rkn.edit("**__Gɪᴠᴇ Tʜᴇ Cᴀᴩᴛɪᴏɴ__\n\nExᴀᴍᴩʟᴇ:- `/set_caption {filename}\n\n💾 Sɪᴢᴇ: {filesize}\n\n⏰ Dᴜʀᴀᴛɪᴏɴ: {duration}`**")
+       return await rkn.edit("**__Gɪᴠᴇ Tʜᴇ Cᴀᴩᴛɪᴏɴ__\n\nExᴀᴍᴩʟᴇ:- `/set_caption {filename}\n\n💾 Sɪᴢᴇ: {filesize}\n\n⏰ Dᴜʀᴀᴛɪᴏɴ: {duration}\n\bBy: @Rkn_Bots_Updates`**")
     caption = message.text.split(" ", 1)[1]
     await digital_botz.set_caption(message.from_user.id, caption=caption)
     await rkn.edit("__**✅ Cᴀᴩᴛɪᴏɴ Sᴀᴠᴇᴅ**__")
