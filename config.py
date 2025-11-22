@@ -37,6 +37,7 @@ class Config(object):
     API_ID = os.environ.get("API_ID", "")
     API_HASH = os.environ.get("API_HASH", "")
     BOT_TOKEN = os.environ.get("BOT_TOKEN", "") 
+    BOT = None
 
     # premium account string session required 😢 
     STRING_SESSION = os.environ.get("STRING_SESSION", "")
@@ -220,13 +221,15 @@ Exᴀᴍᴩʟᴇ:- `/set_prefix @Digital_Botz`
 📥 Fᴏʀ Hᴇʟᴘ Cᴏɴᴛ. @Digital_Botz
 """
     
-    RKN_PROGRESS = """<b>\n
-╭━━━━❰RKN PROCESSING...❱━➣
-┣⪼ 🗃️ ꜱɪᴢᴇ: {1} | {2}
-┣⪼ ⏳️ ᴅᴏɴᴇ : {0}%
-┣⪼ 🚀 ꜱᴩᴇᴇᴅ: {3}/s
-┣⪼ ⏰️ ᴇᴛᴀ: {4}
-╰━━━━━━━━━━━━━━━➣ </b>"""
+    RKN_PROGRESS = """<b>
+╭━━━━━━━━◉🚀◉━━━━━━━━╮
+┃   𝗥𝗞𝗡 𝗣𝗥𝗢𝗖𝗘𝗦𝗦𝗜𝗡𝗚...❱━➣  
+┣━━━━━━━━━━━━━━━━━━━━╯
+┣⪼ 📦 𝗦𝗜𝗭𝗘: {1} | {2}
+┣⪼ 📊 𝗗𝗢𝗡𝗘: {0}%
+┣⪼ 🚀 𝗦𝗣𝗘𝗘𝗗: {3}/s
+┣⪼ ⏰ 𝗘𝗧𝗔: {4}
+╰━━━━━━━━◉🔥◉━━━━━━━━╯</b>"""
 
 # Rkn Developer 
 # Don't Remove Credit 😔
