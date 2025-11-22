@@ -143,24 +143,33 @@ class Database:
   
     async def set_reset_dailylimit(self, id, date):
         await self.col.update_one({'_id': int(id)}, {'$set': {'daily': date}})
-
+        
     async def reset_uploadlimit_access(self, user_id):
-        seconds = 1440*60
-        date = datetime.datetime.now() + datetime.timedelta(seconds=seconds)
+        seconds = 1440 * 60
+        reset_date = datetime.datetime.now() + datetime.timedelta(seconds=seconds)
+        zero_usage = 0
+        
         user_data = await self.get_user_data(user_id)
         if user_data:
             expiry_time = user_data.get("daily")
-            n_date = 0
-            if expiry_time is n_date:
-                await self.col.update_one({'_id': int(user_id)}, {'$set': {'daily': date}})
-                await self.col.update_one({'_id': int(user_id)}, {'$set': {'used_limit': n_date}})
-            elif isinstance(expiry_time, datetime.datetime) and datetime.datetime.now() <= expiry_time:
-                xd = user_data.get("daily")
-            else:
-                await self.col.update_one({'_id': int(user_id)}, {'$set': {'daily': date}})
-                await self.col.update_one({'_id': int(user_id)}, {'$set': {'used_limit': n_date}})
-        
-        
+            current_time = datetime.datetime.now()
+            
+            needs_reset = (
+                expiry_time is None or
+                expiry_time == 0 or
+                not isinstance(expiry_time, datetime.datetime) or
+                current_time > expiry_time
+            )
+            
+            if needs_reset:
+                await self.col.update_one(
+                    {'_id': user_id}, 
+                    {'$set': {
+                        'daily': reset_date,
+                        'used_limit': zero_usage
+                    }}
+                )
+                        
     async def get_user_data(self, id) -> dict:
         user_data = await self.col.find_one({'_id': int(id)})
         return user_data or None
@@ -168,19 +177,41 @@ class Database:
     async def get_user(self, user_id):
         user_data = await self.premium.find_one({"id": user_id})
         return user_data
+
+    async def add_premium(self, user_id, user_data, limit=None, type=None):    
+        await self.premium.update_one(
+            {"id": user_id}, 
+            {"$set": user_data}, 
+            upsert=True
+        )
         
-    async def addpremium(self, user_id, user_data, limit=None, type=None):    
-        await self.premium.update_one({"id": user_id}, {"$set": user_data}, upsert=True)
-        if limit and type and Config.UPLOAD_LIMIT_MODE:
-            await self.col.update_one({'_id': user_id}, {'$set': {'usertype': type}})
-            await self.col.update_one({'_id': user_id}, {'$set': {'uploadlimit': limit}})
-        
-    async def remove_premium(self, user_id, limit=Config.FREE_UPLOAD_LIMIT, type="Free"):
-        await self.premium.update_one({"id": user_id}, {"$set": {"expiry_time": None}})
-        if limit and type and Config.UPLOAD_LIMIT_MODE:
-            await self.col.update_one({'_id': user_id}, {'$set': {'usertype': type}})
-            await self.col.update_one({'_id': user_id}, {'$set': {'uploadlimit': limit}})
+        if Config.UPLOAD_LIMIT_MODE and limit and type:
+            await self.col.update_one(
+                {'_id': user_id}, 
+                {'$set': {
+                    'usertype': type,
+                    'uploadlimit': limit
+                }}
+            )
     
+    async def remove_premium(self, user_id, limit=Config.FREE_UPLOAD_LIMIT, type="Free"):
+        await self.premium.update_one(
+            {"id": user_id}, 
+            {"$set": {
+                "expiry_time": None,
+                "has_free_trial": False
+            }}
+        )
+        
+        if Config.UPLOAD_LIMIT_MODE and limit and type:
+            await self.col.update_one(
+                {'_id': user_id}, 
+                {'$set': {
+                    'usertype': user_type,
+                    'uploadlimit': limit
+                }}
+            )
+          
     async def checking_remaining_time(self, user_id):
         user_data = await self.get_user(user_id)
         expiry_time = user_data.get("expiry_time")
@@ -214,17 +245,22 @@ class Database:
             return user_data.get("has_free_trial", False)
         return False
 
-    async def give_free_trail(self, user_id):
-        seconds = 720*60
+    async def give_free_trial(self, user_id):
+        seconds = 720 * 60
         expiry_time = datetime.datetime.now() + datetime.timedelta(seconds=seconds)
-        user_data = {"id": user_id, "expiry_time": expiry_time, "has_free_trial": True}
+        user_data = {
+            "id": user_id, 
+            "expiry_time": expiry_time, 
+            "has_free_trial": True
+        }
         
         if Config.UPLOAD_LIMIT_MODE:
-            type, limit = "Trial", 536870912000 # calculation 500*1024*1024*1024=results        
-            await self.addpremium(user_id, user_data, limit, type)
+            limit_type = "Trial"
+            upload_limit = 536870912000
+            await self.add_premium(user_id, user_data, upload_limit, limit_type)
         else:
-            await self.addpremium(user_id, user_data)
-            
+            await self.add_premium(user_id, user_data)
+                    
     async def remove_ban(self, id):
         ban_status = dict(
             is_banned=False,
