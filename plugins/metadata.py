@@ -32,10 +32,10 @@ License Link : https://github.com/DigitalBotz/Digital-Rename-Bot/blob/main/LICEN
 # pyrogram imports
 from pyrogram import Client, filters
 from pyrogram.types import Message, CallbackQuery, InlineKeyboardButton, InlineKeyboardMarkup
+from pyrogram.errors import ListenerTimeout
 
 # extra imports
 from helper.database import digital_botz
-from pyromod.exceptions import ListenerTimeout
 from config import rkn
 
 TRUE = [[InlineKeyboardButton('ᴍᴇᴛᴀᴅᴀᴛᴀ ᴏɴ', callback_data='metadata_1'),
