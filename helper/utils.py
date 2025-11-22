@@ -154,7 +154,7 @@ async def get_seconds(time_string):
 
     return total_seconds
 
-def add_prefix_suffix(input_string, prefix='', suffix=''):
+async def add_prefix_suffix(input_string, prefix='', suffix=''):
     pattern = r'(?P<filename>.*?)(\.\w+)?$'
     match = re.search(pattern, input_string)
     
@@ -174,7 +174,7 @@ async def remove_path(*paths):
         if path and os.path.lexists(path):
             os.remove(path)
 
-def metadata_text(metadata_text):
+async def metadata_text(metadata_text):
     author = None
     title = None
     video_title = None
