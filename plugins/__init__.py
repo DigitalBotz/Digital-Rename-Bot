@@ -26,7 +26,7 @@ License Link : https://github.com/DigitalBotz/Digital-Rename-Bot/blob/main/LICEN
 """
 
 __name__ = "Digital-Rename-Bot"
-__version__ = "3.0.8"
+__version__ = "3.0.9"
 __license__ = " Apache License, Version 2.0"
 __copyright__ = "Copyright (C) 2022-present Digital Botz <https://github.com/DigitalBotz>"
 __programer__ = "<a href=https://github.com/DigitalBotz/Digital-Rename-Bot>Digital Botz</a>"
@@ -61,3 +61,14 @@ __maindeveloper__ = "<a href=https://t.me/RknDeveloper>RknDeveloper</a>"
 # - Dockerfile
 # - requirements.txt
 # - runtime.txt
+
+from plugins.force_sub import not_subscribed, forces_sub, handle_banned_user_status
+from pyrogram import Client, filters
+
+@Client.on_message(filters.private)
+async def _(bot, message):
+    await handle_banned_user_status(bot, message)
+    
+@Client.on_message(filters.private & filters.create(not_subscribed))
+async def forces_sub_handler(client, message):
+    await forces_sub(bot, message)
