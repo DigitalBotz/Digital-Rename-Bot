@@ -70,5 +70,5 @@ async def _(bot, message):
     await handle_banned_user_status(bot, message)
     
 @Client.on_message(filters.private & filters.create(not_subscribed))
-async def forces_sub_handler(client, message):
+async def forces_sub_handler(bot, message):
     await forces_sub(bot, message)
