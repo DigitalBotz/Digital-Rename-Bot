@@ -54,7 +54,7 @@ logging.basicConfig(
              logging.StreamHandler()]
 )
 #logger = logging.getLogger(__name__)
-logging.getLogger("pyrogram").setLevel(logging.WARNING)
+logging.getLogger("pyrofork").setLevel(logging.WARNING)
 
 class DigitalRenameBot(Client):
     def __init__(self):
@@ -65,7 +65,9 @@ class DigitalRenameBot(Client):
             bot_token=Config.BOT_TOKEN,
             workers=200,
             plugins={"root": "plugins"},
-            sleep_threshold=15)
+            sleep_threshold=5,
+            max_concurrent_transmissions=50
+        )
                 
          
     async def start(self):
