@@ -138,11 +138,11 @@ async def refunc(client, message):
             new_name = new_name + "." + extn
         await reply_message.delete()
 
-        button = [[InlineKeyboardButton("📁 Dᴏᴄᴜᴍᴇɴᴛ",callback_data = "upload_document")]]
+        button = [[InlineKeyboardButton("📁 Dᴏᴄᴜᴍᴇɴᴛ",callback_data = "upload#document")]]
         if file.media in [MessageMediaType.VIDEO, MessageMediaType.DOCUMENT]:
-            button.append([InlineKeyboardButton("🎥 Vɪᴅᴇᴏ", callback_data = "upload_video")])
+            button.append([InlineKeyboardButton("🎥 Vɪᴅᴇᴏ", callback_data = "upload#video")])
         elif file.media == MessageMediaType.AUDIO:
-            button.append([InlineKeyboardButton("🎵 Aᴜᴅɪᴏ", callback_data = "upload_audio")])
+            button.append([InlineKeyboardButton("🎵 Aᴜᴅɪᴏ", callback_data = "upload#audio")])
         await message.reply(
             text=f"**Sᴇʟᴇᴄᴛ Tʜᴇ Oᴜᴛᴩᴜᴛ Fɪʟᴇ Tyᴩᴇ**\n**• Fɪʟᴇ Nᴀᴍᴇ :-**`{new_name}`",
             reply_to_message_id=file.id,
@@ -203,8 +203,8 @@ async def upload_files(bot, sender_id, upload_type, file_path, ph_path, caption,
         return None, str(e)
 
 
-@Client.on_callback_query(filters.regex("upload"))
-async def doc(bot, update):
+#@Client.on_callback_query(filters.regex("upload"))
+async def upload_doc(bot, update):
     rkn_processing = await update.message.edit("`Processing...`")
     
     # Creating Directory for Metadata
@@ -309,7 +309,7 @@ async def doc(bot, update):
              print(f"Error processing thumbnail: {e}")
              ph_path = None
 
-    upload_type = update.data.split("_")[1]
+    upload_type = update.data.split("#")[1]
     
     # Use the correct file path based on metadata mode
     final_file_path = metadata_path if metadata_mode and os.path.exists(metadata_path) else file_path
