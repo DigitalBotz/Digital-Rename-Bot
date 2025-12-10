@@ -1,4 +1,4 @@
-pyrofork==2.3.68
+pyrofork==2.3.69.dev1
 TgCrypto-pyrofork==1.2.8
 motor==3.7.1
 dnspython==2.8.0
