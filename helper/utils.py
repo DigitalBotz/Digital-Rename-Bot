@@ -31,45 +31,69 @@ License Link : https://github.com/DigitalBotz/Digital-Rename-Bot/blob/main/LICEN
 """
 
 # extra imports
-import math, time, re, datetime, pytz, os
+import math, time, re, datetime, pytz, os, asyncio
 from config import Config, rkn 
 
 # pyrogram imports
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
+_progress_last_update = {}
+_progress_locks = {}
+_PROGRESS_UPDATE_INTERVAL = 3.0
+
+
 async def progress_for_pyrogram(current, total, ud_type, message, start):
-    now = time.time()
-    diff = now - start
-    if round(diff % 5.00) == 0 or current == total:
-        if total <= 0:
+    """Update a Telegram progress message without flooding Telegram.
+
+    Pyrogram can call this callback many times per second.  The old modulo
+    based check could update repeatedly in the same second, divide by zero,
+    and create negative/overlong progress bars.  Updates are now throttled
+    per message and the final update is always sent.
+    """
+    now = time.monotonic()
+    key = (getattr(message, "chat", None).id if getattr(message, "chat", None) else 0,
+           getattr(message, "id", id(message)))
+    current = max(0, int(current or 0))
+    total = max(0, int(total or 0))
+    is_complete = total > 0 and current >= total
+
+    lock = _progress_locks.setdefault(key, asyncio.Lock())
+    async with lock:
+        last_update = _progress_last_update.get(key, 0.0)
+        if not is_complete and now - last_update < _PROGRESS_UPDATE_INTERVAL:
             return
-        percentage = current * 100 / total
-        speed = current / max(diff, 0.001)
-        elapsed_time = round(diff) * 1000
-        time_to_completion = round((total - current) / speed) * 1000
-        estimated_total_time = elapsed_time + time_to_completion
+        _progress_last_update[key] = now
 
-        elapsed_time = TimeFormatter(milliseconds=elapsed_time)
-        estimated_total_time = TimeFormatter(milliseconds=estimated_total_time)
-
-        progress = "{0}{1}".format(
-            ''.join(["▣" for i in range(math.floor(percentage / 5))]),
-            ''.join(["▢" for i in range(20 - math.floor(percentage / 5))])
-        )            
-        tmp = progress + rkn.RKN_PROGRESS.format( 
-            round(percentage, 2),
-            humanbytes(current),
-            humanbytes(total),
-            humanbytes(speed),            
-            estimated_total_time if estimated_total_time != '' else "0 s"
-        )
         try:
-            await message.edit(
-                text=f"{ud_type}\n\n{tmp}",               
-                reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("✖️ 𝙲𝙰𝙽𝙲𝙴𝙻 ✖️", callback_data="close")]])                                               
+            # Call sites pass time.time(), so use the same clock here.
+            elapsed = max(time.time() - start, 0.001)
+            speed = current / elapsed
+            percentage = min(100.0, (current * 100.0 / total)) if total else 0.0
+            filled = min(20, max(0, int(percentage / 5)))
+            progress = "▣" * filled + "▢" * (20 - filled)
+            remaining = max(0, total - current)
+            eta = TimeFormatter(milliseconds=(remaining / speed) * 1000) if speed else "0 s"
+            tmp = progress + rkn.RKN_PROGRESS.format(
+                round(percentage, 2),
+                humanbytes(current),
+                humanbytes(total),
+                humanbytes(speed),
+                eta or "0 s",
             )
-        except:
+            await message.edit(
+                text=f"{ud_type}\n\n{tmp}",
+                reply_markup=InlineKeyboardMarkup([[
+                    InlineKeyboardButton("✖️ 𝙲𝙰𝙽𝙲𝙴𝙻 ✖️", callback_data="close")
+                ]]),
+            )
+        except Exception:
+            # Telegram may return MessageNotModified/FloodWait while a file
+            # transfer is finishing; never break the actual transfer for UI.
             pass
+        finally:
+            if is_complete:
+                _progress_last_update.pop(key, None)
+                _progress_locks.pop(key, None)
 
 def humanbytes(size):    
     if size is None:

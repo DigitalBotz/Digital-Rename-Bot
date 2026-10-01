@@ -36,6 +36,8 @@ import psutil
 import shutil
 import os
 import base64
+from datetime import datetime
+from zoneinfo import ZoneInfo
 from config import Config
 from plugins import __version__
 from helper.utils import humanbytes
@@ -112,6 +114,10 @@ async def root_route_handler(request):
     
     # Add current timestamp for cache busting
     html_content = html_content.replace('{{timestamp}}', str(int(time.time())))
+    html_content = html_content.replace(
+        '{{updated_at}}',
+        datetime.now(ZoneInfo('Asia/Kathmandu')).strftime('%d %b %Y, %I:%M:%S %p NPT'),
+    )
     
     return web.Response(text=html_content, content_type='text/html')
 

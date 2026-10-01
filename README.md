@@ -1,127 +1,163 @@
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
-
-![Typing SVG](https://readme-typing-svg.herokuapp.com/?lines=𝗪𝗘𝗟𝗖𝗢𝗠+𝗧𝗢+𝗗𝗜𝗚𝗜𝗧𝗔𝗟+𝗥𝗘𝗡𝗔𝗠𝗘+𝗕𝗢𝗧!;𝗖𝗥𝗘𝗔𝗧𝗘𝗗+𝗕𝗬+𝗗𝗜𝗚𝗜𝗧𝗔𝗟+𝗕𝗢𝗧𝗭!;𝗜+𝗔𝗠+𝗣𝗢𝗪𝗘𝗥𝗙𝗨𝗟+𝗧𝗚+𝗥𝗘𝗡𝗔𝗠𝗘+𝗕𝗢𝗧!&color=4169E1)
-
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
-
+# Digital Rename Bot
 
 <p align="center">
-  <img src="https://telegra.ph/file/b746aadfe59959eb76f59.jpg" alt="RKN RENAME BOT V3">
+  <img src="https://telegra.ph/file/b746aadfe59959eb76f59.jpg" alt="Digital Rename Bot" width="220">
 </p>
 
 <p align="center">
-
-![Fork](https://img.shields.io/github/forks/DigitalBotz/Digital-Rename-Bot?style=for-the-badge)
-![Stars](https://img.shields.io/github/stars/DigitalBotz/Digital-Rename-Bot?color=%23&style=for-the-badge)
-![License](https://img.shields.io/github/license/DigitalBotz/Digital-Rename-Bot?style=for-the-badge)
-![Issues](https://img.shields.io/github/issues/DigitalBotz/Digital-Rename-Bot?style=for-the-badge)
-
+  <strong>Fast, reliable Telegram file renaming and metadata bot</strong><br>
+  Rename files, customize captions, add thumbnails, edit metadata, and manage uploads from Telegram.
 </p>
 
+<p align="center">
+  <a href="https://github.com/DigitalBotz/Digital-Rename-Bot"><img src="https://img.shields.io/badge/version-3.1.1-5865F2?style=for-the-badge" alt="Version 3.1.1"></a>
+  <a href="https://github.com/DigitalBotz/Digital-Rename-Bot/blob/main/LICENSE"><img src="https://img.shields.io/github/license/DigitalBotz/Digital-Rename-Bot?style=for-the-badge" alt="License"></a>
+  <a href="https://github.com/DigitalBotz/Digital-Rename-Bot/issues"><img src="https://img.shields.io/github/issues/DigitalBotz/Digital-Rename-Bot?style=for-the-badge" alt="Issues"></a>
+</p>
 
-### Sᴀᴍᴩʟᴇ Bᴏᴛ (Official Digital Rename Bot)
+## What it does
 
-* [Rkn_RenameBot](http://t.me/Rkn_RenameBot)
-* [Digital_Rename_Bot](http://t.me/Digital_Rename_Bot)
+Digital Rename Bot is a Pyrogram-based Telegram bot for quickly renaming documents, videos, and audio files. It also supports thumbnails, custom captions, prefix/suffix rules, FFmpeg metadata editing, force subscription, premium plans, broadcasts, and admin moderation tools.
 
+### Highlights
 
-## Deploy Me 🥀
+- Fast file renaming with document, video, and audio output options.
+- 2 GB support by default and larger-file support with a valid premium string session.
+- Custom filename prefix and suffix.
+- Permanent thumbnails and custom captions with `{filename}`, `{filesize}`, and `{duration}` placeholders.
+- FFmpeg metadata editing for title, author, video, audio, and subtitle streams.
+- Daily upload limits, premium plans, and a 12-hour free trial.
+- Force-subscription, ban/unban, broadcast, logs, and status commands.
+- Responsive web status dashboard.
+- Throttled Pyrogram progress updates to avoid Telegram flood limits.
 
-<details><summary>📌 Deploy to Koyeb </summary>
-  
-[![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/deploy?type=git&repository=github.com/RknDeveloper/Digital-Rename-Bot&env[BOT_TOKEN]&env[API_ID]&env[API_HASH]&env[WEBHOOK]=True&env[ADMIN]&env[DB_URL]&env[DB_NAME]=Rkn-Developer&env[FORCE_SUB]&env[START_PIC]&env[LOG_CHANNEL]=You%20Dont%20Need%20LogChannel%20To%20Remove%20This%20Variable&run_command=python%20bot.py&branch=main&name=rkn-rename) 
-</details>
+## Requirements
 
-<details><summary>📌 Deploy to Render </summary>
-  
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/DigitalBotz/Digital-Rename-Bot)
+- Python **3.11+**
+- Telegram Bot Token from [@BotFather](https://t.me/BotFather)
+- Telegram `API_ID` and `API_HASH` from [my.telegram.org](https://my.telegram.org)
+- MongoDB connection string from [MongoDB Atlas](https://www.mongodb.com/atlas)
+- FFmpeg installed on the host (included in the Docker image)
+- A Telegram premium user string session for files larger than 2 GB
 
-</details>
+## Configuration
 
-<details><summary>📌 Deploy To Railway </summary>
-<a href="https://graph.org/file/fabd75cd5043d2cfdc13d.jpg"><img src="https://railway.app/button.svg" alt="Deploy"></a>
-</details>
+Set these environment variables before starting the bot:
 
-<details><summary>📌 Deploy to Heroku </summary>
+| Variable | Required | Description |
+|---|:---:|---|
+| `BOT_TOKEN` | Yes | Telegram bot token from BotFather |
+| `API_ID` | Yes | Telegram application ID |
+| `API_HASH` | Yes | Telegram application hash |
+| `DB_URL` | Yes | MongoDB connection URI |
+| `DB_NAME` | No | MongoDB database name; default: `Digital_Rename_Bot` |
+| `ADMIN` | No | Space-separated admin user IDs |
+| `FORCE_SUB` | No | Channel username or channel ID for force subscription |
+| `LOG_CHANNEL` | No | Channel ID for logs; leave empty to disable |
+| `STRING_SESSION` | No | Premium user session for 2 GB+ file support |
+| `RKN_PIC` | No | Start-message image URL |
+| `PORT` | No | Web status port; default: `8080` |
 
-<a href="https://heroku.com/deploy?template=https://github.com/DigitalBotz/Digital-Rename-Bot"><img src="https://img.shields.io/badge/Deploy%20To%20Heroku-black?style=for-the-badge&logo=heroku" width="220" height="38.45"></p></a>
-</details>
+> Never commit tokens, API hashes, database credentials, or string sessions to GitHub.
 
-## Rᴇǫᴜɪʀᴇᴅ Cᴏɴғɪɢs
+## Local installation
 
-* `BOT_TOKEN`  - Get Bot Token From @BotFather
-* `API_ID` - From my.telegram.org
-* `API_HASH` - From my.telegram.org
-* `ADMIN` - AUTH Or Bot Controllers Id's Multiple Id Use Space To Split 
-* `DB_URL`  - Mongo Database URL From https://cloud.mongodb.com
-* `DB_NAME`  - Your Database Name From Mongodb.
-* `FORCE_SUB` - Your Force Sub Channel Username Without @
-* `LOG_CHANNEL` - Bot Logs Sending Channel. If You Don't Need This To Remove This Variable In Your Server
-* `STRING_SESSION` - Your Tg Premium Account String Session Required. `[Note :- If you remove the string session, 4GB files doesn't works on the bot.]`
-
-## 🥰 Features
-
-* Renames very fast .
-* Permanent Thumbnail support.
-* Force join for the user for use.
-* Supports Broadcasts.
-* Custom File Name Support...[Prefix_&_Suffix]
-* Set custom caption.
-* Has a custom Start-up pic.
-* Force subscribe available.
-* Supports ulimited renaming at a time.
-* Custom Metadata Support.
-* Admin Command Available.
-* premium subscription available.
-* premium trial available.
-* handle ban/unban members using command.
-* Deploy to Koyeb + Heroku + Railway + Render.
-* Developer Service 24x7. 🔥
-
-
-## Botfather Commands
-```
-start - 𝖈ʜᴇᴄᴋ 𝖎 𝖆ᴍ ʟɪᴠᴇ.
-plans - ᴜᴘɢʀᴀᴅᴇ ᴛᴏ ᴘʀᴇᴍɪᴜᴍ ᴘʟᴀɴ.
-myplan - ᴄʜᴇᴄᴋ ʏᴏᴜʀ ᴘʀᴇᴍɪᴜᴍ ᴘʟᴀɴ ʜᴇʀᴇ.
-view_thumb - 𝖙ᴏ 𝖘ᴇᴇ 𝖞ᴏᴜʀ 𝖈ᴜ𝖘ᴛᴏᴍ 𝖙ʜᴜᴍʙɴᴀɪʟ !!
-del_thumb - 𝖙ᴏ 𝖉ᴇʟᴇᴛᴇ 𝖞ᴏᴜʀ 𝖈ᴜ𝖘ᴛᴏᴍ 𝖙ʜᴜᴍʙɴᴀɪʟ !!
-set_caption - Sᴇᴛ A Cᴜsᴛᴏᴍ Cᴀᴘᴛɪᴏɴ !!
-see_caption - Sᴇᴇ Yᴏᴜʀ Cᴜsᴛᴏᴍ Cᴀᴘᴛɪᴏɴ !!
-del_caption - Dᴇʟᴇᴛᴇ Cᴜsᴛᴏᴍ Cᴀᴘᴛɪᴏɴ !!
-metadata - Tᴏ Sᴇᴛ & Cʜᴀɴɢᴇ ʏᴏᴜʀ ᴍᴇᴛᴀᴅᴀᴛᴀ ᴄᴏᴅᴇ
-set_prefix - Tᴏ Sᴇᴛ Yᴏᴜʀ Pʀᴇғɪx !!
-see_prefix - Tᴏ Sᴇᴇ Yᴏᴜʀ Pʀᴇғɪx !!
-del_prefix - Dᴇʟᴇᴛᴇ Yᴏᴜʀ Pʀᴇғɪx !!
-set_suffix - Tᴏ Sᴇᴛ Yᴏᴜʀ Sᴜғғɪx !!
-see_suffix - Tᴏ Sᴇᴇ Yᴏᴜʀ Sᴜғғɪx !!
-del_suffix - Dᴇʟᴇᴛᴇ Yᴏᴜʀ Sᴜғғɪx !!
-restart - ᴛᴏ ʀᴇsᴛᴀʀᴛ ᴛʜᴇ ʙᴏᴛ ᴀɴᴅ sᴇɴᴅ ᴍᴇssᴀɢᴇ ᴀʟʟ ᴅʙ ᴜsᴇʀs (Aᴅᴍɪɴ Oɴʟʏ)
-addpremium - ᴀᴅᴅ ᴘʀᴇᴍɪᴜᴍ (Aᴅᴍɪɴ Oɴʟʏ)
-remove_premium - ʀᴇᴍᴏᴠᴇ ᴘʀᴇᴍɪᴜᴍ (Aᴅᴍɪɴ Oɴʟʏ)
-ban - ban members using command (admin only)
-unban - unban members using command (admin only)
-banned_users - check bot all ban users using command (admin only)
-logs - ᴄʜᴇᴄᴋ ʙᴏᴛ ʟᴏɢs (Aᴅᴍɪɴ Oɴʟʏ)
-status - Cʜᴇᴄᴋ Bᴏᴛ Sᴛᴀᴛᴜs (Aᴅᴍɪɴ Oɴʟʏ)
-broadcast - Sᴇɴᴅ Mᴇssᴀɢᴇ Tᴏ Aʟʟ Usᴇʀs (Aᴅᴍɪɴ Oɴʟʏ)
+```bash
+git clone https://github.com/DigitalBotz/Digital-Rename-Bot.git
+cd Digital-Rename-Bot
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python bot.py
 ```
 
-## Note:
+For Docker:
 
-- Please, Just Fork The Repo And Edit As Per Your Needs. # Don't Remove My Credit.
-- ᴅᴏ ɴᴏᴛ ʀᴇᴍᴏᴠᴇ ᴄʀᴇᴅɪᴛs ɢɪᴠᴇɴ ɪɴ ᴛʜɪs ʀᴇᴘᴏ.
-- Importing this repo instead of forking is strictly prohibited, Kindly fork and edit as your wish. Must Give Credits for developer(s)
-- If you find any bugs or errors, [report](https://t.me/DigitalBotz_Support) it
+```bash
+docker build -t digital-rename-bot .
+docker run --env-file .env -p 8080:8080 digital-rename-bot
+```
 
-## ❣️ Special Thanks 👍
+The web dashboard is available at `http://localhost:8080` when the bot is running.
 
-- Thanks To RknDeveloper For His Awesome [File-Rename-Bot](https://github.com/RknDeveloper/File-Rename-Bot.git)
-- Thanks To [RknDeveloper](https://github.com/RknDeveloper) who have edited and modified this repo as now it is. (It's me 😂)
-- Thanks To [JayMahakal](https://github.com/JayMahakal98) who have edited and modified this repo as now it is.
-- Thanks To Rkn Developer Teams ✅ (Edit & New Feature Added)
-- Special Repo Owner Thanks To [Digital Botz](https://github.com/DigitalBotz) 🥲
+## Bot commands
 
-## Last Updated
-- `22-11-2025 12:15:30 AM`
-- 
+### User commands
+
+| Command | Purpose |
+|---|---|
+| `/start` | Start the bot |
+| `/plans` | View premium plans |
+| `/myplan` | View current plan and upload usage |
+| `/set_caption` | Set a custom output caption |
+| `/see_caption` | View the current caption |
+| `/del_caption` | Delete the custom caption |
+| `/view_thumb` | View the saved thumbnail |
+| `/del_thumb` | Delete the saved thumbnail |
+| `/metadata` | Enable/disable and configure metadata editing |
+| `/set_prefix` | Set a filename prefix |
+| `/see_prefix` | View the current prefix |
+| `/del_prefix` | Delete the prefix |
+| `/set_suffix` | Set a filename suffix |
+| `/see_suffix` | View the current suffix |
+| `/del_suffix` | Delete the suffix |
+
+### Admin commands
+
+| Command | Purpose |
+|---|---|
+| `/status` | View bot status and ping |
+| `/logs` | Download the bot log file |
+| `/broadcast` | Broadcast a replied message to users |
+| `/addpremium` | Add a premium plan |
+| `/remove_premium` | Remove a premium plan |
+| `/ban` | Ban a user for a number of days |
+| `/unban` | Remove a user ban |
+| `/banned_users` | List banned users |
+| `/restart` | Notify users and restart the bot |
+
+## Custom caption example
+
+```text
+/set_caption 📁 File: {filename}
+💾 Size: {filesize}
+⏱ Duration: {duration}
+```
+
+## Metadata example
+
+```text
+--change-title My Title
+--change-video-title Video Stream
+--change-audio-title Audio Stream
+--change-subtitle-title Subtitle Stream
+--change-author Digital Botz
+```
+
+## Deployment
+
+The project includes deployment files for Docker, Render, Heroku-compatible platforms, and other Python hosting providers. Add all required environment variables in the hosting provider's secrets/settings panel.
+
+- [Deploy on Render](https://render.com/deploy?repo=https://github.com/DigitalBotz/Digital-Rename-Bot)
+- [Deploy on Heroku-compatible platforms](https://heroku.com/deploy?template=https://github.com/DigitalBotz/Digital-Rename-Bot)
+
+## Version 3.1.1
+
+- Improved Pyrogram progress updates with throttling and final 100% updates.
+- Fixed zero-division, invalid ETA, and concurrent progress issues.
+- Improved filename sanitization and upload cleanup.
+- Fixed premium database method and quota rollback bugs.
+- Fixed FFmpeg subprocess handling and metadata fallback.
+- Added safer configuration validation and cleaner startup logs.
+- Redesigned the web status dashboard.
+
+## Credits and license
+
+This project is released under the [Apache License 2.0](LICENSE). Please retain the original project credits when modifying or redistributing it.
+
+Special thanks to [RknDeveloper](https://github.com/RknDeveloper), [DigitalBotz](https://github.com/DigitalBotz), and [JayMahakal98](https://github.com/JayMahakal98).
+
+For bug reports and support, contact the [Digital Botz Support](https://t.me/DigitalBotz_Support).
+
+**Last updated:** `01 October 2026, 11:52 PM NPT (UTC+05:45)`  
+**Current version:** `3.1.1`

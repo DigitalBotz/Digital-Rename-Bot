@@ -33,6 +33,7 @@ License Link : https://github.com/DigitalBotz/Digital-Rename-Bot/blob/main/LICEN
 import aiohttp, asyncio, warnings, pytz, datetime
 import logging
 import logging.config
+import sys
 
 # pyrogram imports
 from pyrogram import Client, __version__, errors
@@ -71,6 +72,13 @@ class DigitalRenameBot(Client):
         Config.validate()
         await super().start()
         me = await self.get_me()
+        loaded_plugins = sorted(
+            name.removeprefix("plugins.")
+            for name in sys.modules
+            if name.startswith("plugins.") and name.count(".") == 1
+        )
+        for plugin_name in loaded_plugins:
+            logging.info("Digital Botz plugin loaded: %s", plugin_name)
         self.mention = me.mention
         self.username = me.username  
         self.uptime = Config.BOT_UPTIME
