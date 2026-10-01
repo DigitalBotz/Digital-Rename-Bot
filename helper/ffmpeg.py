@@ -5,9 +5,14 @@ async def change_metadata(input_file, output_file, metadata):
     author, title, video_title, audio_title, subtitle_title = await metadata_text(metadata)
     
     # Get the video metadata
-    output = subprocess.check_output(['ffprobe', '-v', 'error', '-show_streams', '-print_format', 'json', input_file])
-    data = json.loads(output)
-    streams = data['streams']
+    try:
+        output = subprocess.check_output(
+            ['ffprobe', '-v', 'error', '-show_streams', '-print_format', 'json', input_file],
+            stderr=subprocess.STDOUT,
+        )
+        streams = json.loads(output).get('streams', [])
+    except (OSError, subprocess.CalledProcessError, json.JSONDecodeError):
+        return False
 
     # Create the FFmpeg command to change metadata
     cmd = [
@@ -37,7 +42,12 @@ async def change_metadata(input_file, output_file, metadata):
     
     # Execute the command
     try:
-        subprocess.run(cmd, check=True)
+        process = await asyncio.create_subprocess_exec(
+            *cmd, stdout=asyncio.subprocess.DEVNULL, stderr=asyncio.subprocess.PIPE
+        )
+        _, stderr = await process.communicate()
+        if process.returncode:
+            raise subprocess.CalledProcessError(process.returncode, cmd, stderr=stderr)
         return True
     except subprocess.CalledProcessError as e:
         print("FFmpeg Error:", e.stderr)

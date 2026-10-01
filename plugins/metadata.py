@@ -63,10 +63,13 @@ async def handle_metadata(bot: Client, message: Message):
 @Client.on_callback_query(filters.regex('.*?(custom_metadata|metadata).*?'))
 async def query_metadata(bot: Client, query: CallbackQuery):
     data = query.data
+    await query.answer()
     if data.startswith('metadata_'):
         _bool = data.split('_')[1]
         user_metadata = await digital_botz.get_metadata_code(query.from_user.id)
-        bool_meta = bool(eval(_bool))
+        if _bool not in {'0', '1'}:
+            return
+        bool_meta = _bool == '1'
         await digital_botz.set_metadata_mode(query.from_user.id, bool_meta=not bool_meta)
         await query.message.edit(f"Your Current Metadata:-\n\n➜ `{user_metadata}`", reply_markup=InlineKeyboardMarkup(FALSE if bool_meta else TRUE))
            

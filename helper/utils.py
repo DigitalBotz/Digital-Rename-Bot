@@ -40,9 +40,11 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 async def progress_for_pyrogram(current, total, ud_type, message, start):
     now = time.time()
     diff = now - start
-    if round(diff % 5.00) == 0 or current == total:        
+    if round(diff % 5.00) == 0 or current == total:
+        if total <= 0:
+            return
         percentage = current * 100 / total
-        speed = current / diff
+        speed = current / max(diff, 0.001)
         elapsed_time = round(diff) * 1000
         time_to_completion = round((total - current) / speed) * 1000
         estimated_total_time = elapsed_time + time_to_completion
@@ -70,12 +72,14 @@ async def progress_for_pyrogram(current, total, ud_type, message, start):
             pass
 
 def humanbytes(size):    
-    if not size:
-        return ""
+    if size is None:
+        return "0 B"
+    if size == 0:
+        return "0 B"
     power = 2**10
     n = 0
     Dic_powerN = {0: ' ', 1: 'K', 2: 'M', 3: 'G', 4: 'T'}
-    while size > power:
+    while size >= power and n < len(Dic_powerN) - 1:
         size /= power
         n += 1
     return str(round(size, 2)) + " " + Dic_powerN[n] + 'ʙ'
@@ -130,7 +134,7 @@ async def get_seconds_first(time_string):
 
     for i in range(0, len(parts), 2):
         value = int(parts[i])
-        unit = parts[i+1].rstrip('s')  # Remove 's' from unit
+        unit = parts[i+1].lower().rstrip('s')
         total_seconds += value * conversion_factors.get(unit, 0)
 
     return total_seconds
@@ -146,15 +150,23 @@ async def get_seconds(time_string):
     }
 
     total_seconds = 0
-    pattern = r'(\d+)\s*(\w+)'
+    pattern = r'(\d+)\s*(seconds?|mins?|minutes?|hours?|days?|months?|years?)\b'
     matches = re.findall(pattern, time_string)
 
     for value, unit in matches:
+        unit = unit.lower()
+        unit = {'second': 's', 'seconds': 's', 'minute': 'min', 'minutes': 'min',
+                'mins': 'min', 'hour': 'hour', 'hours': 'hour', 'day': 'day',
+                'days': 'day', 'month': 'month', 'months': 'month',
+                'year': 'year', 'years': 'year'}.get(unit, unit)
         total_seconds += int(value) * conversion_factors.get(unit, 0)
 
     return total_seconds
 
 async def add_prefix_suffix(input_string, prefix='', suffix=''):
+    input_string = os.path.basename(str(input_string)).strip()
+    prefix = str(prefix or '').strip()
+    suffix = str(suffix or '').strip()
     pattern = r'(?P<filename>.*?)(\.\w+)?$'
     match = re.search(pattern, input_string)
     

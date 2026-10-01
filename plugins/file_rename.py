@@ -49,7 +49,7 @@ from config import Config
 
 # extra imports
 from asyncio import sleep
-import os, time, asyncio
+import os, time, asyncio, re
 
 
 UPLOAD_TEXT = """Uploading Started...."""
@@ -61,8 +61,9 @@ app = Client("4gb_FileRenameBot", api_id=Config.API_ID, api_hash=Config.API_HASH
 @Client.on_message(filters.private & (filters.audio | filters.document | filters.video))
 async def rename_start(client, message):
     user_id  = message.from_user.id
+    await digital_botz.add_user(client, message)
     rkn_file = getattr(message, message.media.value)
-    filename = rkn_file.file_name
+    filename = getattr(rkn_file, "file_name", None) or f"file_{message.id}.bin"
     filesize = humanbytes(rkn_file.file_size)
     mime_type = rkn_file.mime_type
     dcid = FileId.decode(rkn_file.file_id).dc_id
@@ -74,7 +75,7 @@ async def rename_start(client, message):
         limit = user_data.get('uploadlimit', 0)
         used = user_data.get('used_limit', 0)
         remain = int(limit) - int(used)
-        used_percentage = int(used) / int(limit) * 100
+        used_percentage = int(used) / max(int(limit), 1) * 100
         if remain < int(rkn_file.file_size):
             return await message.reply_text(f"{used_percentage:.2f}% Of Daily Upload Limit {humanbytes(limit)}.\n\n Media Size: {filesize}\n Your Used Daily Limit {humanbytes(used)}\n\nYou have only **{humanbytes(remain)}** Data.\nPlease, Buy Premium Plan s.", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🪪 Uᴘɢʀᴀᴅᴇ", callback_data="plans")]]))
          
@@ -125,13 +126,16 @@ async def rename_start(client, message):
 async def refunc(client, message):
     reply_message = message.reply_to_message
     if (reply_message.reply_markup) and isinstance(reply_message.reply_markup, ForceReply):
-        new_name = message.text 
+        new_name = os.path.basename((message.text or "").strip())
+        new_name = re.sub(r'[\\/:*?"<>|\x00-\x1f]', '_', new_name)
+        if not new_name or new_name in {'.', '..'}:
+            return await message.reply_text("Please provide a valid file name.")
         await message.delete() 
         msg = await client.get_messages(message.chat.id, reply_message.id)
         file = msg.reply_to_message
         media = getattr(file, file.media.value)
         if not "." in new_name:
-            if "." in media.file_name:
+            if getattr(media, "file_name", None) and "." in media.file_name:
                 extn = media.file_name.rsplit('.', 1)[-1]
             else:
                 extn = "mkv"
@@ -208,13 +212,23 @@ async def upload_doc(bot, update):
     rkn_processing = await update.message.edit("`Processing...`")
     
     # Creating Directory for Metadata
-    if not os.path.isdir("Metadata"):
-        os.mkdir("Metadata")
+    os.makedirs("Renames", exist_ok=True)
+    os.makedirs("Metadata", exist_ok=True)
 
     user_id = int(update.message.chat.id) 
     new_name = update.message.text
-    new_filename_ = new_name.split(":-")[1]
+    try:
+        new_filename_ = new_name.split(":-", 1)[1].strip()
+    except (IndexError, AttributeError):
+        return await rkn_processing.edit("Invalid rename request. Please start again.")
+    new_filename_ = os.path.basename(new_filename_)
+    new_filename_ = re.sub(r'[\\/:*?"<>|\x00-\x1f]', '_', new_filename_)
+    if not new_filename_ or new_filename_ in {'.', '..'}:
+        return await rkn_processing.edit("Please provide a valid file name.")
     user_data = await digital_botz.get_user_data(user_id)
+    if not user_data:
+        await digital_botz.add_user(bot, update.message)
+        user_data = await digital_botz.get_user_data(user_id)
 
     try:
         # adding prefix and suffix
@@ -229,8 +243,8 @@ async def upload_doc(bot, update):
     media = getattr(file, file.media.value)
     
     # File paths for download and metadata
-    file_path = f"Renames/{new_filename}"
-    metadata_path = f"Metadata/{new_filename}"
+    file_path = os.path.join("Renames", new_filename)
+    metadata_path = os.path.join("Metadata", new_filename)
 
     await rkn_processing.edit("`Try To Download....`")
     if bot.premium and bot.uploadlimit:
@@ -243,7 +257,7 @@ async def upload_doc(bot, update):
         dl_path = await bot.download_media(message=file, file_name=file_path, progress=progress_for_pyrogram, progress_args=(DOWNLOAD_TEXT, rkn_processing, time.time()))                    
     except Exception as e:
         if bot.premium and bot.uploadlimit:
-            used_remove = int(used) - int(media.file_size)
+            used_remove = max(0, int(used) - int(media.file_size))
             await digital_botz.set_used_limit(user_id, used_remove)
         return await rkn_processing.edit(f"Download Error: {e}")
 
@@ -266,7 +280,7 @@ async def upload_doc(bot, update):
         
     duration = 0
     try:
-        parser = createParser(file_path)
+        parser = createParser(dl_path)
         metadata = extractMetadata(parser)
         if metadata and metadata.has("duration"):
             duration = metadata.get('duration').seconds
@@ -286,7 +300,7 @@ async def upload_doc(bot, update):
              caption = c_caption.format(filename=new_filename, filesize=humanbytes(media.file_size), duration=convert(duration))
          except Exception as e:
              if bot.premium and bot.uploadlimit:
-                 used_remove = int(used) - int(media.file_size)
+                 used_remove = max(0, int(used) - int(media.file_size))
                  await digital_botz.set_used_limit(user_id, used_remove)
              return await rkn_processing.edit(text=f"Yᴏᴜʀ Cᴀᴩᴛɪᴏɴ Eʀʀᴏʀ Exᴄᴇᴩᴛ Kᴇyᴡᴏʀᴅ Aʀɢᴜᴍᴇɴᴛ ●> ({e})")             
     else:
@@ -303,13 +317,17 @@ async def upload_doc(bot, update):
              if ph_path and os.path.exists(ph_path):
                  Image.open(ph_path).convert("RGB").save(ph_path)
                  img = Image.open(ph_path)
-                 img.resize((320, 320))
+                 img = img.resize((320, 320))
                  img.save(ph_path, "JPEG")
          except Exception as e:
              print(f"Error processing thumbnail: {e}")
              ph_path = None
 
-    upload_type = update.data.split("#")[1]
+    try:
+        upload_type = update.data.split("#", 1)[1]
+    except (AttributeError, IndexError):
+        await remove_path(ph_path, file_path, dl_path, metadata_path)
+        return await rkn_processing.edit("Invalid upload type. Please start again.")
     
     # Use the correct file path based on metadata mode
     final_file_path = metadata_path if metadata_mode and os.path.exists(metadata_path) else file_path
@@ -323,7 +341,7 @@ async def upload_doc(bot, update):
 
         if error:
             if bot.premium and bot.uploadlimit:
-                used_remove = int(used) - int(media.file_size)
+                used_remove = max(0, int(used) - int(media.file_size))
                 await digital_botz.set_used_limit(user_id, used_remove)
             await remove_path(ph_path, file_path, dl_path, metadata_path)
             return await rkn_processing.edit(f"Upload Error: {error}")
@@ -344,7 +362,7 @@ async def upload_doc(bot, update):
                    
         if error:
             if bot.premium and bot.uploadlimit:
-                used_remove = int(used) - int(media.file_size)
+                used_remove = max(0, int(used) - int(media.file_size))
                 await digital_botz.set_used_limit(user_id, used_remove)
             await remove_path(ph_path, file_path, dl_path, metadata_path)
             return await rkn_processing.edit(f"Upload Error: {error}")        

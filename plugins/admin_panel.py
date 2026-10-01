@@ -85,6 +85,8 @@ async def add_premium(client, message):
         current_time = time_zone.strftime("%d-%m-%Y\n⏱️ ᴊᴏɪɴɪɴɢ ᴛɪᴍᴇ : %I:%M:%S %p")
 
         user = await client.get_users(user_id)
+        if not await digital_botz.is_user_exist(user_id):
+            await digital_botz.col.insert_one(digital_botz.new_user(user_id))
 
         if plan_type == "Pro":
             limit = 107374182400
@@ -99,7 +101,7 @@ async def add_premium(client, message):
 
         expiry_time = datetime.datetime.now() + datetime.timedelta(seconds=seconds)
         user_data = {"id": user_id, "expiry_time": expiry_time}
-        await digital_botz.addpremium(user_id, user_data, limit, type)
+        await digital_botz.add_premium(user_id, user_data, limit, type)
 
         user_data = await digital_botz.get_user_data(user_id)
         limit = user_data.get('uploadlimit', 0)
@@ -125,14 +127,16 @@ async def add_premium(client, message):
         time_zone = datetime.datetime.now(pytz.timezone("Asia/Kolkata"))
         current_time = time_zone.strftime("%d-%m-%Y\n⏱️ ᴊᴏɪɴɪɴɢ ᴛɪᴍᴇ : %I:%M:%S %p")
 
-        user = await client.get_users(user_id)        
+        user = await client.get_users(user_id)
+        if not await digital_botz.is_user_exist(user_id):
+            await digital_botz.col.insert_one(digital_botz.new_user(user_id))
         seconds = await get_seconds(time_string)
         if seconds <= 0:
             return await message.reply_text("Invalid time format. Please use `/addpremium user_id 1 year 1 month 1 day 1 min 10 s`", quote=True)
 
         expiry_time = datetime.datetime.now() + datetime.timedelta(seconds=seconds)
         user_data = {"id": user_id, "expiry_time": expiry_time}
-        await digital_botz.addpremium(user_id, user_data)
+        await digital_botz.add_premium(user_id, user_data)
         data = await digital_botz.get_user(user_id)
         expiry = data.get("expiry_time")
         expiry_str_in_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata")).strftime("%d-%m-%Y\n⏱️ ᴇxᴘɪʀʏ ᴛɪᴍᴇ : %I:%M:%S %p")
@@ -273,10 +277,11 @@ async def _banned_users(_, m: Message):
     banned_usr_count = 0
     text = ''
     async for banned_user in all_banned_users:
-        user_id = banned_user['id']
-        ban_duration = banned_user['ban_status']['ban_duration']
-        banned_on = banned_user['ban_status']['banned_on']
-        ban_reason = banned_user['ban_status']['ban_reason']
+        user_id = banned_user.get('_id')
+        ban_status = banned_user.get('ban_status', {})
+        ban_duration = ban_status.get('ban_duration', 0)
+        banned_on = ban_status.get('banned_on', 'unknown')
+        ban_reason = ban_status.get('ban_reason', '')
         banned_usr_count += 1
         text += f"> **user_id**: `{user_id}`, **Ban Duration**: `{ban_duration}`, " \
                 f"**Banned on**: `{banned_on}`, **Reason**: `{ban_reason}`\n\n"
@@ -321,7 +326,7 @@ async def send_msg(user_id, message):
         return 200
     except FloodWait as e:
         await asyncio.sleep(e.value)
-        return send_msg(user_id, message)
+        return await send_msg(user_id, message)
     except InputUserDeactivated:
         logger.info(f"{user_id} : Dᴇᴀᴄᴛɪᴠᴀᴛᴇᴅ")
         return 400

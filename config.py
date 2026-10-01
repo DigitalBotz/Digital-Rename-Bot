@@ -30,7 +30,7 @@ License Link : https://github.com/DigitalBotz/Digital-Rename-Bot/blob/main/LICEN
 """
 
 import re, os, time
-id_pattern = re.compile(r'^.\d+$') 
+id_pattern = re.compile(r'^-?\d+$')
 
 class Config(object):
     # digital_botz client config
@@ -48,8 +48,9 @@ class Config(object):
  
     # other configs
     RKN_PIC = os.environ.get("RKN_PIC", "https://telegra.ph/file/b746aadfe59959eb76f59.jpg")
-    ADMIN = [int(admin) if id_pattern.search(admin) else admin for admin in os.environ.get('ADMIN', '6705898491').split()]
-    LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", "-1002123429361"))
+    ADMIN = [int(admin) if id_pattern.fullmatch(admin) else admin for admin in os.environ.get('ADMIN', '6705898491').split()]
+    _log_channel = os.environ.get("LOG_CHANNEL", "-1002123429361").strip()
+    LOG_CHANNEL = int(_log_channel) if _log_channel.lstrip("-").isdigit() else None
 
     # free upload limit 
     FREE_UPLOAD_LIMIT = 6442450944 # calculation 6*1024*1024*1024=results
@@ -67,6 +68,15 @@ class Config(object):
     # wes response configuration     
     PORT = int(os.environ.get("PORT", "8080"))
     BOT_UPTIME = time.time()
+
+    @classmethod
+    def validate(cls):
+        missing = [name for name, value in {
+            "API_ID": cls.API_ID, "API_HASH": cls.API_HASH,
+            "BOT_TOKEN": cls.BOT_TOKEN, "DB_URL": cls.DB_URL,
+        }.items() if not str(value).strip()]
+        if missing:
+            raise RuntimeError("Missing required environment variables: " + ", ".join(missing))
 
 class rkn(object):
     # part of text configuration

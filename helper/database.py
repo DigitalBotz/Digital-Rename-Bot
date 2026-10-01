@@ -39,10 +39,15 @@ from helper.utils import send_log
 
 class Database:
     def __init__(self, uri, database_name):
-        self._client = motor.motor_asyncio.AsyncIOMotorClient(uri)
-        self.db = self._client[database_name]
-        self.col = self.db.user
-        self.premium = self.db.premium
+        self._client = None
+        self.db = None
+        self.col = None
+        self.premium = None
+        if uri:
+            self._client = motor.motor_asyncio.AsyncIOMotorClient(uri)
+            self.db = self._client[database_name]
+            self.col = self.db.user
+            self.premium = self.db.premium
 
     def new_user(self, id):
         return dict(
@@ -95,42 +100,42 @@ class Database:
 
     async def get_thumbnail(self, id):
         user = await self.col.find_one({'_id': int(id)})
-        return user.get('file_id', None)
+        return user.get('file_id', None) if user else None
 
     async def set_caption(self, id, caption):
         await self.col.update_one({'_id': int(id)}, {'$set': {'caption': caption}})
 
     async def get_caption(self, id):
         user = await self.col.find_one({'_id': int(id)})
-        return user.get('caption', None)
+        return user.get('caption', None) if user else None
 
     async def set_prefix(self, id, prefix):
         await self.col.update_one({'_id': int(id)}, {'$set': {'prefix': prefix}})
 
     async def get_prefix(self, id):
         user = await self.col.find_one({'_id': int(id)})
-        return user.get('prefix', None)
+        return user.get('prefix', None) if user else None
 
     async def set_suffix(self, id, suffix):
         await self.col.update_one({'_id': int(id)}, {'$set': {'suffix': suffix}})
 
     async def get_suffix(self, id):
         user = await self.col.find_one({'_id': int(id)})
-        return user.get('suffix', None)
+        return user.get('suffix', None) if user else None
 
     async def set_metadata_mode(self, id, bool_meta):
         await self.col.update_one({'_id': int(id)}, {'$set': {'metadata_mode': bool_meta}})
 
     async def get_metadata_mode(self, id):
         user = await self.col.find_one({'_id': int(id)})
-        return user.get('metadata_mode', None)
+        return user.get('metadata_mode', None) if user else None
 
     async def set_metadata_code(self, id, metadata_code):
         await self.col.update_one({'_id': int(id)}, {'$set': {'metadata_code': metadata_code}})
 
     async def get_metadata_code(self, id):
         user = await self.col.find_one({'_id': int(id)})
-        return user.get('metadata_code', None)
+        return user.get('metadata_code', None) if user else None
 
     async def set_used_limit(self, id, used):
         await self.col.update_one({'_id': int(id)}, {'$set': {'used_limit': used}})
@@ -207,13 +212,15 @@ class Database:
             await self.col.update_one(
                 {'_id': user_id}, 
                 {'$set': {
-                    'usertype': user_type,
+                    'usertype': type,
                     'uploadlimit': limit
                 }}
             )
           
     async def checking_remaining_time(self, user_id):
         user_data = await self.get_user(user_id)
+        if not user_data or not user_data.get("expiry_time"):
+            return datetime.timedelta(0)
         expiry_time = user_data.get("expiry_time")
         time_left_str = expiry_time - datetime.datetime.now()
         return time_left_str
@@ -285,7 +292,7 @@ class Database:
             banned_on=datetime.date.max.isoformat(),
             ban_reason='')
         user = await self.col.find_one({'_id': int(id)})
-        return user.get('ban_status', default)
+        return user.get('ban_status', default) if user else default
 
     async def get_all_banned_users(self):
         banned_users = self.col.find({'ban_status.is_banned': True})

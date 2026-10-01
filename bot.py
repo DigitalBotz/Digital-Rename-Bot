@@ -33,9 +33,6 @@ License Link : https://github.com/DigitalBotz/Digital-Rename-Bot/blob/main/LICEN
 import aiohttp, asyncio, warnings, pytz, datetime
 import logging
 import logging.config
-import glob, sys
-import importlib.util
-from pathlib import Path
 
 # pyrogram imports
 from pyrogram import Client, __version__, errors
@@ -71,6 +68,7 @@ class DigitalRenameBot(Client):
                 
          
     async def start(self):
+        Config.validate()
         await super().start()
         me = await self.get_me()
         self.mention = me.mention
@@ -85,20 +83,6 @@ class DigitalRenameBot(Client):
         bind_address = "0.0.0.0"
         await aiohttp.web.TCPSite(app, bind_address, Config.PORT).start()
         
-        path = "plugins/*.py"
-        files = glob.glob(path)
-        for name in files:
-            with open(name) as a:
-                patt = Path(a.name)
-                plugin_name = patt.stem.replace(".py", "")
-                plugins_path = Path(f"plugins/{plugin_name}.py")
-                import_path = "plugins.{}".format(plugin_name)
-                spec = importlib.util.spec_from_file_location(import_path, plugins_path)
-                load = importlib.util.module_from_spec(spec)
-                spec.loader.exec_module(load)
-                sys.modules["plugins" + plugin_name] = load
-                print("Digital Botz Imported " + plugin_name)
-                
         print(f"{me.first_name} Iꜱ Sᴛᴀʀᴛᴇᴅ.....✨️")
 
         
