@@ -39,6 +39,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 _progress_last_update = {}
 _progress_locks = {}
+_progress_samples = {}
 _PROGRESS_UPDATE_INTERVAL = 3.0
 
 
@@ -59,15 +60,21 @@ async def progress_for_pyrogram(current, total, ud_type, message, start):
 
     lock = _progress_locks.setdefault(key, asyncio.Lock())
     async with lock:
+        previous = _progress_samples.get(key)
+        _progress_samples[key] = (current, now)
         last_update = _progress_last_update.get(key, 0.0)
         if not is_complete and now - last_update < _PROGRESS_UPDATE_INTERVAL:
             return
         _progress_last_update[key] = now
 
         try:
-            # Call sites pass time.time(), so use the same clock here.
-            elapsed = max(time.time() - start, 0.001)
-            speed = current / elapsed
+            if previous:
+                previous_current, previous_time = previous
+                speed = max(0, current - previous_current) / max(now - previous_time, 0.001)
+            else:
+                # Call sites pass time.time(), so use the same clock here.
+                elapsed = max(time.time() - float(start or time.time()), 0.001)
+                speed = current / elapsed
             percentage = min(100.0, (current * 100.0 / total)) if total else 0.0
             filled = min(20, max(0, int(percentage / 5)))
             progress = "▣" * filled + "▢" * (20 - filled)
@@ -93,6 +100,7 @@ async def progress_for_pyrogram(current, total, ud_type, message, start):
         finally:
             if is_complete:
                 _progress_last_update.pop(key, None)
+                _progress_samples.pop(key, None)
                 _progress_locks.pop(key, None)
 
 def humanbytes(size):    
