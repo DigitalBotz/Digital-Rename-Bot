@@ -283,7 +283,7 @@ async def upload_doc(bot, update):
     
     duration = 0
     try:
-        parser = createParser(final file_path)
+        parser = createParser(final_file_path)
         metadata = extractMetadata(parser)
         if metadata and metadata.has("duration"):
             duration = metadata.get('duration').seconds
