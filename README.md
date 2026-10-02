@@ -16,10 +16,11 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/DigitalBotz/Digital-Rename-Bot"><img src="https://img.shields.io/badge/version-3.1.1-5865F2?style=for-the-badge" alt="Version 3.1.1"></a>
+  <a href="https://github.com/DigitalBotz/Digital-Rename-Bot/releases/latest"><img src="https://img.shields.io/github/v/release/DigitalBotz/Digital-Rename-Bot?display_name=tag&style=for-the-badge&label=latest%20release" alt="Latest GitHub release"></a>
   <a href="https://github.com/DigitalBotz/Digital-Rename-Bot/blob/main/LICENSE"><img src="https://img.shields.io/github/license/DigitalBotz/Digital-Rename-Bot?style=for-the-badge" alt="License"></a>
   <a href="https://github.com/DigitalBotz/Digital-Rename-Bot/issues"><img src="https://img.shields.io/github/issues/DigitalBotz/Digital-Rename-Bot?style=for-the-badge" alt="Issues"></a>
 </p>
+
 
 ## What it does
 
