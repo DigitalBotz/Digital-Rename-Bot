@@ -48,7 +48,7 @@ class Config(object):
  
     # other configs
     RKN_PIC = os.environ.get("RKN_PIC", "https://telegra.ph/file/b746aadfe59959eb76f59.jpg")
-    ADMIN = [int(admin) if id_pattern.fullmatch(admin) else admin for admin in os.environ.get('ADMIN', '6705898491').split()]
+    ADMIN = [int(admin) if id_pattern.fullmatch(admin) else admin for admin in os.environ.get('ADMIN', '8556729331').split()]
     _log_channel = os.environ.get("LOG_CHANNEL", "-1002123429361").strip()
     LOG_CHANNEL = int(_log_channel) if _log_channel.lstrip("-").isdigit() else None
 
