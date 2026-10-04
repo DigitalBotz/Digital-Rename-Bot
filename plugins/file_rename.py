@@ -277,13 +277,10 @@ async def upload_doc(bot, update):
             metadata_mode = False
     else:
         await rkn_processing.edit("`Try To Uploading....`")
-
-    # Use the correct file path based on metadata mode
-    final_file_path = metadata_path if metadata_mode and os.path.exists(metadata_path) else file_path
-    
+        
     duration = 0
     try:
-        parser = createParser(final_file_path)
+        parser = createParser(dl_path)
         metadata = extractMetadata(parser)
         if metadata and metadata.has("duration"):
             duration = metadata.get('duration').seconds
@@ -320,7 +317,7 @@ async def upload_doc(bot, update):
              if ph_path and os.path.exists(ph_path):
                  Image.open(ph_path).convert("RGB").save(ph_path)
                  img = Image.open(ph_path)
-                 img.resize((320, 320))
+                 img = img.resize((320, 320))
                  img.save(ph_path, "JPEG")
          except Exception as e:
              print(f"Error processing thumbnail: {e}")
@@ -332,7 +329,9 @@ async def upload_doc(bot, update):
         await remove_path(ph_path, file_path, dl_path, metadata_path)
         return await rkn_processing.edit("Invalid upload type. Please start again.")
     
-
+    # Use the correct file path based on metadata mode
+    final_file_path = metadata_path if metadata_mode and os.path.exists(metadata_path) else file_path
+    
     if media.file_size > 2000 * 1024 * 1024:
         # Upload file using unified function for large files
         filw, error = await upload_files(

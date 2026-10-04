@@ -43,18 +43,37 @@ from helper.utils import humanbytes
 from plugins import __version__ as _bot_version_, __developer__, __database__, __library__, __language__, __programer__
 from plugins.file_rename import upload_doc
 
-upgrade_button = InlineKeyboardMarkup([[        
-        InlineKeyboardButton('buy premium ✓', user_id=int(6705898491)),
-         ],[
-        InlineKeyboardButton("Bᴀᴄᴋ", callback_data = "start")
-]])
+async def _premium_contact_button(client):
+    """Use an admin mention only when Pyrogram can resolve the peer."""
+    admin_id = next((item for item in Config.ADMIN if isinstance(item, int)), None)
 
-upgrade_trial_button = InlineKeyboardMarkup([[        
-        InlineKeyboardButton('buy premium ✓', user_id=int(6705898491)),
-         ],[
-        InlineKeyboardButton("ᴛʀɪᴀʟ - 𝟷𝟸 ʜᴏᴜʀs ✓", callback_data = "give_trial"),
-        InlineKeyboardButton("Bᴀᴄᴋ", callback_data = "start")
-]])
+    if admin_id is not None:
+        try:
+            await client.resolve_peer(admin_id)
+            return InlineKeyboardButton("buy premium ✓", user_id=admin_id)
+        except Exception:
+            # Unknown/unseen IDs cause PEER_ID_INVALID while Telegram serializes
+            # the keyboard. Fall back before sending the message.
+            pass
+
+    username = Config.ADMIN_USERNAME
+    if username:
+        return InlineKeyboardButton("buy premium ✓", url=f"https://t.me/{username}")
+
+    # Keep the keyboard valid even when both optional contact settings are empty.
+    return InlineKeyboardButton("buy premium ✓", callback_data="start")
+
+
+async def _upgrade_markup(client, include_trial=False):
+    rows = [[await _premium_contact_button(client)]]
+    if include_trial:
+        rows.append([
+            InlineKeyboardButton("ᴛʀɪᴀʟ - 𝟷𝟸 ʜᴏᴜʀs ✓", callback_data="give_trial"),
+            InlineKeyboardButton("Bᴀᴄᴋ", callback_data="start")
+        ])
+    else:
+        rows.append([InlineKeyboardButton("Bᴀᴄᴋ", callback_data="start")])
+    return InlineKeyboardMarkup(rows)
 
 
         
@@ -138,11 +157,11 @@ async def plans(client, message):
     free_trial_status = await digital_botz.get_free_trial_status(user.id)
     if not await digital_botz.has_premium_access(user.id):
         if not free_trial_status:
-            await message.reply_text(text=upgrade_msg, reply_markup=upgrade_trial_button, disable_web_page_preview=True)
+            await message.reply_text(text=upgrade_msg, reply_markup=await _upgrade_markup(client, include_trial=True), disable_web_page_preview=True)
         else:
-            await message.reply_text(text=upgrade_msg, reply_markup=upgrade_button, disable_web_page_preview=True)
+            await message.reply_text(text=upgrade_msg, reply_markup=await _upgrade_markup(client), disable_web_page_preview=True)
     else:
-        await message.reply_text(text=upgrade_msg, reply_markup=upgrade_button, disable_web_page_preview=True)
+        await message.reply_text(text=upgrade_msg, reply_markup=await _upgrade_markup(client), disable_web_page_preview=True)
    
   
 @Client.on_callback_query()
@@ -212,11 +231,11 @@ async def cb_handler(client, query: CallbackQuery):
         free_trial_status = await digital_botz.get_free_trial_status(query.from_user.id)
         if not await digital_botz.has_premium_access(query.from_user.id):
             if not free_trial_status:
-                await query.message.edit_text(text=upgrade_msg, disable_web_page_preview=True, reply_markup=upgrade_trial_button)   
+                await query.message.edit_text(text=upgrade_msg, disable_web_page_preview=True, reply_markup=await _upgrade_markup(client, include_trial=True))
             else:
-                await query.message.edit_text(text=upgrade_msg, disable_web_page_preview=True, reply_markup=upgrade_button)
+                await query.message.edit_text(text=upgrade_msg, disable_web_page_preview=True, reply_markup=await _upgrade_markup(client))
         else:
-            await query.message.edit_text(text=upgrade_msg, disable_web_page_preview=True, reply_markup=upgrade_button)
+            await query.message.edit_text(text=upgrade_msg, disable_web_page_preview=True, reply_markup=await _upgrade_markup(client))
            
     elif data == "give_trial":
         if not client.premium:
