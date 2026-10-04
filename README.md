@@ -53,17 +53,18 @@ Set these environment variables before starting the bot:
 
 | Variable | Required | Description |
 |---|:---:|---|
-| `BOT_TOKEN` | Yes | Telegram bot token from BotFather |
-| `API_ID` | Yes | Telegram application ID |
-| `API_HASH` | Yes | Telegram application hash |
-| `DB_URL` | Yes | MongoDB connection URI |
-| `DB_NAME` | No | MongoDB database name; default: `Digital_Rename_Bot` |
-| `ADMIN` | No | Space-separated admin user IDs |
-| `FORCE_SUB` | No | Channel username or channel ID for force subscription |
-| `LOG_CHANNEL` | No | Channel ID for logs; leave empty to disable |
-| `STRING_SESSION` | No | Premium user session for 2 GB+ file support |
-| `RKN_PIC` | No | Start-message image URL |
-| `PORT` | No | Web status port; default: `8080` |
+| `BOT_TOKEN` | **Yes** | Telegram bot token from BotFather |
+| `API_ID` | **Yes** | Telegram application ID |
+| `API_HASH` | **Yes** | Telegram application hash |
+| `DB_URL` | **Yes** | MongoDB connection URI |
+| `DB_NAME` | **No** | MongoDB database name; default: `Digital_Rename_Bot` |
+| `ADMIN` | **Yes** | Space-separated admin user IDs; at least one numeric ID is required and the first numeric ID is used for the premium contact button |
+| `ADMIN_USERNAME` | **Yes** | Telegram username fallback for the premium contact button, with or without `@` |
+| `FORCE_SUB` | **No** | Channel username or channel ID for force subscription |
+| `LOG_CHANNEL` | **Yes** | Channel ID for logs; leave empty to disable |
+| `STRING_SESSION` | **No** | Premium user session for 2 GB+ file support |
+| `RKN_PIC` | **No** | Start-message image URL |
+| `PORT` | **No** | Web status port; default: `8080` |
 
 > Never commit tokens, API hashes, database credentials, or string sessions to GitHub.
 
@@ -87,41 +88,34 @@ docker run --env-file .env -p 8080:8080 digital-rename-bot
 
 The web dashboard is available at `http://localhost:8080` when the bot is running.
 
-## Bot commands
+## Botfather Commands
+```
+start - 𝖈ʜᴇᴄᴋ 𝖎 𝖆ᴍ ʟɪᴠᴇ.
+plans - ᴜᴘɢʀᴀᴅᴇ ᴛᴏ ᴘʀᴇᴍɪᴜᴍ ᴘʟᴀɴ.
+myplan - ᴄʜᴇᴄᴋ ʏᴏᴜʀ ᴘʀᴇᴍɪᴜᴍ ᴘʟᴀɴ ʜᴇʀᴇ.
+view_thumb - 𝖙ᴏ 𝖘ᴇᴇ 𝖞ᴏᴜʀ 𝖈ᴜ𝖘ᴛᴏᴍ 𝖙ʜᴜᴍʙɴᴀɪʟ !!
+del_thumb - 𝖙ᴏ 𝖉ᴇʟᴇᴛᴇ 𝖞ᴏᴜʀ 𝖈ᴜ𝖘ᴛᴏᴍ 𝖙ʜᴜᴍʙɴᴀɪʟ !!
+set_caption - Sᴇᴛ A Cᴜsᴛᴏᴍ Cᴀᴘᴛɪᴏɴ !!
+see_caption - Sᴇᴇ Yᴏᴜʀ Cᴜsᴛᴏᴍ Cᴀᴘᴛɪᴏɴ !!
+del_caption - Dᴇʟᴇᴛᴇ Cᴜsᴛᴏᴍ Cᴀᴘᴛɪᴏɴ !!
+metadata - Tᴏ Sᴇᴛ & Cʜᴀɴɢᴇ ʏᴏᴜʀ ᴍᴇᴛᴀᴅᴀᴛᴀ ᴄᴏᴅᴇ
+set_prefix - Tᴏ Sᴇᴛ Yᴏᴜʀ Pʀᴇғɪx !!
+see_prefix - Tᴏ Sᴇᴇ Yᴏᴜʀ Pʀᴇғɪx !!
+del_prefix - Dᴇʟᴇᴛᴇ Yᴏᴜʀ Pʀᴇғɪx !!
+set_suffix - Tᴏ Sᴇᴛ Yᴏᴜʀ Sᴜғғɪx !!
+see_suffix - Tᴏ Sᴇᴇ Yᴏᴜʀ Sᴜғғɪx !!
+del_suffix - Dᴇʟᴇᴛᴇ Yᴏᴜʀ Sᴜғғɪx !!
+restart - ᴛᴏ ʀᴇsᴛᴀʀᴛ ᴛʜᴇ ʙᴏᴛ ᴀɴᴅ sᴇɴᴅ ᴍᴇssᴀɢᴇ ᴀʟʟ ᴅʙ ᴜsᴇʀs (Aᴅᴍɪɴ Oɴʟʏ)
+addpremium - ᴀᴅᴅ ᴘʀᴇᴍɪᴜᴍ (Aᴅᴍɪɴ Oɴʟʏ)
+remove_premium - ʀᴇᴍᴏᴠᴇ ᴘʀᴇᴍɪᴜᴍ (Aᴅᴍɪɴ Oɴʟʏ)
+ban - ban members using command (admin only)
+unban - unban members using command (admin only)
+banned_users - check bot all ban users using command (admin only)
+logs - ᴄʜᴇᴄᴋ ʙᴏᴛ ʟᴏɢs (Aᴅᴍɪɴ Oɴʟʏ)
+status - Cʜᴇᴄᴋ Bᴏᴛ Sᴛᴀᴛᴜs (Aᴅᴍɪɴ Oɴʟʏ)
+broadcast - Sᴇɴᴅ Mᴇssᴀɢᴇ Tᴏ Aʟʟ Usᴇʀs (Aᴅᴍɪɴ Oɴʟʏ)
+```
 
-### User commands
-
-| Command | Purpose |
-|---|---|
-| `/start` | Start the bot |
-| `/plans` | View premium plans |
-| `/myplan` | View current plan and upload usage |
-| `/set_caption` | Set a custom output caption |
-| `/see_caption` | View the current caption |
-| `/del_caption` | Delete the custom caption |
-| `/view_thumb` | View the saved thumbnail |
-| `/del_thumb` | Delete the saved thumbnail |
-| `/metadata` | Enable/disable and configure metadata editing |
-| `/set_prefix` | Set a filename prefix |
-| `/see_prefix` | View the current prefix |
-| `/del_prefix` | Delete the prefix |
-| `/set_suffix` | Set a filename suffix |
-| `/see_suffix` | View the current suffix |
-| `/del_suffix` | Delete the suffix |
-
-### Admin commands
-
-| Command | Purpose |
-|---|---|
-| `/status` | View bot status and ping |
-| `/logs` | Download the bot log file |
-| `/broadcast` | Broadcast a replied message to users |
-| `/addpremium` | Add a premium plan |
-| `/remove_premium` | Remove a premium plan |
-| `/ban` | Ban a user for a number of days |
-| `/unban` | Remove a user ban |
-| `/banned_users` | List banned users |
-| `/restart` | Notify users and restart the bot |
 
 ## Custom caption example
 
@@ -179,15 +173,13 @@ The repository includes `app.json`, `Procfile`, and `runtime.txt` for Heroku-com
 
 > **Deployment note:** Free hosting plans may sleep, limit disk space, or restrict long-running file transfers. For reliable 24/7 operation and large files, use a suitable paid or persistent worker/server.
 
-## Version 3.1.1
+## Version 3.1.2
 
-- Improved Pyrogram progress updates with throttling and final 100% updates.
-- Fixed zero-division, invalid ETA, and concurrent progress issues.
+- Improved code and final 100% updates.
+- Fixed metadata button issues.
 - Improved filename sanitization and upload cleanup.
 - Fixed premium database method and quota rollback bugs.
 - Fixed FFmpeg subprocess handling and metadata fallback.
-- Added safer configuration validation and cleaner startup logs.
-- Redesigned the web status dashboard.
 
 ## Credits and license
 
@@ -212,5 +204,5 @@ This project is provided under the [Apache License 2.0](LICENSE). The license pe
 
 For bug reports and support, contact [Digital Botz Support](https://t.me/DigitalBotz_Support).
 
-**Last updated:** `01 October 2026, 11:52 PM NPT (UTC+05:45)`  
-**Current version:** `3.1.1`
+**Last updated:** `04 October 2026, 12:52 PM NPT (UTC+05:45)`  
+**Current version:** `3.1.2`
