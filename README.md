@@ -1,5 +1,11 @@
 # Digital Rename Bot
 
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+![Typing SVG](https://readme-typing-svg.herokuapp.com/?lines=𝗪𝗘𝗟𝗖𝗢𝗠+𝗧𝗢+𝗗𝗜𝗚𝗜𝗧𝗔𝗟+𝗥𝗘𝗡𝗔𝗠𝗘+𝗕𝗢𝗧!;𝗖𝗥𝗘𝗔𝗧𝗘𝗗+𝗕𝗬+𝗗𝗜𝗚𝗜𝗧𝗔𝗟+𝗕𝗢𝗧𝗭!;𝗜+𝗔𝗠+𝗣𝗢𝗪𝗘𝗥𝗙𝗨𝗟+𝗧𝗚+𝗥𝗘𝗡𝗔𝗠𝗘+𝗕𝗢𝗧!&color=4169E1)
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
 <p align="center">
   <img src="https://telegra.ph/file/b746aadfe59959eb76f59.jpg" alt="Digital Rename Bot" width="220">
 </p>
@@ -14,6 +20,7 @@
   <a href="https://github.com/DigitalBotz/Digital-Rename-Bot/blob/main/LICENSE"><img src="https://img.shields.io/github/license/DigitalBotz/Digital-Rename-Bot?style=for-the-badge" alt="License"></a>
   <a href="https://github.com/DigitalBotz/Digital-Rename-Bot/issues"><img src="https://img.shields.io/github/issues/DigitalBotz/Digital-Rename-Bot?style=for-the-badge" alt="Issues"></a>
 </p>
+
 
 ## What it does
 
@@ -51,10 +58,9 @@ Set these environment variables before starting the bot:
 | `API_HASH` | Yes | Telegram application hash |
 | `DB_URL` | Yes | MongoDB connection URI |
 | `DB_NAME` | No | MongoDB database name; default: `Digital_Rename_Bot` |
-| `ADMIN` | **Yes** | Space-separated admin user IDs; at least one numeric ID is required and the first numeric ID is used for the premium contact button |
-| `ADMIN_USERNAME` | **Yes** | Telegram username fallback for the premium contact button, with or without `@` |
+| `ADMIN` | No | Space-separated admin user IDs |
 | `FORCE_SUB` | No | Channel username or channel ID for force subscription |
-| `LOG_CHANNEL` | **Yes** | Channel ID for bot logs, normally a `-100...` channel ID |
+| `LOG_CHANNEL` | No | Channel ID for logs; leave empty to disable |
 | `STRING_SESSION` | No | Premium user session for 2 GB+ file support |
 | `RKN_PIC` | No | Start-message image URL |
 | `PORT` | No | Web status port; default: `8080` |
@@ -173,7 +179,7 @@ The repository includes `app.json`, `Procfile`, and `runtime.txt` for Heroku-com
 
 > **Deployment note:** Free hosting plans may sleep, limit disk space, or restrict long-running file transfers. For reliable 24/7 operation and large files, use a suitable paid or persistent worker/server.
 
-## Changes since the latest release
+## Version 3.1.1
 
 - Improved Pyrogram progress updates with throttling and final 100% updates.
 - Fixed zero-division, invalid ETA, and concurrent progress issues.
@@ -207,5 +213,4 @@ This project is provided under the [Apache License 2.0](LICENSE). The license pe
 For bug reports and support, contact [Digital Botz Support](https://t.me/DigitalBotz_Support).
 
 **Last updated:** `01 October 2026, 11:52 PM NPT (UTC+05:45)`  
-**Latest release:** [![Latest GitHub release](https://img.shields.io/github/v/release/DigitalBotz/Digital-Rename-Bot?display_name=tag&style=flat-square)](https://github.com/DigitalBotz/Digital-Rename-Bot/releases/latest)  
-**Release history:** [View all GitHub releases](https://github.com/DigitalBotz/Digital-Rename-Bot/releases)
+**Current version:** `3.1.1`

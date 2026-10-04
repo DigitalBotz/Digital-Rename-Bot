@@ -80,11 +80,12 @@ async def progress_for_pyrogram(current, total, ud_type, message, start):
             progress = "▣" * filled + "▢" * (20 - filled)
             remaining = max(0, total - current)
             eta = TimeFormatter(milliseconds=(remaining / speed) * 1000) if speed else "0 s"
-            # RKN_PROGRESS uses: {0}=percentage, {1}=current size,
-            # {2}=total size, {3}=speed, {4}=ETA.
             tmp = progress + rkn.RKN_PROGRESS.format(
-                round(percentage, 2), humanbytes(current), humanbytes(total),
-                humanbytes(speed), eta or "0 s"
+                round(percentage, 2),
+                humanbytes(current),
+                humanbytes(total),
+                humanbytes(speed),
+                eta or "0 s",
             )
             await message.edit(
                 text=f"{ud_type}\n\n{tmp}",
