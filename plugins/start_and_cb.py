@@ -164,7 +164,7 @@ async def plans(client, message):
         await message.reply_text(text=upgrade_msg, reply_markup=await _upgrade_markup(client), disable_web_page_preview=True)
    
   
-@Client.on_callback_query()
+@Client.on_callback_query(~filters.regex(r'^(?:metadata_[01]|custom_metadata)$'))
 async def cb_handler(client, query: CallbackQuery):
     data = query.data 
     await query.answer()

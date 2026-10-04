@@ -41,11 +41,11 @@ from config import rkn
 TRUE = [[InlineKeyboardButton('ᴍᴇᴛᴀᴅᴀᴛᴀ ᴏɴ', callback_data='metadata_1'),
        InlineKeyboardButton('✅', callback_data='metadata_1')
        ],[
-       InlineKeyboardButton('Sᴇᴛ Cᴜsᴛᴏᴍ Mᴇᴛᴀᴅᴀᴛᴀ', callback_data='cutom_metadata')]]
+       InlineKeyboardButton('Sᴇᴛ Cᴜsᴛᴏᴍ Mᴇᴛᴀᴅᴀᴛᴀ', callback_data='custom_metadata')]]
 FALSE = [[InlineKeyboardButton('ᴍᴇᴛᴀᴅᴀᴛᴀ ᴏғғ', callback_data='metadata_0'),
         InlineKeyboardButton('❌', callback_data='metadata_0')
        ],[
-       InlineKeyboardButton('Sᴇᴛ Cᴜsᴛᴏᴍ Mᴇᴛᴀᴅᴀᴛᴀ', callback_data='cutom_metadata')]]
+       InlineKeyboardButton('Sᴇᴛ Cᴜsᴛᴏᴍ Mᴇᴛᴀᴅᴀᴛᴀ', callback_data='custom_metadata')]]
 
 
 @Client.on_message(filters.private & filters.command('metadata'))
@@ -60,7 +60,7 @@ async def handle_metadata(bot: Client, message: Message):
     )
 
 
-@Client.on_callback_query(filters.regex('.*?(custom_metadata|metadata).*?'))
+@Client.on_callback_query(filters.regex(r'^(?:metadata_[01]|custom_metadata)$'))
 async def query_metadata(bot: Client, query: CallbackQuery):
     data = query.data
     await query.answer()
@@ -73,7 +73,7 @@ async def query_metadata(bot: Client, query: CallbackQuery):
         await digital_botz.set_metadata_mode(query.from_user.id, bool_meta=not bool_meta)
         await query.message.edit(f"Your Current Metadata:-\n\n➜ `{user_metadata}`", reply_markup=InlineKeyboardMarkup(FALSE if bool_meta else TRUE))
            
-    elif data == 'cutom_metadata':
+    elif data == 'custom_metadata':
         await query.message.delete()
         try:
             metadata = await bot.ask(text=rkn.SEND_METADATA, chat_id=query.from_user.id, filters=filters.text, timeout=30, disable_web_page_preview=True)
