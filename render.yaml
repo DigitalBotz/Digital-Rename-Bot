@@ -1,11 +1,11 @@
 services:
   - type: web
     plan: free
-    name: Digital-test
+    name: Digital-Rename-Bot
     env: python
     buildCommand: pip install -r requirements.txt
     startCommand: python3 bot.py
-    repo: https://github.com/DigitalBotz/Digital-test.git
+    repo: https://github.com/DigitalBotz/Digital-Rename-Bot.git
     branch: main
     autoDeploy: false
     envVars:
