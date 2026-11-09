@@ -1,7 +1,7 @@
 pyrofork==2.3.69
 TgCrypto-pyrofork==1.2.8
 motor==3.7.1
-dnspython==2.9.1
+dnspython==2.9.2
 hachoir==3.3.0
 
 Pillow==13.0.0
